@@ -8,6 +8,8 @@
 #include <Math/PxPyPzM4D.h>
 
 int main(int argc, char *argv[]) {
+	using LorentzVector = ROOT::Math::LorentzVector<ROOT::Math::PxPyPzM4D<float>>;
+
     std::random_device dev;
     std::mt19937 rng(dev());
     std::uniform_real_distribution<> mom(-100.,100.);
