@@ -15,7 +15,7 @@ std::map<std::string, float> FeatComp::process(const TLorentzVector& b_1,
 										       const TLorentzVector& l_2,
 										       const TLorentzVector& met,
 										       const TLorentzVector& svfit,
-										       const float& hh_kinfit_m
+										       const float& hh_kinfit_m,
                                                const bool& is_boosted,
                                                const float& b_1_csv,
                                                const float& b_2_csv,
