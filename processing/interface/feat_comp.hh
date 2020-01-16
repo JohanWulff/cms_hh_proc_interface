@@ -11,6 +11,8 @@
 #include <Math/VectorUtil.h>
 #include <Math/LorentzVector.h>
 
+typedef ROOT::Math::LorentzVector LorentzVector;
+
 class FeatComp {
 	/* Class for computing requested features for final-state LorentzVectors*/
 
