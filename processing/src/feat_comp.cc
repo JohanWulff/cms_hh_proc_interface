@@ -1,4 +1,4 @@
-#include "cms_hh_proc_inference/processing/interface/feat_comp.hh"
+#include "cms_hh_proc_interface/processing/interface/feat_comp.hh"
 
 FeatComp::FeatComp(bool return_all, std::vector<std::string> requested={}, bool use_deep_csv=true, bool verbose=false) {
     _all = return_all;
