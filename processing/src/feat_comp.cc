@@ -108,8 +108,7 @@ std::map<std::string, float> FeatComp::process(const TLorentzVector& b_1,
 }
 
 inline bool FeatComp::_feat_check(std::string feat) {
-    bool b = (_all ? true : std::find(_requested.begin(), _requested.end(), feat) != _requested.end());
-    return b;
+    return (_all ? true : std::find(_requested.begin(), _requested.end(), feat) != _requested.end());
 }
 
 inline float FeatComp::delta_phi(const TLorentzVector& v_0, const TLorentzVector& v_1) return std::abs(v_0.DeltaPhi(v_1));
