@@ -36,12 +36,12 @@ public:
 										 const TLorentzVector&,  // l_2
 										 const TLorentzVector&,  // MET
 										 const TLorentzVector&,  // SVFit
-										 const float&            // HH KinFit mass
-										 const bool& 			 // Is boosted
+										 const float&,           // HH KinFit mass
+										 const bool&, 			 // Is boosted
 										 const float&,			 // b_1 CSV
-										 const float&			 // b_2 CSV
+										 const float&,			 // b_2 CSV
 										 const float&,			 // b_1 Deep CSV
-										 const float&			 // b_2 Deep CSV
+										 const float&,			 // b_2 Deep CSV
 										 FeatComp::Channel);	 // Channel		
 	inline float delta_eta(const TLorentzVector&, const TLorentzVector&);
 	inline float delta_phi(const TLorentzVector&, const TLorentzVector&);

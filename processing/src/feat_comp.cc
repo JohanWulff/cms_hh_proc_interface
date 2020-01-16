@@ -34,8 +34,8 @@ std::map<std::string, float> FeatComp::process(const TLorentzVector& b_1,
     std::map<std::string, float> feats;
 
     // Categoricals
-    feats['boosted'] = is_boosted;
-    feats['channel'] = channel;
+    feats["boosted"] = is_boosted;
+    feats["channel"] = channel;
     FeatComp::_add_jet_flags(b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, feats)
 
     // Delta phi
@@ -163,6 +163,6 @@ void FeatComp::_add_jet_flags(const float& b_1_csv, const float& b_2_csv,
         if (csv_1 >= wp) tag_1++;
         if (csv_2 >= wp) tag_2++;
     }
-    feats['jet_1_quality'] = tag_1;
-    feats['jet_2_quality'] = tag_2;
+    feats["jet_1_quality"] = tag_1;
+    feats["jet_2_quality"] = tag_2;
 }
