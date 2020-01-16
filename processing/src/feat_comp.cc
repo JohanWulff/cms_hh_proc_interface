@@ -109,9 +109,9 @@ std::map<std::string, float> FeatComp::process(const TLorentzVector& b_1,
 
 inline bool FeatComp::_feat_check(std::string feat) {return (_all ? true : std::find(_requested.begin(), _requested.end(), feat) != _requested.end());}
 
-inline float FeatComp::delta_phi(const TLorentzVector& v_0, const TLorentzVector& v_1) return std::abs(v_0.DeltaPhi(v_1));
+inline float FeatComp::delta_phi(const TLorentzVector& v_0, const TLorentzVector& v_1) {return std::abs(v_0.DeltaPhi(v_1));}
 
-inline float FeatComp::delta_eta(const TLorentzVector& v_0, const TLorentzVector& v_1) return std::abs(v_0.Eta()-v_1.Eta());
+inline float FeatComp::delta_eta(const TLorentzVector& v_0, const TLorentzVector& v_1) {return std::abs(v_0.Eta()-v_1.Eta());}
 
 inline float  FeatComp::delta_r_boosted(const TLorentzVector& v_0, const TLorentzVector& v_1, const TLorentzVector& ref){
     /* Modified from https://github.com/hh-italian-group/AnalysisTools/blob/1be0da0748d69827ed7ebda6d9b8198b87f170fd/Core/include/AnalysisMath.h */
@@ -119,7 +119,7 @@ inline float  FeatComp::delta_r_boosted(const TLorentzVector& v_0, const TLorent
     return DeltaR(boost(v_0, ref.BoostToCM()), boost(v_1, ref.BoostToCM()));
 }
 
-inline float FeatComp::calc_mt(const TLorentzVector& v, const TLorentzVector& met) return std::sqrt(2.0*v.Pt()*met.Pt()*(1.0-std::cos(v.DeltaPhi(met))));
+inline float FeatComp::calc_mt(const TLorentzVector& v, const TLorentzVector& met) {return std::sqrt(2.0*v.Pt()*met.Pt()*(1.0-std::cos(v.DeltaPhi(met))));}
 
 inline float FeatComp::calc_phi(const TLorentzVector& l_1, const TLorentzVector& l_2,
                                 const TLorentzVector& b_1, const TLorentzVector& b_2, const TLorentzVector& hh) {
