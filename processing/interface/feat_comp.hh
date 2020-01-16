@@ -6,6 +6,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <set>
 
 // ROOT
 #include <Math/VectorUtil.h>
@@ -20,7 +21,7 @@ class FeatComp {
 private:
 	// Variables
     bool _all, _verbose, _use_deep_csv;
-    std::vector<std::string> _requested;
+    std::set<std::string> _requested;
 	std::vector<float> _csv_wps{0, 0.5426, 0.8484, 0.9535};  // TODO: Check these
 	std::vector<float> _deep_csv_wps{0, 0.5426, 0.8484, 0.9535};  //TODO: Update these
 
@@ -33,7 +34,7 @@ public:
 	enum Channel{tauTau=0, muTau=1, eTau=2};
 
     // Methods
-	FeatComp(bool, std::vector<std::string>, bool, bool);
+	FeatComp(bool, std::set<std::string>, bool, bool);
 	~FeatComp();
 	std::map<std::string, float> process(const LorentzVector&,  // b_1
 										 const LorentzVector&,  // b_2

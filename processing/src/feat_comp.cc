@@ -1,6 +1,6 @@
 #include "cms_hh_proc_interface/processing/interface/feat_comp.hh"
 
-FeatComp::FeatComp(bool return_all, std::vector<std::string> requested={}, bool use_deep_csv=true, bool verbose=false) {
+FeatComp::FeatComp(bool return_all, std::set<std::string> requested={}, bool use_deep_csv=true, bool verbose=false) {
     _all = return_all;
     _requested = requested;
     _use_deep_csv = use_deep_csv;
@@ -120,7 +120,9 @@ inline float  FeatComp::delta_r_boosted(const LorentzVector& v_0, const LorentzV
     return DeltaR(boost(v_0, ref.BoostToCM()), boost(v_1, ref.BoostToCM()));
 }
 
-inline float FeatComp::calc_mt(const LorentzVector& v, const LorentzVector& met) {return std::sqrt(2.0*v.Pt()*met.Pt()*(1.0-std::cos(v.DeltaPhi(met))));}
+inline float FeatComp::calc_mt(const LorentzVector& v, const LorentzVector& met) {
+    return std::sqrt(2.0*v.Pt()*met.Pt()*(1.0-std::cos(ROOT::Math::VectorUtil::DeltaPhi(v,met))));
+}
 
 inline float FeatComp::calc_phi(const LorentzVector& l_1, const LorentzVector& l_2,
                                 const LorentzVector& b_1, const LorentzVector& b_2, const LorentzVector& hh) {
