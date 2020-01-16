@@ -15,6 +15,8 @@
 
 using LorentzVector = ROOT::Math::LorentzVector<ROOT::Math::PxPyPzM4D<float>>;
 
+enum Channel{tauTau=0, muTau=1, eTau=2};
+
 class FeatComp {
 	/* Class for computing requested features for final-state LorentzVectors*/
 
@@ -30,9 +32,6 @@ private:
 	inline bool _feat_check(std::string);
 
 public:
-	// Classes
-	enum Channel{tauTau=0, muTau=1, eTau=2};
-
     // Methods
 	FeatComp(bool return_all=true, std::set<std::string> requested={}, bool use_deep_csv=true, bool verbose=false);
 	~FeatComp();
@@ -42,13 +41,13 @@ public:
 										 const LorentzVector&,  // l_2
 										 const LorentzVector&,  // MET
 										 const LorentzVector&,  // SVFit
-										 const float&,           // HH KinFit mass
-										 const bool&, 			 // Is boosted
-										 const float&,			 // b_1 CSV
-										 const float&,			 // b_2 CSV
-										 const float&,			 // b_1 Deep CSV
-										 const float&,			 // b_2 Deep CSV
-										 FeatComp::Channel);	 // Channel		
+										 const float&,          // HH KinFit mass
+										 const bool&, 			// Is boosted
+										 const float&,			// b_1 CSV
+										 const float&,			// b_2 CSV
+										 const float&,			// b_1 Deep CSV
+										 const float&,			// b_2 Deep CSV
+										 Channel);	            // Channel		
 	inline float delta_eta(const LorentzVector&, const LorentzVector&);
 	inline float delta_phi(const LorentzVector&, const LorentzVector&);
 	inline float delta_r(const LorentzVector&, const LorentzVector&);

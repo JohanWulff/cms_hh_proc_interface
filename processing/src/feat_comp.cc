@@ -21,7 +21,7 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
                                                const float& b_2_csv,
                                                const float& b_1_deepcsv,
                                                const float& b_2_deepcsv,
-                                               FeatComp::Channel channel) {
+                                               Channel channel) {
     /* Compute HL features from base event*/
 
     // Extra vectors

@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
     float hh_kinfit_mass = energy(rng);
     bool is_boosted = csv(rng) > 1.;
     float csv_1(csv(rng)), csv_2(csv(rng)), deepcsv_1(csv(rng)), deepcsv_2(csv(rng));
-    FeatComp::Channel channel = tauTau;
+    Channel channel = tauTau;
     std::cout << "Generated\n";
 
     std::cout << "Processing event... ";
