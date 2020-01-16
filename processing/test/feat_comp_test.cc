@@ -28,12 +28,12 @@ int main(int argc, char *argv[]) {
     float hh_kinfit_mass = energy(rng);
     bool is_boosted = csv(rng) > 1.;
     float csv_1(csv(rng)), csv_2(csv(rng)), deepcsv_1(csv(rng)), deepcsv_2(csv(rng));
-    FeatComp::Channel channel("tauTau");
+    FeatComp::Channel = tauTau;
     std::cout << "Generated\n";
 
     std::cout << "Processing event... ";
     std::map<std::string, float> feats = feat_comp.process(b_1, b_2, l_1, l_2, met, sv, hh_kinfit_mass, is_boosted, csv_1, csv_2, deepcsv_1 deepcsv_2, channel);
     std::cout << "Processed\n";
 
-    for (auto const& f : feats) std::cout << x.first << ":" << x.second << "\n";
+    for (auto const& f : feats) std::cout << f.first << ":" << f.second << "\n";
 }
