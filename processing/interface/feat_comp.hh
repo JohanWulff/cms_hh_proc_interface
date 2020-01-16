@@ -13,7 +13,6 @@
 #include <Math/LorentzVector.h>
 #include <Math/PxPyPzM4D.h>
 
-using LorentzVector = ROOT::Math::LorentzVector<ROOT::Math::PxPyPzM4D<float>>;
 
 enum Channel{tauTau=0, muTau=1, eTau=2};
 
@@ -21,6 +20,8 @@ class FeatComp {
 	/* Class for computing requested features for final-state LorentzVectors*/
 
 private:
+	using LorentzVector = ROOT::Math::LorentzVector<ROOT::Math::PxPyPzM4D<float>>;
+
 	// Variables
     bool _all, _verbose, _use_deep_csv;
     std::set<std::string> _requested;
