@@ -12,6 +12,7 @@
 #include <Math/VectorUtil.h>
 #include <Math/LorentzVector.h>
 #include <Math/PxPyPzM4D.h>
+#include <Math/GenVector.h>
 
 using LorentzVector = ROOT::Math::LorentzVector<ROOT::Math::PxPyPzM4D<float>>;
 
