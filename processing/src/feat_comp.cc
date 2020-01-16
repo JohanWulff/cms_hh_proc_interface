@@ -28,7 +28,7 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     LorentzVector h_bb(b_1 + b_2);
     LorentzVector h_tt_vis(l_1 + l_2);
     LorentzVector h_tt_met(h_tt_vis + met);
-    LorentzVector hh(h_bb.Px()+svfit.Px(), h_bb.Py()+svfit.Py(), h_bb.Pz()+svfit.Pz(), hh_kinfit_m);
+    LorentzVector hh(h_bb.Px()+svfit.Px(), h_bb.Py()+svfit.Py(), h_bb.Pz()+svfit.Pz(), hh_kinfit_m);  // I assume 4th component is a mass, but who knows...
 
     std::map<std::string, float> feats;
 

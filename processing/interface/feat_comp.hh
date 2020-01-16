@@ -10,6 +10,8 @@
 // ROOT
 #include <Math/VectorUtil.h>
 #include <Math/LorentzVector.h>
+#include <Math/PxPyPzMVector.h>
+
 
 using LorentzVector = ROOT::Math::LorentzVector<ROOT::Math::PxPyPzMVector>;
 
