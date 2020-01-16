@@ -57,13 +57,13 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("deta_hbb_httmet")) feats["deta_hbb_httmet"] = FeatComp::delta_eta(h_bb, met);
 
     // Delta R
-    if (FeatComp::_feat_check("dR_l1_l2"))      feats["dR_l1_l2"]      = l_1.DeltaR(l_2);
-    if (FeatComp::_feat_check("dR_b1_b2"))      feats["dR_b1_b2"]      = b_1.DeltaR(b_2);
-    if (FeatComp::_feat_check("dR_hbb_httmet")) feats["dR_hbb_httmet"] = h_bb.DeltaR(h_tt_met);
-    if (FeatComp::_feat_check("dR_hbb_sv"))     feats["dR_hbb_sv"]     = h_bb.DeltaR(svfit);
-    if (FeatComp::_feat_check("dR_b1_b2_x_h_bb_pT"))     feats["dR_b1_b2_x_h_bb_pT"]     = b_1.DeltaR(b_2)*h_bb.Pt();
-    if (FeatComp::_feat_check("dR_l1_l2_x_h_tt_met_pT")) feats["dR_l1_l2_x_h_tt_met_pT"] = l_1.DeltaR(l_2)*h_tt_met.Pt();
-    if (FeatComp::_feat_check("dR_l1_l2_x_sv_pT"))       feats["dR_l1_l2_x_sv_pT"]       = l_1.DeltaR(l_2)*svfit.Pt();
+    if (FeatComp::_feat_check("dR_l1_l2"))      feats["dR_l1_l2"]      = FeatComp::delta_r(l_1, l_2);
+    if (FeatComp::_feat_check("dR_b1_b2"))      feats["dR_b1_b2"]      = FeatComp::delta_r(b_1, b_2);
+    if (FeatComp::_feat_check("dR_hbb_httmet")) feats["dR_hbb_httmet"] = FeatComp::delta_r(h_bb, h_tt_met);
+    if (FeatComp::_feat_check("dR_hbb_sv"))     feats["dR_hbb_sv"]     = FeatComp::delta_r(h_bb, svfit);
+    if (FeatComp::_feat_check("dR_b1_b2_x_h_bb_pT"))     feats["dR_b1_b2_x_h_bb_pT"]     = FeatComp::delta_r(b_1, b_2)*h_bb.Pt();
+    if (FeatComp::_feat_check("dR_l1_l2_x_h_tt_met_pT")) feats["dR_l1_l2_x_h_tt_met_pT"] = FeatComp::delta_r(l_1, l_2)*h_tt_met.Pt();
+    if (FeatComp::_feat_check("dR_l1_l2_x_sv_pT"))       feats["dR_l1_l2_x_sv_pT"]       = FeatComp::delta_r(l_1, l_2)*svfit.Pt();
     if (FeatComp::_feat_check("dR_b1_b2_boosted_hbb"))     feats["dR_b1_b2_boosted_hbb"]     = FeatComp::delta_r_boosted(b_1, b_2, h_bb);
     if (FeatComp::_feat_check("dR_l1_l2_boosted_htt_met")) feats["dR_l1_l2_boosted_htt_met"] = FeatComp::delta_r_boosted(l_1, l_2, h_tt_met);
     if (FeatComp::_feat_check("dR_l1_l2_boosted_sv"))      feats["dR_l1_l2_boosted_sv"]      = FeatComp::delta_r_boosted(l_1, l_2, svfit);
@@ -108,9 +108,11 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
 
 inline bool FeatComp::_feat_check(std::string feat) {return (_all ? true : std::find(_requested.begin(), _requested.end(), feat) != _requested.end());}
 
-inline float FeatComp::delta_phi(const LorentzVector& v_0, const LorentzVector& v_1) {return std::abs(v_0.DeltaPhi(v_1));}
+inline float FeatComp::delta_phi(const LorentzVector& v_0, const LorentzVector& v_1) {return std::abs(ROOT::Math::VectorUtil::DeltaPhi(v_0, v_1));}
 
 inline float FeatComp::delta_eta(const LorentzVector& v_0, const LorentzVector& v_1) {return std::abs(v_0.Eta()-v_1.Eta());}
+
+inline float FeatComp::delta_r(const LorentzVector& v_0, const LorentzVector& v_1) {return ROOT::Math::VectorUtil::DeltaR(v_0, v_1);}
 
 inline float  FeatComp::delta_r_boosted(const LorentzVector& v_0, const LorentzVector& v_1, const LorentzVector& ref){
     /* Modified from https://github.com/hh-italian-group/AnalysisTools/blob/1be0da0748d69827ed7ebda6d9b8198b87f170fd/Core/include/AnalysisMath.h */

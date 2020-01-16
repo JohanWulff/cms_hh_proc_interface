@@ -50,6 +50,7 @@ public:
 										 FeatComp::Channel);	 // Channel		
 	inline float delta_eta(const LorentzVector&, const LorentzVector&);
 	inline float delta_phi(const LorentzVector&, const LorentzVector&);
+	inline float delta_r(const LorentzVector&, const LorentzVector&);
 	inline float delta_r_boosted(const LorentzVector&, const LorentzVector&, const LorentzVector&);
 	inline float calc_mt(const LorentzVector&, const LorentzVector&);
 	inline float calc_phi(const LorentzVector&, const LorentzVector&, const LorentzVector&, const LorentzVector&, const LorentzVector&);
