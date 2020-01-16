@@ -59,4 +59,4 @@ public:
 	inline float calc_cos_delta(const LorentzVector&, const LorentzVector&);
 };
 
-#endif /* FEAT_COMP_HH__HH_ */
+#endif /* FEAT_COMP_HH_ */
