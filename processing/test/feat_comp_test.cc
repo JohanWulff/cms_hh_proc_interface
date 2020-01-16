@@ -8,9 +8,9 @@
 int main(int argc, char *argv[]) {
     std::random_device dev;
     std::mt19937 rng(dev());
-    std::uniform_real_distribution<std::mt19937::result_type> mom(-100,100);
-    std::uniform_real_distribution<std::mt19937::result_type> energy(20,500);
-    std::uniform_real_distribution<std::mt19937::result_type> csv(-1,1);
+    std::uniform_real_distribution<std::mt19937::result_type> mom(-100.,100.);
+    std::uniform_real_distribution<std::mt19937::result_type> energy(20.,500.);
+    std::uniform_real_distribution<std::mt19937::result_type> csv(-1.,1.);
 
     std::cout << "Instantiating FeatComp... ";
     feat_comp = FeatComp(true);
