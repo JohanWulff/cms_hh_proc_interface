@@ -1,0 +1,3 @@
+<bin name="testfeatcomp" file="feat_comp_test.cc">
+    <use name="cms_hh_proc_interface/processing" />
+</bin>
