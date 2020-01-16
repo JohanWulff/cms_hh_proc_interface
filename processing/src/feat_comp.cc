@@ -45,8 +45,8 @@ std::map<std::string, float> FeatComp::process(const TLorentzVector& b_1,
     if (FeatComp::_feat_check("dphi_l2_met"))     feats["dphi_l2_met"]     = FeatComp::delta_phi(l_2, met);
     if (FeatComp::_feat_check("dphi_l1l2_met"))   feats["dphi_l1l2_met"]   = FeatComp::delta_phi(h_tt_vis, met);
     if (FeatComp::_feat_check("dphi_sv_met"))     feats["dphi_sv_met"]     = FeatComp::delta_phi(svfit, met);
-    if (FeatComp::_feat_check("dphi_httmet_met")) feats["dphi_httmet_mpt"] = FeatComp::delta_phi(h_tt_met, met);
-    if (FeatComp::_feat_check("dphi_httvis_met")) feats["dphi_httvis_mpt"] = FeatComp::delta_phi(h_tt_vis, met);
+    if (FeatComp::_feat_check("dphi_httmet_met")) feats["dphi_httmet_met"] = FeatComp::delta_phi(h_tt_met, met);
+    if (FeatComp::_feat_check("dphi_httvis_met")) feats["dphi_httvis_met"] = FeatComp::delta_phi(h_tt_vis, met);
     if (FeatComp::_feat_check("dphi_hbb_met"))    feats["dphi_hbb_met"]    = FeatComp::delta_phi(h_bb, met);
     if (FeatComp::_feat_check("dphi_hbb_sv"))     feats["dphi_hbb_sv"]     = FeatComp::delta_phi(h_bb, svfit);
     if (FeatComp::_feat_check("dphi_hbb_httmet")) feats["dphi_hbb_httmet"] = FeatComp::delta_phi(h_bb, h_tt_met);
@@ -85,11 +85,11 @@ std::map<std::string, float> FeatComp::process(const TLorentzVector& b_1,
     if (FeatComp::_feat_check("phi2"))     feats["phi2"]     = FeatComp::calc_phi_1(b_1, b_2, svfit, hh);
     if (FeatComp::_feat_check("costheta_star_met")) feats["costheta_star_met"] = FeatComp::calc_cos_delta_star(h_tt_met, h_bb+h_tt_met);
     if (FeatComp::_feat_check("costheta_star"))     feats["costheta_star"]     = FeatComp::calc_cos_delta_star(svfit, hh);
-    if (FeatComp::_feat_check("costheta_l1_httmet"))      feats["costheta_l1_httmet"]      = FeatComp::calc_cos_delta(l_1, h_tt_mpt);
+    if (FeatComp::_feat_check("costheta_l1_httmet"))      feats["costheta_l1_httmet"]      = FeatComp::calc_cos_delta(l_1, h_tt_met);
     if (FeatComp::_feat_check("costheta_l1_htt"))         feats["costheta_l1_httmet"]      = FeatComp::calc_cos_delta(l_1, svfit);
-    if (FeatComp::_feat_check("costheta_l2_httmet"))      feats["costheta_l2_httmet"]      = FeatComp::calc_cos_delta(l_2, h_tt_mpt);
+    if (FeatComp::_feat_check("costheta_l2_httmet"))      feats["costheta_l2_httmet"]      = FeatComp::calc_cos_delta(l_2, h_tt_met);
     if (FeatComp::_feat_check("costheta_l2_htt"))         feats["costheta_l2_httmet"]      = FeatComp::calc_cos_delta(l_2, svfit);
-    if (FeatComp::_feat_check("costheta_met_httmet"))     feats["costheta_met_httmet"]     = FeatComp::calc_cos_delta(met, h_tt_mpt);
+    if (FeatComp::_feat_check("costheta_met_httmet"))     feats["costheta_met_httmet"]     = FeatComp::calc_cos_delta(met, h_tt_met);
     if (FeatComp::_feat_check("costheta_met_htt"))        feats["costheta_met_htt"]        = FeatComp::calc_cos_delta(met, svfit);
     if (FeatComp::_feat_check("costheta_met_hbb"))        feats["costheta_met_hbb"]        = FeatComp::calc_cos_delta(met, h_bb);
     if (FeatComp::_feat_check("costheta_b1_hbb"))         feats["costheta_b1_hbb"]         = FeatComp::calc_cos_delta(b_1, h_bb);
@@ -98,19 +98,16 @@ std::map<std::string, float> FeatComp::process(const TLorentzVector& b_1,
     if (FeatComp::_feat_check("costheta_htt_met_hh_vis")) feats["costheta_htt_met_hh_vis"] = FeatComp::calc_cos_delta(h_tt_met, h_tt_vis+h_bb);
     if (FeatComp::_feat_check("costheta_hbb_hh_vis"))     feats["costheta_hbb_hh_vis"]     = FeatComp::calc_cos_delta(h_bb, h_tt_vis+h_bb);
     if (FeatComp::_feat_check("costheta_htt_hh_met"))     feats["costheta_htt_hh_met"]     = FeatComp::calc_cos_delta(svfit, h_tt_met+h_bb);
-    if (FeatComp::_feat_check("costheta_htt_mpt_hh_met")) feats["costheta_htt_mpt_hh_met"] = FeatComp::calc_cos_delta(h_tt_met, h_tt_met+h_bb);
+    if (FeatComp::_feat_check("costheta_htt_met_hh_met")) feats["costheta_htt_met_hh_met"] = FeatComp::calc_cos_delta(h_tt_met, h_tt_met+h_bb);
     if (FeatComp::_feat_check("costheta_hbb_hh_met"))     feats["costheta_hbb_hh_met"]     = FeatComp::calc_cos_delta(h_bb, h_tt_met+h_bb);
     if (FeatComp::_feat_check("costheta_htt_hh"))         feats["costheta_htt_hh_vis"]     = FeatComp::calc_cos_delta(svfit, hh);
-    if (FeatComp::_feat_check("costheta_htt_mpt_hh"))     feats["costheta_htt_mpt_hh_vis"] = FeatComp::calc_cos_delta(h_tt_met, hh);
+    if (FeatComp::_feat_check("costheta_htt_met_hh"))     feats["costheta_htt_met_hh_vis"] = FeatComp::calc_cos_delta(h_tt_met, hh);
     if (FeatComp::_feat_check("costheta_hbb_hh"))         feats["costheta_hbb_hh_vis"]     = FeatComp::calc_cos_delta(h_bb, hh);            
 
     return feats;
 }
 
-bool FeatComp::_feat_check(std::string feat) {
-    if (_all) return true;
-    return _requested.find(feat) != _requested.end()
-}
+inline bool FeatComp::_feat_check(std::string feat) return _all ? true : std::find(_requested.begin(), _requested.end(), feat) != _requested.end();
 
 inline float FeatComp::delta_phi(const TLorentzVector& v_0, const TLorentzVector& v_1) return std::abs(v_0.DeltaPhi(v_1));
 

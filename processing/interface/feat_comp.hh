@@ -8,6 +8,7 @@
 
 // ROOT
 #include <TLorentzVector.h>
+#include <Math/VectorUtil.h>
 
 class FeatComp {
 	/* Class for computing requested features for final-state TLorentzVectors*/
@@ -21,7 +22,7 @@ private:
 
 	// Methods
 	void _add_jet_flags(const float&, const float&, const float&, const float&, std::map<std::string, float>&);
-	bool _feat_check(std::string);
+	inline bool _feat_check(std::string);
 
 public:
 	// Classes
