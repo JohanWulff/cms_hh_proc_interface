@@ -36,7 +36,7 @@ std::map<std::string, float> FeatComp::process(const TLorentzVector& b_1,
     // Categoricals
     feats["boosted"] = is_boosted;
     feats["channel"] = channel;
-    FeatComp::_add_jet_flags(b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, feats)
+    FeatComp::_add_jet_flags(b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, feats);
 
     // Delta phi
     if (FeatComp::_feat_check("dphi_l1_l2"))      feats["dphi_l1_l2"]      = FeatComp::delta_phi(l_1, l_2);
@@ -78,7 +78,7 @@ std::map<std::string, float> FeatComp::process(const TLorentzVector& b_1,
 
     // Angle Deltas
     if (FeatComp::_feat_check("phi_met")) feats["phi_met"] = FeatComp::calc_phi(l_1, l_2, b_1, b_2, h_bb+h_tt_met);
-    if (FeatComp::_feat_check("phi"))     feats["phi"]     = FeatComp::calc_phi(l_1, l_2, b_1, b_2, hh;
+    if (FeatComp::_feat_check("phi"))     feats["phi"]     = FeatComp::calc_phi(l_1, l_2, b_1, b_2, hh);
     if (FeatComp::_feat_check("phi1_met")) feats["phi1_met"] = FeatComp::calc_phi_1(l_1, l_2, h_tt_met, h_bb+h_tt_met);
     if (FeatComp::_feat_check("phi1"))     feats["phi1"]     = FeatComp::calc_phi_1(l_1, l_2, sv, hh);
     if (FeatComp::_feat_check("phi2_met")) feats["phi2_met"] = FeatComp::calc_phi_1(b_1, b_2, h_tt_met, h_bb+h_tt_met);
@@ -100,7 +100,7 @@ std::map<std::string, float> FeatComp::process(const TLorentzVector& b_1,
     if (FeatComp::_feat_check("costheta_htt_hh_met"))     feats["costheta_htt_hh_met"]     = FeatComp::calc_cos_delta(sv, h_tt_met+h_bb);
     if (FeatComp::_feat_check("costheta_htt_mpt_hh_met")) feats["costheta_htt_mpt_hh_met"] = FeatComp::calc_cos_delta(h_tt_met, h_tt_met+h_bb);
     if (FeatComp::_feat_check("costheta_hbb_hh_met"))     feats["costheta_hbb_hh_met"]     = FeatComp::calc_cos_delta(h_bb, h_tt_met+h_bb);
-    if (FeatComp::_feat_check("costheta_htt_hh"))         feats["costheta_htt_hh_vis"]     = FeatComp::calc_cos_delta(sv, hh;
+    if (FeatComp::_feat_check("costheta_htt_hh"))         feats["costheta_htt_hh_vis"]     = FeatComp::calc_cos_delta(sv, hh);
     if (FeatComp::_feat_check("costheta_htt_mpt_hh"))     feats["costheta_htt_mpt_hh_vis"] = FeatComp::calc_cos_delta(h_tt_met, hh);
     if (FeatComp::_feat_check("costheta_hbb_hh"))         feats["costheta_hbb_hh_vis"]     = FeatComp::calc_cos_delta(h_bb, hh);            
 
@@ -119,7 +119,7 @@ inline float FeatComp::delta_eta(const TLorentzVector& v_0, const TLorentzVector
 inline float  FeatComp::delta_r_boosted(const TLorentzVector& v_0, const TLorentzVector& v_1, const TLorentzVector& ref){
     /* Modified from https://github.com/hh-italian-group/AnalysisTools/blob/1be0da0748d69827ed7ebda6d9b8198b87f170fd/Core/include/AnalysisMath.h */
     using namespace ROOT::Math::VectorUtil;
-    return DeltaR(boost(v_0, ref.BoostToCM()), boost(v_1, ref.BoostToCM());
+    return DeltaR(boost(v_0, ref.BoostToCM()), boost(v_1, ref.BoostToCM()));
 }
 
 inline float FeatComp::calc_mt(const TLorentzVector& v, const TLorentzVector& met) return std::sqrt(2.0*v.Pt()*met.Pt()*(1.0-std::cos(v.DeltaPhi(met))));
