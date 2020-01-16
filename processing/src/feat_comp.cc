@@ -65,9 +65,9 @@ std::map<std::string, float> FeatComp::process(const TLorentzVector& b_1,
     if (FeatComp::_feat_check("dR_b1_b2_x_h_bb_pT"))     feats["dR_b1_b2_x_h_bb_pT"]     = b_1.DeltaR(b_2)*h_bb.Pt();
     if (FeatComp::_feat_check("dR_l1_l2_x_h_tt_met_pT")) feats["dR_l1_l2_x_h_tt_met_pT"] = l_1.DeltaR(l_2)*h_tt_met.Pt();
     if (FeatComp::_feat_check("dR_l1_l2_x_sv_pT"))       feats["dR_l1_l2_x_sv_pT"]       = l_1.DeltaR(l_2)*svfit.Pt();
-    if (FeatComp::_feat_check("dR_b1_b2_boosted_hbb"))     feats["dR_b1_b2_boosted_hbb"]     = FeatComp::delta_eta(b_1, b_2, h_bb);
-    if (FeatComp::_feat_check("dR_l1_l2_boosted_htt_met")) feats["dR_l1_l2_boosted_htt_met"] = FeatComp::delta_eta(l_1, l_2, h_tt_met);
-    if (FeatComp::_feat_check("dR_l1_l2_boosted_sv"))      feats["dR_l1_l2_boosted_sv"]      = FeatComp::delta_eta(l_1, l_2, svfit);
+    if (FeatComp::_feat_check("dR_b1_b2_boosted_hbb"))     feats["dR_b1_b2_boosted_hbb"]     = FeatComp::delta_r_boosted(b_1, b_2, h_bb);
+    if (FeatComp::_feat_check("dR_l1_l2_boosted_htt_met")) feats["dR_l1_l2_boosted_htt_met"] = FeatComp::delta_r_boosted(l_1, l_2, h_tt_met);
+    if (FeatComp::_feat_check("dR_l1_l2_boosted_sv"))      feats["dR_l1_l2_boosted_sv"]      = FeatComp::delta_r_boosted(l_1, l_2, svfit);
     
     // Masses
     if (FeatComp::_feat_check("h_tt_met_mt"))  feats["h_tt_met_mt"]  = FeatComp::calc_mt(h_tt_met, met);
