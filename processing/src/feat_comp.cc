@@ -9,12 +9,12 @@ FeatComp::FeatComp(bool return_all, std::vector<std::string> requested={}, bool 
 
 FeatComp::~FeatComp() {}
 
-std::map<std::string, float> FeatComp::process(const TLorentzVector& b_1,
-										       const TLorentzVector& b_2, 
-										       const TLorentzVector& l_1,
-										       const TLorentzVector& l_2,
-										       const TLorentzVector& met,
-										       const TLorentzVector& svfit,
+std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
+										       const LorentzVector& b_2, 
+										       const LorentzVector& l_1,
+										       const LorentzVector& l_2,
+										       const LorentzVector& met,
+										       const LorentzVector& svfit,
 										       const float& hh_kinfit_m,
                                                const bool& is_boosted,
                                                const float& b_1_csv,
@@ -25,10 +25,10 @@ std::map<std::string, float> FeatComp::process(const TLorentzVector& b_1,
     /* Compute HL features from base event*/
 
     // Extra vectors
-    TLorentzVector h_bb(b_1 + b_2);
-    TLorentzVector h_tt_vis(l_1 + l_2);
-    TLorentzVector h_tt_met(h_tt_vis + met);
-    TLorentzVector hh;
+    LorentzVector h_bb(b_1 + b_2);
+    LorentzVector h_tt_vis(l_1 + l_2);
+    LorentzVector h_tt_met(h_tt_vis + met);
+    LorentzVector hh;
     hh.SetXYZM(h_bb.Px()+svfit.Px(), h_bb.Py()+svfit.Py(), h_bb.Pz()+svfit.Pz(), hh_kinfit_m);
 
     std::map<std::string, float> feats;
@@ -109,27 +109,27 @@ std::map<std::string, float> FeatComp::process(const TLorentzVector& b_1,
 
 inline bool FeatComp::_feat_check(std::string feat) {return (_all ? true : std::find(_requested.begin(), _requested.end(), feat) != _requested.end());}
 
-inline float FeatComp::delta_phi(const TLorentzVector& v_0, const TLorentzVector& v_1) {return std::abs(v_0.DeltaPhi(v_1));}
+inline float FeatComp::delta_phi(const LorentzVector& v_0, const LorentzVector& v_1) {return std::abs(v_0.DeltaPhi(v_1));}
 
-inline float FeatComp::delta_eta(const TLorentzVector& v_0, const TLorentzVector& v_1) {return std::abs(v_0.Eta()-v_1.Eta());}
+inline float FeatComp::delta_eta(const LorentzVector& v_0, const LorentzVector& v_1) {return std::abs(v_0.Eta()-v_1.Eta());}
 
-inline float  FeatComp::delta_r_boosted(const TLorentzVector& v_0, const TLorentzVector& v_1, const TLorentzVector& ref){
+inline float  FeatComp::delta_r_boosted(const LorentzVector& v_0, const LorentzVector& v_1, const LorentzVector& ref){
     /* Modified from https://github.com/hh-italian-group/AnalysisTools/blob/1be0da0748d69827ed7ebda6d9b8198b87f170fd/Core/include/AnalysisMath.h */
     using namespace ROOT::Math::VectorUtil;
     return DeltaR(boost(v_0, ref.BoostToCM()), boost(v_1, ref.BoostToCM()));
 }
 
-inline float FeatComp::calc_mt(const TLorentzVector& v, const TLorentzVector& met) {return std::sqrt(2.0*v.Pt()*met.Pt()*(1.0-std::cos(v.DeltaPhi(met))));}
+inline float FeatComp::calc_mt(const LorentzVector& v, const LorentzVector& met) {return std::sqrt(2.0*v.Pt()*met.Pt()*(1.0-std::cos(v.DeltaPhi(met))));}
 
-inline float FeatComp::calc_phi(const TLorentzVector& l_1, const TLorentzVector& l_2,
-                                const TLorentzVector& b_1, const TLorentzVector& b_2, const TLorentzVector& hh) {
+inline float FeatComp::calc_phi(const LorentzVector& l_1, const LorentzVector& l_2,
+                                const LorentzVector& b_1, const LorentzVector& b_2, const LorentzVector& hh) {
     /* Modified from https://github.com/hh-italian-group/AnalysisTools/blob/1be0da0748d69827ed7ebda6d9b8198b87f170fd/Core/include/AnalysisMath.h */
     using namespace ROOT::Math::VectorUtil;
     return Angle(boost(l_1, hh.BoostToCM()).Vect().Cross(boost(l_2, hh.BoostToCM()).Vect()),
                  boost(b_1, hh.BoostToCM()).Vect().Cross(boost(b_2, hh.BoostToCM()).Vect()));
 }
 
-inline float FeatComp::calc_phi_1(const TLorentzVector& v_0, const TLorentzVector& v_1, const TLorentzVector& h, const TLorentzVector& hh) {
+inline float FeatComp::calc_phi_1(const LorentzVector& v_0, const LorentzVector& v_1, const LorentzVector& h, const LorentzVector& hh) {
     /* Modified from https://github.com/hh-italian-group/AnalysisTools/blob/1be0da0748d69827ed7ebda6d9b8198b87f170fd/Core/include/AnalysisMath.h */
     
     using namespace ROOT::Math::VectorUtil;
@@ -137,14 +137,14 @@ inline float FeatComp::calc_phi_1(const TLorentzVector& v_0, const TLorentzVecto
                  boost(h, hh.BoostToCM()).Vect().Cross(ROOT::Math::Cartesian3D<>(0, 0, 1)));
 }
 
-inline float FeatComp::calc_cos_delta_star(const TLorentzVector& v, const TLorentzVector& hh) { 
+inline float FeatComp::calc_cos_delta_star(const LorentzVector& v, const LorentzVector& hh) { 
     /* Modified from https://github.com/hh-italian-group/AnalysisTools/blob/1be0da0748d69827ed7ebda6d9b8198b87f170fd/Core/include/AnalysisMath.h */
     
     using namespace ROOT::Math::VectorUtil;
     return CosTheta(boost(v, hh.BoostToCM()), ROOT::Math::Cartesian3D<>(0, 0, 1));
 }
 
-inline float FeatComp::calc_cos_delta(const TLorentzVector& v, const TLorentzVector& r) {
+inline float FeatComp::calc_cos_delta(const LorentzVector& v, const LorentzVector& r) {
     /* Modified from https://github.com/hh-italian-group/AnalysisTools/blob/1be0da0748d69827ed7ebda6d9b8198b87f170fd/Core/include/AnalysisMath.h */
     
     using namespace ROOT::Math::VectorUtil;

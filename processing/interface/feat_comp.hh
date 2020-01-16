@@ -7,11 +7,11 @@
 #include <map>
 
 // ROOT
-#include <TLorentzVector.h>
 #include <Math/VectorUtil.h>
+#include <Math/LorentzVector.h>
 
 class FeatComp {
-	/* Class for computing requested features for final-state TLorentzVectors*/
+	/* Class for computing requested features for final-state LorentzVectors*/
 
 private:
 	// Variables
@@ -31,12 +31,12 @@ public:
     // Methods
 	FeatComp(bool, std::vector<std::string>, bool, bool);
 	~FeatComp();
-	std::map<std::string, float> process(const TLorentzVector&,  // b_1
-										 const TLorentzVector&,  // b_2
-										 const TLorentzVector&,  // l_1
-										 const TLorentzVector&,  // l_2
-										 const TLorentzVector&,  // MET
-										 const TLorentzVector&,  // SVFit
+	std::map<std::string, float> process(const LorentzVector&,  // b_1
+										 const LorentzVector&,  // b_2
+										 const LorentzVector&,  // l_1
+										 const LorentzVector&,  // l_2
+										 const LorentzVector&,  // MET
+										 const LorentzVector&,  // SVFit
 										 const float&,           // HH KinFit mass
 										 const bool&, 			 // Is boosted
 										 const float&,			 // b_1 CSV
@@ -44,14 +44,14 @@ public:
 										 const float&,			 // b_1 Deep CSV
 										 const float&,			 // b_2 Deep CSV
 										 FeatComp::Channel);	 // Channel		
-	inline float delta_eta(const TLorentzVector&, const TLorentzVector&);
-	inline float delta_phi(const TLorentzVector&, const TLorentzVector&);
-	inline float delta_r_boosted(const TLorentzVector&, const TLorentzVector&, const TLorentzVector&);
-	inline float calc_mt(const TLorentzVector&, const TLorentzVector&);
-	inline float calc_phi(const TLorentzVector&, const TLorentzVector&, const TLorentzVector&, const TLorentzVector&, const TLorentzVector&);
-	inline float calc_phi_1(const TLorentzVector&, const TLorentzVector&, const TLorentzVector&, const TLorentzVector&);
-	inline float calc_cos_delta_star(const TLorentzVector&, const TLorentzVector&);
-	inline float calc_cos_delta(const TLorentzVector&, const TLorentzVector&);
+	inline float delta_eta(const LorentzVector&, const LorentzVector&);
+	inline float delta_phi(const LorentzVector&, const LorentzVector&);
+	inline float delta_r_boosted(const LorentzVector&, const LorentzVector&, const LorentzVector&);
+	inline float calc_mt(const LorentzVector&, const LorentzVector&);
+	inline float calc_phi(const LorentzVector&, const LorentzVector&, const LorentzVector&, const LorentzVector&, const LorentzVector&);
+	inline float calc_phi_1(const LorentzVector&, const LorentzVector&, const LorentzVector&, const LorentzVector&);
+	inline float calc_cos_delta_star(const LorentzVector&, const LorentzVector&);
+	inline float calc_cos_delta(const LorentzVector&, const LorentzVector&);
 };
 
 #endif /* FEAT_COMP_HH__HH_ */

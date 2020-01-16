@@ -3,7 +3,7 @@
 #include <string>
 #include <map>
 #include <random>
-#include <TLorentzVector.h>
+#include <LorentzVector.h>
 
 int main(int argc, char *argv[]) {
     std::random_device dev;
@@ -17,12 +17,12 @@ int main(int argc, char *argv[]) {
     std::cout << "Instantiated\n ";
 
     std::cout << "Generating random event... ";
-    TLorentzVector b_1(mom(rng),mom(rng),mom(rng),energy(rng));
-    TLorentzVector b_2(mom(rng),mom(rng),mom(rng),energy(rng));
-    TLorentzVector l_1(mom(rng),mom(rng),mom(rng),energy(rng));
-    TLorentzVector l_2(mom(rng),mom(rng),mom(rng),energy(rng));
-    TLorentzVector met(mom(rng),mom(rng),0,       energy(rng));
-    TLorentzVector sv(mom(rng),mom(rng),mom(rng),energy(rng));
+    LorentzVector b_1(mom(rng),mom(rng),mom(rng),energy(rng));
+    LorentzVector b_2(mom(rng),mom(rng),mom(rng),energy(rng));
+    LorentzVector l_1(mom(rng),mom(rng),mom(rng),energy(rng));
+    LorentzVector l_2(mom(rng),mom(rng),mom(rng),energy(rng));
+    LorentzVector met(mom(rng),mom(rng),0,       energy(rng));
+    LorentzVector sv(mom(rng),mom(rng),mom(rng),energy(rng));
     float hh_kinfit_mass = energy(rng);
     bool is_boosted = csv(rng) > 1.;
     float csv_1(csv(rng)), csv_2(csv(rng)), deepcsv_1(csv(rng)), deepcsv_2(csv(rng));
