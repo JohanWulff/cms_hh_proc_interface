@@ -11,7 +11,7 @@
 #include <Math/VectorUtil.h>
 #include <Math/LorentzVector.h>
 
-using LorentzVector = ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float>>;
+using LorentzVector = ROOT::Math::LorentzVector<ROOT::Math::PxPyPzMVector>;
 
 class FeatComp {
 	/* Class for computing requested features for final-state LorentzVectors*/
