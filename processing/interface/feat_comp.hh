@@ -34,7 +34,7 @@ public:
 	enum Channel{tauTau=0, muTau=1, eTau=2};
 
     // Methods
-	FeatComp(bool, std::set<std::string>, bool, bool);
+	FeatComp(bool return_all=true, std::set<std::string> requested={}, bool use_deep_csv=true, bool verbose=false);
 	~FeatComp();
 	std::map<std::string, float> process(const LorentzVector&,  // b_1
 										 const LorentzVector&,  // b_2

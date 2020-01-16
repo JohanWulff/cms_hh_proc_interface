@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
     std::uniform_real_distribution<> csv(-1.,1.);
 
     std::cout << "Instantiating FeatComp... ";
-    FeatComp feat_comp(true);
+    FeatComp feat_comp();
     std::cout << "Instantiated\n ";
 
     std::cout << "Generating random event... ";
