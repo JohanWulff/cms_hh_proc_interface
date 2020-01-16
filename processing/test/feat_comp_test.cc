@@ -3,7 +3,9 @@
 #include <string>
 #include <map>
 #include <random>
-#include <LorentzVector.h>
+#include <Math/VectorUtil.h>
+#include <Math/LorentzVector.h>
+#include <Math/PxPyPzM4D.h>
 
 int main(int argc, char *argv[]) {
     std::random_device dev;
