@@ -108,7 +108,7 @@ std::map<std::string, float> FeatComp::process(const TLorentzVector& b_1,
 }
 
 inline bool FeatComp::_feat_check(std::string feat) {
-    bool b = false(_all ? true : std::find(_requested.begin(), _requested.end(), feat) != _requested.end());
+    bool b = (_all ? true : std::find(_requested.begin(), _requested.end(), feat) != _requested.end());
     return b;
 }
 
