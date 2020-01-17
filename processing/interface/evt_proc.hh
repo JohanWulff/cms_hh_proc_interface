@@ -25,7 +25,7 @@ private:
 
 	// Variables
     bool _all;
-	FeatComp _feat_comp;
+	FeatComp* _feat_comp;
     std::set<std::string> _requested;
 
 	// Methods
