@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
                                                           top_1_mass, top_2_mass, l_1_mt, l_2_mt,
                                                           is_boosted, csv_1, csv_2, deepcsv_1, deepcsv_2, channel, res_mass);
     std::cout << "Processed\n";
-    for (auto const& f : feats) std::cout << f.first << " : " f.second;
+    for (auto const& f : feats) std::cout << f.first << " : " << f.second;
     std::cout << feats.size() << " features returned\n\n";
 
     std::cout << "Instantiating requested EvtProc... ";
