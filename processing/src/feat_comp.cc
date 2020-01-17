@@ -68,26 +68,24 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("dR_l1_l2_boosted_sv"))      feats["dR_l1_l2_boosted_sv"]      = FeatComp::delta_r_boosted(l_1, l_2, svfit);
     
     // Masses
-    if (FeatComp::_feat_check("sv_mass"))      feats["sv_mass"]      = svfit.M();
-    if (FeatComp::_feat_check("h_bb_mass"))    feats["h_bb_mass"]    = h_bb.M();
-    if (FeatComp::_feat_check("hh_kinfit_m"))  feats["hh_kinfit_m"]  = hh_kinfit_m;
-    if (FeatComp::_feat_check("sv_mt"))        feats["sv_mt"]        = FeatComp::calc_mt(svfit, met);
-    if (FeatComp::_feat_check("h_tt_met_mt"))  feats["h_tt_met_mt"]  = FeatComp::calc_mt(h_tt_met, met);
-    if (FeatComp::_feat_check("diH_mass_met")) feats["diH_mass_met"] = (h_bb+h_tt_met).M();
-    if (FeatComp::_feat_check("diH_mass_sv"))  feats["diH_mass_sv"]  = (h_bb+svfit).M();
-    if (FeatComp::_feat_check("diH_mass_vis")) feats["diH_mass_vis"] = (h_bb+h_tt_vis).M();
-    if (FeatComp::_feat_check("diH_mass_X"))   feats["diH_mass_X"]   = (h_bb+h_tt_met).M()-h_tt_met.M()-h_bb.M();
+    if (FeatComp::_feat_check("sv_mass"))       feats["sv_mass"]       = svfit.M();
+    if (FeatComp::_feat_check("h_tt_vis_mass")) feats["h_tt_vis_mass"] = h_tt_vis.M();
+    if (FeatComp::_feat_check("h_bb_mass"))     feats["h_bb_mass"]     = h_bb.M();
+    if (FeatComp::_feat_check("hh_kinfit_m"))   feats["hh_kinfit_m"]   = hh_kinfit_m;
+    if (FeatComp::_feat_check("sv_mt"))         feats["sv_mt"]         = FeatComp::calc_mt(svfit, met);
+    if (FeatComp::_feat_check("h_tt_met_mt"))   feats["h_tt_met_mt"]   = FeatComp::calc_mt(h_tt_met, met);
+    if (FeatComp::_feat_check("diH_mass_met"))  feats["diH_mass_met"]  = (h_bb+h_tt_met).M();
+    if (FeatComp::_feat_check("diH_mass_sv"))   feats["diH_mass_sv"]   = (h_bb+svfit).M();
+    if (FeatComp::_feat_check("diH_mass_vis"))  feats["diH_mass_vis"]  = (h_bb+h_tt_vis).M();
+    if (FeatComp::_feat_check("diH_mass_X"))    feats["diH_mass_X"]    = (h_bb+h_tt_met).M()-h_tt_met.M()-h_bb.M();
 
     // Momenta
     if (FeatComp::_feat_check("sv_pT"))   feats["sv_pT"]   = svfit.Pt();
     if (FeatComp::_feat_check("h_bb_pT")) feats["h_bb_pT"] = h_bb.Pt();
     if (FeatComp::_feat_check("hh_pT"))   feats["hh_pT"]   = hh.Pt();
 
-
     // Energies
     if (FeatComp::_feat_check("h_bb_E")) feats["h_bb_E"] = h_bb.E();
-
-
 
     // Angle Deltas
     if (FeatComp::_feat_check("phi_met")) feats["phi_met"] = FeatComp::calc_phi(l_1, l_2, b_1, b_2, h_bb+h_tt_met);
