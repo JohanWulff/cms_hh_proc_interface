@@ -58,7 +58,8 @@ int main(int argc, char *argv[]) {
     std::cout << "Instantiated\n ";
 
     std::cout << "Processing event... ";
-    feats = evt_proc2.process(b_1, b_2, l_1, l_2, met, sv, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot,
+    feats = evt_proc2.process(b_1, b_2, l_1, l_2, met, sv, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, pzetavisible, pzeta,
+                              top_1_mass, top_2_mass, l_1_mt, l_2_mt,
                               is_boosted, csv_1, csv_2, deepcsv_1, deepcsv_2, channel, res_mass);
     std::cout << "Processed\n";
 
