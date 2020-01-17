@@ -80,8 +80,8 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
 
     // Momenta
     if (FeatComp::_feat_check("sv_pT"))   feats["sv_pT"]   = svfit.Pt();
-    if (FeatComp::_feat_check("h_bb_pT")) feats["h_bb_pT"] = h_bb.pT();
-    if (FeatComp::_feat_check("hh_pT"))   feats["hh_pT"]   = hh.pT();
+    if (FeatComp::_feat_check("h_bb_pT")) feats["h_bb_pT"] = h_bb.Pt();
+    if (FeatComp::_feat_check("hh_pT"))   feats["hh_pT"]   = hh.Pt();
 
 
     // Energies
