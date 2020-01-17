@@ -28,6 +28,12 @@ int main(int argc, char *argv[]) {
     float hh_kinfit_chi2 = energy(rng);
     float mt2            = energy(rng);
     float mt_tot         = energy(rng);
+    float pzetavisible   = energy(rng);
+    float pzeta          = energy(rng);
+    float top_1_mass     = energy(rng);
+    float top_2_mass     = energy(rng);
+    float l_1_mt         = energy(rng);
+    float l_2_mt         = energy(rng);
     bool is_boosted      = csv(rng) > 1.;
     float csv_1(csv(rng)), csv_2(csv(rng)), deepcsv_1(csv(rng)), deepcsv_2(csv(rng));
     Channel channel = tauTau;
@@ -39,7 +45,8 @@ int main(int argc, char *argv[]) {
     std::cout << "Instantiated\n ";
 
     std::cout << "Processing event... ";
-    std::map<std::string, float> feats = evt_proc.process(b_1, b_2, l_1, l_2, met, sv, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot,
+    std::map<std::string, float> feats = evt_proc.process(b_1, b_2, l_1, l_2, met, sv, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, pzetavisible, pzeta,
+                                                          top_1_mass, top_2_mass, l_1_mt, l_2_mt,
                                                           is_boosted, csv_1, csv_2, deepcsv_1, deepcsv_2, channel, res_mass);
     std::cout << "Processed\n";
 
@@ -57,7 +64,7 @@ int main(int argc, char *argv[]) {
 
     std::cout << "Expected: ";
     for (auto const& f : requested) std::cout << f << " ";
-    std::cout << "\nRecieved: ";
+    std::cout << "\nReceived: ";
     for (auto const& f : feats)     std::cout << f.first << " ";
 
     return 0;
