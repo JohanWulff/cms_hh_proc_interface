@@ -47,12 +47,12 @@ int main(int argc, char *argv[]) {
 
     std::cout << "Instantiating requested EvtProc... ";
     std::set<std::string> requested = {"costheta_met_htt", "phi", "hh_kinfit_chi2", "is_boosted", "costheta_l1_httmet"};
-    EvtProc evt_proc(false, requested);
+    EvtProc evt_proc2(false, requested);
     std::cout << "Instantiated\n ";
 
     std::cout << "Processing event... ";
-    feats = evt_proc.process(b_1, b_2, l_1, l_2, met, sv, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot,
-                             is_boosted, csv_1, csv_2, deepcsv_1, deepcsv_2, channel, res_mass);
+    feats = evt_proc2.process(b_1, b_2, l_1, l_2, met, sv, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot,
+                              is_boosted, csv_1, csv_2, deepcsv_1, deepcsv_2, channel, res_mass);
     std::cout << "Processed\n";
 
     std::cout << "Expected: ";
