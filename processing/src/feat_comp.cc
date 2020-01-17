@@ -51,7 +51,7 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
 
     // Delta eta
     if (FeatComp::_feat_check("deta_l1_l2"))      feats["deta_l1_l2"]      = FeatComp::delta_eta(l_1, l_2);
-    if (FeatComp::_feat_check("deta_b1_b2"))      feats["deta_l1_l2"]      = FeatComp::delta_eta(b_1, b_2);
+    if (FeatComp::_feat_check("deta_b1_b2"))      feats["deta_b1_b2"]      = FeatComp::delta_eta(b_1, b_2);
     if (FeatComp::_feat_check("deta_hbb_sv"))     feats["deta_hbb_sv"]     = FeatComp::delta_eta(h_bb, svfit);
     if (FeatComp::_feat_check("deta_hbb_httmet")) feats["deta_hbb_httmet"] = FeatComp::delta_eta(h_bb, met);
 
@@ -97,9 +97,9 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("costheta_star_met")) feats["costheta_star_met"] = FeatComp::calc_cos_delta_star(h_tt_met, h_bb+h_tt_met);
     if (FeatComp::_feat_check("costheta_star"))     feats["costheta_star"]     = FeatComp::calc_cos_delta_star(svfit, hh);
     if (FeatComp::_feat_check("costheta_l1_httmet"))      feats["costheta_l1_httmet"]      = FeatComp::calc_cos_delta(l_1, h_tt_met);
-    if (FeatComp::_feat_check("costheta_l1_htt"))         feats["costheta_l1_httmet"]      = FeatComp::calc_cos_delta(l_1, svfit);
+    if (FeatComp::_feat_check("costheta_l1_htt"))         feats["costheta_l1_htt"]         = FeatComp::calc_cos_delta(l_1, svfit);
     if (FeatComp::_feat_check("costheta_l2_httmet"))      feats["costheta_l2_httmet"]      = FeatComp::calc_cos_delta(l_2, h_tt_met);
-    if (FeatComp::_feat_check("costheta_l2_htt"))         feats["costheta_l2_httmet"]      = FeatComp::calc_cos_delta(l_2, svfit);
+    if (FeatComp::_feat_check("costheta_l2_htt"))         feats["costheta_l2_htt"]         = FeatComp::calc_cos_delta(l_2, svfit);
     if (FeatComp::_feat_check("costheta_met_httmet"))     feats["costheta_met_httmet"]     = FeatComp::calc_cos_delta(met, h_tt_met);
     if (FeatComp::_feat_check("costheta_met_htt"))        feats["costheta_met_htt"]        = FeatComp::calc_cos_delta(met, svfit);
     if (FeatComp::_feat_check("costheta_met_hbb"))        feats["costheta_met_hbb"]        = FeatComp::calc_cos_delta(met, h_bb);
@@ -110,9 +110,9 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("costheta_htt_hh_met"))     feats["costheta_htt_hh_met"]     = FeatComp::calc_cos_delta(svfit, h_tt_met+h_bb);
     if (FeatComp::_feat_check("costheta_htt_met_hh_met")) feats["costheta_htt_met_hh_met"] = FeatComp::calc_cos_delta(h_tt_met, h_tt_met+h_bb);
     if (FeatComp::_feat_check("costheta_hbb_hh_met"))     feats["costheta_hbb_hh_met"]     = FeatComp::calc_cos_delta(h_bb, h_tt_met+h_bb);
-    if (FeatComp::_feat_check("costheta_htt_hh"))         feats["costheta_htt_hh_vis"]     = FeatComp::calc_cos_delta(svfit, hh);
-    if (FeatComp::_feat_check("costheta_htt_met_hh"))     feats["costheta_htt_met_hh_vis"] = FeatComp::calc_cos_delta(h_tt_met, hh);
-    if (FeatComp::_feat_check("costheta_hbb_hh"))         feats["costheta_hbb_hh_vis"]     = FeatComp::calc_cos_delta(h_bb, hh);            
+    if (FeatComp::_feat_check("costheta_htt_hh"))         feats["costheta_htt_hh"]         = FeatComp::calc_cos_delta(svfit, hh);
+    if (FeatComp::_feat_check("costheta_htt_met_hh"))     feats["costheta_htt_met_hh"]     = FeatComp::calc_cos_delta(h_tt_met, hh);
+    if (FeatComp::_feat_check("costheta_hbb_hh"))         feats["costheta_hbb_hh"]         = FeatComp::calc_cos_delta(h_bb, hh);            
 
     return feats;
 }
