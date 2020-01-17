@@ -1,10 +1,9 @@
 #include "cms_hh_proc_interface/processing/interface/feat_comp.hh"
 
-FeatComp::FeatComp(bool return_all, std::set<std::string> requested, bool use_deep_csv, bool verbose) {
+FeatComp::FeatComp(bool return_all, std::set<std::string> requested, bool use_deep_csv) {
     _all = return_all;
     _requested = requested;
     _use_deep_csv = use_deep_csv;
-    _verbose = verbose;
 }
 
 FeatComp::~FeatComp() {}

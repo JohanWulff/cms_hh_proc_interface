@@ -39,4 +39,6 @@ int main(int argc, char *argv[]) {
     std::cout << "Processed\n";
 
     for (auto const& f : feats) std::cout << f.first << ":" << f.second << "\n";
+
+    return 0;
 }
