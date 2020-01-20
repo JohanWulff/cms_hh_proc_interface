@@ -20,7 +20,8 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
                                                const float& b_2_csv,
                                                const float& b_1_deepcsv,
                                                const float& b_2_deepcsv,
-                                               Channel channel) {
+                                               Channel channel,
+                                               Year year) {
     /* Compute HL features from base event*/
 
     // Extra vectors
@@ -34,6 +35,7 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     // Categoricals
     feats["boosted"] = is_boosted;
     feats["channel"] = channel;
+    feats["year"]    = year;
     FeatComp::_add_jet_flags(b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, feats);
 
     // Delta phi

@@ -57,7 +57,8 @@ public:
 										 const float&,			// b_2 CSV
 										 const float&,			// b_1 Deep CSV
 										 const float&,			// b_2 Deep CSV
-										 Channel,	            // Channel
+										 Channel,				// Channel
+										 Year,	            	// Year
 										 const float&);		    // Resonant mass (set to zero is non-resonant)
 };
 

@@ -37,6 +37,7 @@ int main(int argc, char *argv[]) {
     bool is_boosted      = csv(rng) > 1.;
     float csv_1(csv(rng)), csv_2(csv(rng)), deepcsv_1(csv(rng)), deepcsv_2(csv(rng));
     Channel channel = tauTau;
+    Year year = y16;
     float res_mass = 450;
     std::cout << "Generated\n";
 
@@ -47,7 +48,7 @@ int main(int argc, char *argv[]) {
     std::cout << "Processing event... ";
     std::map<std::string, float> feats = evt_proc.process(b_1, b_2, l_1, l_2, met, sv, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, pzetavisible, pzeta,
                                                           top_1_mass, top_2_mass, l_1_mt, l_2_mt,
-                                                          is_boosted, csv_1, csv_2, deepcsv_1, deepcsv_2, channel, res_mass);
+                                                          is_boosted, csv_1, csv_2, deepcsv_1, deepcsv_2, channel, year, res_mass);
     std::cout << "Processed\n";
     for (auto const& f : feats) std::cout << f.first << " : " << f.second << "\n";
     std::cout << feats.size() << " features returned\n\n";
@@ -60,7 +61,7 @@ int main(int argc, char *argv[]) {
     std::cout << "Processing event... ";
     feats = evt_proc2.process(b_1, b_2, l_1, l_2, met, sv, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, pzetavisible, pzeta,
                               top_1_mass, top_2_mass, l_1_mt, l_2_mt,
-                              is_boosted, csv_1, csv_2, deepcsv_1, deepcsv_2, channel, res_mass);
+                              is_boosted, csv_1, csv_2, deepcsv_1, deepcsv_2, channel year, res_mass);
     std::cout << "Processed\n";
 
     std::cout << "Expected: ";

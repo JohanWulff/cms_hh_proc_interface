@@ -30,6 +30,7 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
                                               const float& b_1_deepcsv,
                                               const float& b_2_deepcsv,
                                               Channel channel,
+                                              Year year,
                                               const float& res_mass) {
     /* Processes (requested) features for an event and returns a map of features->values (in order of requested features) */
 

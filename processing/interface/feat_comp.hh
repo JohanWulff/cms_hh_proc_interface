@@ -15,6 +15,7 @@
 
 
 enum Channel{tauTau=0, muTau=1, eTau=2};
+enum Year{y16=0, y17=1, y18=2};
 
 class FeatComp {
 	/* Class for computing requested features for final-state LorentzVectors */
@@ -49,7 +50,8 @@ public:
 										 const float&,			// b_2 CSV
 										 const float&,			// b_1 Deep CSV
 										 const float&,			// b_2 Deep CSV
-										 Channel);	            // Channel		
+										 Channel,				// Channel	
+										 Year);	            	// Year
 	inline float delta_eta(const LorentzVector&, const LorentzVector&);
 	inline float delta_phi(const LorentzVector&, const LorentzVector&);
 	inline float delta_r(const LorentzVector&, const LorentzVector&);
