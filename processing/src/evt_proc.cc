@@ -35,7 +35,7 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
     /* Processes (requested) features for an event and returns a map of features->values (in order of requested features) */
 
     std::map<std::string, float> feats = _feat_comp->process(b_1, b_2, l_1, l_2, met, svfit, hh_kinfit_mass, is_boosted,
-                                                             b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, channel);
+                                                             b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, channel, year);
     // Non-comp extra HL
     if (EvtProc::_feat_check("hh_kinfit_chi2")) feats["hh_kinfit_chi2"] = hh_kinfit_chi2;
     if (EvtProc::_feat_check("mt2"))            feats["mt2"]            = mt2;
