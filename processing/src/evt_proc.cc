@@ -102,7 +102,7 @@ std::vector<float> EvtProc::process_as_vec(const LorentzVector& b_1,
     int i = 0;
     for (auto const& f : feats) {
         vec[i] = f.second;
-        i++:
+        i++;
     }
     return vec;
 }
