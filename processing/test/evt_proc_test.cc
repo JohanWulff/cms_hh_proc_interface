@@ -74,5 +74,12 @@ int main(int argc, char *argv[]) {
     std::cout << "Recieved vector of " << vec.size() << " elements\n";
     for (auto const& f : vec) std::cout << f << " ";
     std::cout << "\n";
+
+    std::cout << "Checking feat names... ";
+    std::set<std::string> names = evt_proc2.get_feats();
+    std::cout << "Processed\n";
+    std::cout << "Recieved:\n";
+    for (auto const& f : names) std::cout << f << " ";
+    std::cout << "\n";
     return 0;
 }

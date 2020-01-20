@@ -84,6 +84,7 @@ public:
 									  Channel,				// Channel
 									  Year,	            	// Year
 									  const float&);	    // Resonant mass (set to zero is non-resonant)
+	std::set<std::string> get_feats();
 };
 
 #endif /* EVT_PROC_HH_ */
