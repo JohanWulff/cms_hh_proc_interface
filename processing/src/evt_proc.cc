@@ -109,7 +109,7 @@ std::vector<float> EvtProc::process_as_vec(const LorentzVector& b_1,
     return vec;
 }
 
-EvtProc::get_feats() {
+std::set<std::string> EvtProc::get_feats() {
     /* Returns list of features that will be computed in general operation */
 
     std::map<std::string, float> feats = EvtProc::process(LorentzVector, LorentzVector, LorentzVector, LorentzVector, LorentzVector, LorentzVector, 0, 0, 0, 0,
