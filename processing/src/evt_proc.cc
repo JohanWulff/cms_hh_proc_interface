@@ -95,6 +95,8 @@ std::vector<float> EvtProc::process_as_vec(const LorentzVector& b_1,
                                            Channel channel,
                                            Year year,
                                            const float& res_mass) {
+    /* Calls  EvtProc::process and processes result into a vector */
+
     std::map<std::string, float> feats = EvtProc::process(b_1, b_2, l_1, l_2, met, svfit, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, p_zetavisible, p_zeta,
                                                           top_1_mass, top_2_mass, l_1_mt, l_2_mt,
                                                           is_boosted, b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, channel, year, res_mass);
