@@ -44,7 +44,6 @@ int main(int argc, char *argv[]) {
     std::cout << "Instantiating return_all EvtProc... ";
     EvtProc evt_proc;
     std::cout << "Instantiated\n ";
-
     std::cout << "Processing event... ";
     std::map<std::string, float> feats = evt_proc.process(b_1, b_2, l_1, l_2, met, sv, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, pzetavisible, pzeta,
                                                           top_1_mass, top_2_mass, l_1_mt, l_2_mt,
@@ -57,17 +56,23 @@ int main(int argc, char *argv[]) {
     std::set<std::string> requested = {"costheta_met_htt", "phi", "hh_kinfit_chi2", "is_boosted", "costheta_l1_httmet"};
     EvtProc evt_proc2(false, requested);
     std::cout << "Instantiated\n ";
-
     std::cout << "Processing event... ";
     feats = evt_proc2.process(b_1, b_2, l_1, l_2, met, sv, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, pzetavisible, pzeta,
                               top_1_mass, top_2_mass, l_1_mt, l_2_mt,
                               is_boosted, csv_1, csv_2, deepcsv_1, deepcsv_2, channel, year, res_mass);
     std::cout << "Processed\n";
-
     std::cout << "Expected: ";
     for (auto const& f : requested) std::cout << f << " ";
     std::cout << "\nReceived: ";
     for (auto const& f : feats)     std::cout << f.first << " ";
 
+    std::cout << "Processing event as vector... ";
+    std::vector<float> vec = evt_proc2.process_as_vec(b_1, b_2, l_1, l_2, met, sv, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, pzetavisible, pzeta,
+                                                      top_1_mass, top_2_mass, l_1_mt, l_2_mt,
+                                                      is_boosted, csv_1, csv_2, deepcsv_1, deepcsv_2, channel, year, res_mass);
+    std::cout << "Processed\n";
+    std::cout << "Recieved vector of " << vec.size() << " elements\n";
+    for (auto const& f : vec) std::cout << f << " ";
+    std::cout << "\n";
     return 0;
 }

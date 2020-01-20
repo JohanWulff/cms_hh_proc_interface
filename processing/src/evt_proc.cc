@@ -69,3 +69,40 @@ std::map<std::string, float> EvtProc::_sort_feats(std::map<std::string, float> f
     for (auto const& f : _requested) sf[f] = feats[f];
     return sf;
 }
+
+
+std::vector<float> EvtProc::process_as_vec(const LorentzVector& b_1,
+                                           const LorentzVector& b_2,
+                                           const LorentzVector& l_1,
+                                           const LorentzVector& l_2,
+                                           const LorentzVector& met,
+                                           const LorentzVector& svfit,
+                                           const float& hh_kinfit_mass,
+                                           const float& hh_kinfit_chi2,
+                                           const float& mt2,
+                                           const float& mt_tot,
+                                           const float& p_zetavisible,
+                                           const float& p_zeta,
+                                           const float& top_1_mass,
+                                           const float& top_2_mass,
+                                           const float& l_1_mt,
+                                           const float& l_2_mt,
+                                           const bool& is_boosted,
+                                           const float& b_1_csv,
+                                           const float& b_2_csv,
+                                           const float& b_1_deepcsv,
+                                           const float& b_2_deepcsv,
+                                           Channel channel,
+                                           Year year,
+                                           const float& res_mass) {
+    std::map<std::string, float> feats = EvtProc::process(b_1, b_2, l_1, l_2, met, svfit, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, p_zetavisible, p_zeta,
+                                                          top_1_mass, top_2_mass, l_1_mt, l_2_mt,
+                                                          is_boosted, b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, channel, year, res_mass);
+    std::vector<float> vec(feats.size);
+    int i = 0;
+    for (auto const& f : feats) {
+        vec[i] = f.second;
+        i++:
+    }
+    return vec;
+}
