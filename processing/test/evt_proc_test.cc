@@ -76,7 +76,7 @@ int main(int argc, char *argv[]) {
     std::cout << "\n";
 
     std::cout << "Checking feat names... ";
-    std::set<std::string> names = evt_proc2.get_feats();
+    std::vector<std::string> names = evt_proc2.get_feats();
     std::cout << "Processed\n";
     std::cout << "Recieved:\n";
     for (auto const& f : names) std::cout << f << " ";
