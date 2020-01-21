@@ -31,7 +31,9 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
                                               const float& b_2_deepcsv,
                                               Channel channel,
                                               Year year,
-                                              const float& res_mass) {
+                                              const float& res_mass,
+                                              Spin spin,
+                                              const float& klambda) {
     /* Processes (requested) features for an event and returns a map of features->values (in order of requested features) */
 
     std::map<std::string, float> feats = _feat_comp->process(b_1, b_2, l_1, l_2, met, svfit, hh_kinfit_mass, is_boosted,
@@ -41,6 +43,8 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
     if (EvtProc::_feat_check("mt2"))            feats["mt2"]            = mt2;
     if (EvtProc::_feat_check("mt_tot"))         feats["mt_tot"]         = mt_tot; 
     if (EvtProc::_feat_check("res_mass"))       feats["res_mass"]       = res_mass;
+    if (EvtProc::_feat_check("spin"))           feats["spin"]           = spin;
+    if (EvtProc::_feat_check("klambda"))        feats["klambda"]        = klambda;
     if (EvtProc::_feat_check("p_zetavisible"))  feats["p_zetavisible"]  = p_zetavisible;
     if (EvtProc::_feat_check("p_zeta"))         feats["p_zeta"]         = p_zeta;
     if (EvtProc::_feat_check("top_1_mass"))     feats["top_1_mass"]     = top_1_mass;
@@ -94,12 +98,14 @@ std::vector<float> EvtProc::process_as_vec(const LorentzVector& b_1,
                                            const float& b_2_deepcsv,
                                            Channel channel,
                                            Year year,
-                                           const float& res_mass) {
+                                           const float& res_mass,
+                                           Spin spin,
+                                           const float& klambda) {
     /* Calls  EvtProc::process and processes result into a vector */
 
     std::map<std::string, float> feats = EvtProc::process(b_1, b_2, l_1, l_2, met, svfit, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, p_zetavisible, p_zeta,
                                                           top_1_mass, top_2_mass, l_1_mt, l_2_mt,
-                                                          is_boosted, b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, channel, year, res_mass);
+                                                          is_boosted, b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, channel, year, res_mass, spin, klmabda);
     std::vector<float> vec(feats.size());
     int i = 0;
     for (auto const& f : feats) {
@@ -107,6 +113,45 @@ std::vector<float> EvtProc::process_as_vec(const LorentzVector& b_1,
         i++;
     }
     return vec;
+}
+
+void EvtProc::process_to_vec(std::vector<float*>& feats;
+                             const LorentzVector& b_1,
+                             const LorentzVector& b_2,
+                             const LorentzVector& l_1,
+                             const LorentzVector& l_2,
+                             const LorentzVector& met,
+                             const LorentzVector& svfit,
+                             const float& hh_kinfit_mass,
+                             const float& hh_kinfit_chi2,
+                             const float& mt2,
+                             const float& mt_tot,
+                             const float& p_zetavisible,
+                             const float& p_zeta,
+                             const float& top_1_mass,
+                             const float& top_2_mass,
+                             const float& l_1_mt,
+                             const float& l_2_mt,
+                             const bool& is_boosted,
+                             const float& b_1_csv,
+                             const float& b_2_csv,
+                             const float& b_1_deepcsv,
+                             const float& b_2_deepcsv,
+                             Channel channel,
+                             Year year,
+                             const float& res_mass,
+                             Spin spin,
+                             const float& klambda) {
+    /* Calls  EvtProc::process and processes result into a supplied vector */
+
+    std::map<std::string, float> feats = EvtProc::process(b_1, b_2, l_1, l_2, met, svfit, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, p_zetavisible, p_zeta,
+                                                          top_1_mass, top_2_mass, l_1_mt, l_2_mt,
+                                                          is_boosted, b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, channel, year, res_mass, spin, klmabda);
+    int i = 0;
+    for (auto const& f : feats) {
+        *(feats[i]) = f.second;
+        i++;
+    }
 }
 
 std::vector<std::string> EvtProc::get_feats() {
