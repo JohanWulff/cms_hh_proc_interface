@@ -146,7 +146,7 @@ void EvtProc::process_to_vec(std::vector<float*>& feats;
 
     std::map<std::string, float> feats = EvtProc::process(b_1, b_2, l_1, l_2, met, svfit, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, p_zetavisible, p_zeta,
                                                           top_1_mass, top_2_mass, l_1_mt, l_2_mt,
-                                                          is_boosted, b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, channel, year, res_mass, spin, klmabda);
+                                                          is_boosted, b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, channel, year, res_mass, spin, klambda);
     int i = 0;
     for (auto const& f : feats) {
         *(feats[i]) = f.second;
@@ -158,7 +158,7 @@ std::vector<std::string> EvtProc::get_feats() {
     /* Returns list of features that will be computed in general operation */
 
     std::map<std::string, float> feats = EvtProc::process(LorentzVector(), LorentzVector(), LorentzVector(), LorentzVector(), LorentzVector(), LorentzVector(),
-                                                          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false, 0, 0, 0, 0, Channel(tauTau), Year(y16), 0);
+                                                          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false, 0, 0, 0, 0, Channel(tauTau), Year(y16), 0, Spin(nonres), 0);
     std::vector<std::string> names;
     for (auto const& f : feats) names.push_back(f.first);
     return names;

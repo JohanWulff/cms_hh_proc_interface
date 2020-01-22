@@ -16,7 +16,7 @@
 // Local
 #include "feat_comp.hh"
 
-enum Spin{radion=0, graivton=1};
+enum Spin{radion=0, graivton=1, nonres=2};
 
 class EvtProc {
 	/* Class for extracting and computing required information and returning it expected order */
