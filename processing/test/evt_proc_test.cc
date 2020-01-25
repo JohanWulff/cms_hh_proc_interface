@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
     Channel channel = tauTau;
     Year year = y16;
     float res_mass = 450;
-    Spin spin = nonres,
+    Spin spin = nonres;
     float klambda = 1;
     std::cout << "Generated\n";
 
