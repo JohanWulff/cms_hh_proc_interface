@@ -144,11 +144,11 @@ void EvtProc::process_to_vec(std::vector<float*>& feats,
                              const float& klambda) {
     /* Calls  EvtProc::process and processes result into a supplied vector */
 
-    std::map<std::string, float> feats = EvtProc::process(b_1, b_2, l_1, l_2, met, svfit, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, p_zetavisible, p_zeta,
+    std::map<std::string, float> feat_vals = EvtProc::process(b_1, b_2, l_1, l_2, met, svfit, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, p_zetavisible, p_zeta,
                                                           top_1_mass, top_2_mass, l_1_mt, l_2_mt,
                                                           is_boosted, b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, channel, year, res_mass, spin, klambda);
     int i = 0;
-    for (auto const& f : feats) {
+    for (auto const& f : feat_vals) {
         *(feats[i]) = f.second;
         i++;
     }
