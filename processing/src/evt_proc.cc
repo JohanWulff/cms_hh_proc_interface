@@ -150,7 +150,7 @@ void EvtProc::process_to_vec(std::vector<float*>& feats,
     if (feat_vals.size() != feats.size()) throw std::length_error("Length of computed map (" + std::to_string(feat_vals.size()) + ") does not match length of \
                                                                    vector to fill (" + std::to_string(feats.size()) + ")\n");
     int i = 0;
-    for (auto const& f : feat_vals) {
+    for (auto f : feat_vals) {
         std::cout << i << " " << f.first << " " << f.second << " " << feats[i] << "...";
         feats[i] = f.second;
         std::cout << " loaded\n";
