@@ -3,8 +3,8 @@ Interface providing feature computation from ROOT LorentzVectors for CMS RunII h
 
 # Installation
 
-1. cmsrel CMSSW_10_2_16
-1. cd CMSSW_10_2_16/src
+1. cmsrel CMSSW_10_2_15
+1. cd CMSSW_10_2_15/src
 1. cmsenv
 1. git clone git@github.com:GilesStrong/cms_hh_proc_interface.git
 1. scram b -j 12
