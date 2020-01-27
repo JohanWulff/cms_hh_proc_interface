@@ -149,11 +149,11 @@ void EvtProc::process_to_vec(std::vector<float*>& feats,
                                                               is_boosted, b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, channel, year, res_mass, spin, klambda);
     if (feat_vals.size() != feats.size()) throw std::length_error("Length of computed map (" + std::to_string(feat_vals.size()) + ") does not match length of \
                                                                    vector to fill (" + std::to_string(feats.size()) + ")\n");
-    std::cout << feat_vals.size() << "\n";
-    std::cout << feats.size() << "\n";
     int i = 0;
     for (auto const& f : feat_vals) {
+        std::cout << i << " " << f.first << " " << f.second << " " << feats[i] << " " << *(feats[i]) << "...";
         *(feats[i]) = f.second;
+        std::cout << " loaded\n";
         i++;
     }
 }
