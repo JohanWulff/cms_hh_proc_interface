@@ -153,7 +153,7 @@ void EvtProc::process_to_vec(std::vector<float*>& feats,
     for (auto const& f : feat_vals) {
         std::cout << i << " " << f.first << " " << f.second << " " << feats[i] << " " << *(feats[i]) << "...";
         *(feats[i]) = f.second;
-        std::cout << " loaded\n"
+        std::cout << " loaded\n";
         i++;
     }
 }
