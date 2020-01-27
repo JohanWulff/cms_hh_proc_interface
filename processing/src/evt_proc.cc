@@ -115,7 +115,7 @@ std::vector<float> EvtProc::process_as_vec(const LorentzVector& b_1,
     return vec;
 }
 
-void EvtProc::process_to_vec(std::vector<float*>& feats,
+void EvtProc::process_to_vec(std::unique_ptr<float>>& feats,
                              const LorentzVector& b_1,
                              const LorentzVector& b_2,
                              const LorentzVector& l_1,
