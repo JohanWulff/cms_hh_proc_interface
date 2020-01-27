@@ -150,7 +150,7 @@ void EvtProc::process_to_vec(std::vector<float*>& feats,
                                                               top_1_mass, top_2_mass, l_1_mt, l_2_mt,
                                                               is_boosted, b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, channel, year, res_mass, spin, klambda);
     std::cout << "[";
-    for (auto const& f : feat_vals) std::cout << f << ",";
+    for (auto const& f : feat_vals) std::cout << f.second << ",";
     std::cout << "]";
 
     int i = 0;
