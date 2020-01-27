@@ -91,7 +91,7 @@ public:
 									  const float&,		     // Resonant mass (set to zero is non-resonant)
 									  Spin,   				 // Graviton or radion
 									  const float&);	     // KLambda coupling (set to zer if resonant)
-	void process_to_vec(std::vector<float>&,  // vector to fill
+	void process_to_vec(std::vector<float*>&,  // vector to fill
 						const LorentzVector&,  // b_1
 						const LorentzVector&,  // b_2
 						const LorentzVector&,  // l_1

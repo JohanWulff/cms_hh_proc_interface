@@ -115,7 +115,7 @@ std::vector<float> EvtProc::process_as_vec(const LorentzVector& b_1,
     return vec;
 }
 
-void EvtProc::process_to_vec(std::vector<float>& feats,
+void EvtProc::process_to_vec(std::vector<float*>& feats,
                              const LorentzVector& b_1,
                              const LorentzVector& b_2,
                              const LorentzVector& l_1,
@@ -151,9 +151,9 @@ void EvtProc::process_to_vec(std::vector<float>& feats,
                                                                    vector to fill (" + std::to_string(feats.size()) + ")\n");
     int i = 0;
     for (auto const& f : feat_vals) {
-        std::cout << i << " " << f.first << " " << f.second << " " << feats[i] << " " << "...";
-        feats[i] = f.second;
-        std::cout << " loaded\n";
+        std::cout << i << " " << f.first << " " << f.second << " " << feats[i] << " " << *(feats[i]) << "...";
+        *(feats[i]) = f.second;
+        std::cout << " loaded\n"
         i++;
     }
 }
