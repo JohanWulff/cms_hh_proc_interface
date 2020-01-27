@@ -151,8 +151,8 @@ void EvtProc::process_to_vec(std::vector<float*>& feats,
                                                                    vector to fill (" + std::to_string(feats.size()) + ")\n");
     int i = 0;
     for (auto const& f : feat_vals) {
-        std::cout << i << " " << f.first << " " << f.second << " " << feats[i] << " " << *(feats[i]) << "...";
-        *(feats[i]) = f.second;
+        std::cout << i << " " << f.first << " " << f.second << " " << feats[i] << "...";
+        feats[i] = f.second;
         std::cout << " loaded\n";
         i++;
     }
