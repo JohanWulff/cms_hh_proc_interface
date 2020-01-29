@@ -83,5 +83,18 @@ int main(int argc, char *argv[]) {
     std::cout << "Recieved:\n";
     for (auto const& f : names) std::cout << f << " ";
     std::cout << "\n";
+
+    std::cout << "Processing event ot vector of pointers to zeros... "
+    unsinged int _n_feats = names.size();
+    std::vector<std::unique_ptr<float>> feat_vals;
+    feat_vals.reserve(_n_feats);
+    for (unsigned int i = 0; i < _n_feats; i++) feat_vals.emplace_back(new float(0));
+    evt_proc2.process_to_vec(feat_vals, b_1, b_2, l_1, l_2, met, sv, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, pzetavisible, pzeta,
+                             top_1_mass, top_2_mass, l_1_mt, l_2_mt,
+                             is_boosted, csv_1, csv_2, deepcsv_1, deepcsv_2, channel, year, res_mass, spin, klambda);
+    std::cout << "Processed, vector values now: \n";
+    for (unsigned int i = 0; i < _n_feats; i++) std::cout << feat_vals[i] << " ";
+    std::cout << "\n";
+    
     return 0;
 }
