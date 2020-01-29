@@ -39,7 +39,11 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
     std::map<std::string, float> feats = _feat_comp->process(b_1, b_2, l_1, l_2, met, svfit, hh_kinfit_mass, is_boosted,
                                                              b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, channel, year);
     // Non-comp extra HL
-    if (EvtProc::_feat_check("hh_kinfit_chi2")) feats["hh_kinfit_chi2"] = hh_kinfit_chi2 >= 0 ? hh_kinfit_chi2 : std::nanf;
+    if (hh_kinfit_chi2 >= 0) {
+        if (EvtProc::_feat_check("hh_kinfit_chi2")) feats["hh_kinfit_chi2"] = hh_kinfit_chi2;
+    } else {
+        if (EvtProc::_feat_check("hh_kinfit_chi2")) feats["hh_kinfit_chi2"] = std::nanf;
+    }
     if (EvtProc::_feat_check("mt2"))            feats["mt2"]            = mt2;
     if (EvtProc::_feat_check("mt_tot"))         feats["mt_tot"]         = mt_tot; 
     if (EvtProc::_feat_check("res_mass"))       feats["res_mass"]       = res_mass;
