@@ -84,7 +84,7 @@ int main(int argc, char *argv[]) {
     for (auto const& f : names) std::cout << f << " ";
     std::cout << "\n";
 
-    std::cout << "Processing event ot vector of pointers to zeros... "
+    std::cout << "Processing event ot vector of pointers to zeros... ";
     unsinged int _n_feats = names.size();
     std::vector<std::unique_ptr<float>> feat_vals;
     feat_vals.reserve(_n_feats);
@@ -93,7 +93,7 @@ int main(int argc, char *argv[]) {
                              top_1_mass, top_2_mass, l_1_mt, l_2_mt,
                              is_boosted, csv_1, csv_2, deepcsv_1, deepcsv_2, channel, year, res_mass, spin, klambda);
     std::cout << "Processed, vector values now: \n";
-    for (unsigned int i = 0; i < _n_feats; i++) std::cout << feat_vals[i] << " ";
+    for (unsigned int i = 0; i < _n_feats; i++) std::cout << *(feat_vals[i]) << " ";
     std::cout << "\n";
     
     return 0;
