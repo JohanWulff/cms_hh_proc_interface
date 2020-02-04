@@ -24,6 +24,8 @@ int main(int argc, char *argv[]) {
     LorentzVector l_2(mom(rng),mom(rng),mom(rng),energy(rng));
     LorentzVector met(mom(rng),mom(rng),0,       energy(rng));
     LorentzVector sv(mom(rng),mom(rng),mom(rng),energy(rng));
+    LorentzVector vbf_1(mom(rng),mom(rng),mom(rng),energy(rng));
+    LorentzVector vbf_2(mom(rng),mom(rng),mom(rng),energy(rng));
     float hh_kinfit_mass = energy(rng);
     float hh_kinfit_chi2 = energy(rng);
     float mt2            = energy(rng);
@@ -47,7 +49,7 @@ int main(int argc, char *argv[]) {
     EvtProc evt_proc;
     std::cout << "Instantiated\n ";
     std::cout << "Processing event... ";
-    std::map<std::string, float> feats = evt_proc.process(b_1, b_2, l_1, l_2, met, sv, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, pzetavisible, pzeta,
+    std::map<std::string, float> feats = evt_proc.process(b_1, b_2, l_1, l_2, met, sv, vbf_1, vbf_2, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, pzetavisible, pzeta,
                                                           top_1_mass, top_2_mass, l_1_mt, l_2_mt,
                                                           is_boosted, csv_1, csv_2, deepcsv_1, deepcsv_2, channel, year, res_mass, spin, klambda);
     std::cout << "Processed\n";
@@ -59,7 +61,7 @@ int main(int argc, char *argv[]) {
     EvtProc evt_proc2(false, requested);
     std::cout << "Instantiated\n ";
     std::cout << "Processing event... ";
-    feats = evt_proc2.process(b_1, b_2, l_1, l_2, met, sv, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, pzetavisible, pzeta,
+    feats = evt_proc2.process(b_1, b_2, l_1, l_2, met, sv, vbf_1, vbf_2, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, pzetavisible, pzeta,
                               top_1_mass, top_2_mass, l_1_mt, l_2_mt,
                               is_boosted, csv_1, csv_2, deepcsv_1, deepcsv_2, channel, year, res_mass, spin, klambda);
     std::cout << "Processed\n";
@@ -69,7 +71,7 @@ int main(int argc, char *argv[]) {
     for (auto const& f : feats)     std::cout << f.first << " ";
 
     std::cout << "Processing event as vector... ";
-    std::vector<float> vec = evt_proc2.process_as_vec(b_1, b_2, l_1, l_2, met, sv, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, pzetavisible, pzeta,
+    std::vector<float> vec = evt_proc2.process_as_vec(b_1, b_2, l_1, l_2, met, sv, vbf_1, vbf_2, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, pzetavisible, pzeta,
                                                       top_1_mass, top_2_mass, l_1_mt, l_2_mt,
                                                       is_boosted, csv_1, csv_2, deepcsv_1, deepcsv_2, channel, year, res_mass, spin, klambda);
     std::cout << "Processed\n";
@@ -89,7 +91,7 @@ int main(int argc, char *argv[]) {
     std::vector<std::unique_ptr<float>> feat_vals;
     feat_vals.reserve(_n_feats);
     for (unsigned int i = 0; i < _n_feats; i++) feat_vals.emplace_back(new float(0));
-    evt_proc2.process_to_vec(feat_vals, b_1, b_2, l_1, l_2, met, sv, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, pzetavisible, pzeta,
+    evt_proc2.process_to_vec(feat_vals, b_1, b_2, l_1, l_2, met, sv, vbf_1, vbf_2, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, pzetavisible, pzeta,
                              top_1_mass, top_2_mass, l_1_mt, l_2_mt,
                              is_boosted, csv_1, csv_2, deepcsv_1, deepcsv_2, channel, year, res_mass, spin, klambda);
     std::cout << "Processed, vector values now: \n";

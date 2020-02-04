@@ -44,6 +44,8 @@ public:
 										 const LorentzVector&,  // l_2
 										 const LorentzVector&,  // MET
 										 const LorentzVector&,  // SVFit
+										 const LorentzVector&,  // VBF 1
+										 const LorentzVector&,  // VBF 2
 										 const float&,          // HH KinFit mass
 										 const bool&, 			// Is boosted
 										 const float&,			// b_1 CSV

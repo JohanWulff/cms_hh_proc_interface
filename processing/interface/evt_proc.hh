@@ -44,6 +44,8 @@ public:
 										 const LorentzVector&,  // l_2
 										 const LorentzVector&,  // MET
 										 const LorentzVector&,  // SVFit
+										 const LorentzVector&,  // VBF_1
+										 const LorentzVector&,  // VBF_2
 										 const float&,          // HH KinFit mass
 										 const float&,          // HH KinFit chi2
 										 const float&,          // MT2
@@ -71,6 +73,8 @@ public:
 									  const LorentzVector&,  // l_2
 									  const LorentzVector&,  // MET
 									  const LorentzVector&,  // SVFit
+									  const LorentzVector&,  // VBF_1
+									  const LorentzVector&,  // VBF_2
 									  const float&,          // HH KinFit mass
 									  const float&,          // HH KinFit chi2
 									  const float&,          // MT2
@@ -98,6 +102,8 @@ public:
 						const LorentzVector&,  // l_2
 						const LorentzVector&,  // MET
 						const LorentzVector&,  // SVFit
+						const LorentzVector&,  // VBF_1
+						const LorentzVector&,  // VBF_2
 						const float&,          // HH KinFit mass
 						const float&,          // HH KinFit chi2
 						const float&,          // MT2

@@ -27,6 +27,8 @@ int main(int argc, char *argv[]) {
     LorentzVector l_2(mom(rng),mom(rng),mom(rng),energy(rng));
     LorentzVector met(mom(rng),mom(rng),0,       energy(rng));
     LorentzVector sv(mom(rng),mom(rng),mom(rng),energy(rng));
+    LorentzVector vbf_1(mom(rng),mom(rng),mom(rng),energy(rng));
+    LorentzVector vbf_2(mom(rng),mom(rng),mom(rng),energy(rng));
     float hh_kinfit_mass = energy(rng);
     bool is_boosted = csv(rng) > 1.;
     float csv_1(csv(rng)), csv_2(csv(rng)), deepcsv_1(csv(rng)), deepcsv_2(csv(rng));
@@ -35,7 +37,7 @@ int main(int argc, char *argv[]) {
     std::cout << "Generated\n";
 
     std::cout << "Processing event... ";
-    std::map<std::string, float> feats = feat_comp.process(b_1, b_2, l_1, l_2, met, sv, hh_kinfit_mass, is_boosted,
+    std::map<std::string, float> feats = feat_comp.process(b_1, b_2, l_1, l_2, met, sv, vbf_1, vbf_2, hh_kinfit_mass, is_boosted,
                                                            csv_1, csv_2, deepcsv_1, deepcsv_2, channel, year);
     std::cout << "Processed\n";
 

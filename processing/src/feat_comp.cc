@@ -14,6 +14,8 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
 										       const LorentzVector& l_2,
 										       const LorentzVector& met,
 										       const LorentzVector& svfit,
+                                               const LorentzVector& vbf_1,
+                                               const LorentzVector& vbf1,
 										       const float& hh_kinfit_m,
                                                const bool& is_boosted,
                                                const float& b_1_csv,
@@ -29,7 +31,7 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     LorentzVector h_tt_vis(l_1 + l_2);
     LorentzVector h_tt_met(h_tt_vis + met);
     LorentzVector hh(h_bb.Px()+svfit.Px(), h_bb.Py()+svfit.Py(), h_bb.Pz()+svfit.Pz(), hh_kinfit_m);  // I assume 4th component is a mass, but who knows...
-    if (hh_kinfit_m < 0) hh = h_bb+svfit;  // HHKinFit didn;' converge
+    if (hh_kinfit_m < 0) hh = h_bb+svfit;  // HHKinFit didn't converge
     std::map<std::string, float> feats;
 
     // Categoricals
@@ -50,18 +52,24 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("dphi_hbb_met"))    feats["dphi_hbb_met"]    = FeatComp::delta_phi(h_bb, met);
     if (FeatComp::_feat_check("dphi_hbb_sv"))     feats["dphi_hbb_sv"]     = FeatComp::delta_phi(h_bb, svfit);
     if (FeatComp::_feat_check("dphi_hbb_httmet")) feats["dphi_hbb_httmet"] = FeatComp::delta_phi(h_bb, h_tt_met);
+    if (FeatComp::_feat_check("dphi_vbf1_vbf2"))  feats["dphi_vbf1_vbf1"]  = FeatComp::delta_phi(vbf_1, vbf_2);
+    if (FeatComp::_feat_check("dphi_vbf1_met"))   feats["dphi_vbf1_met"]   = FeatComp::delta_phi(vbf_1, met);
+    if (FeatComp::_feat_check("dphi_vbf2_met"))   feats["dphi_vbf2_met"]   = FeatComp::delta_phi(vbf_2, met);
 
     // Delta eta
     if (FeatComp::_feat_check("deta_l1_l2"))      feats["deta_l1_l2"]      = FeatComp::delta_eta(l_1, l_2);
     if (FeatComp::_feat_check("deta_b1_b2"))      feats["deta_b1_b2"]      = FeatComp::delta_eta(b_1, b_2);
     if (FeatComp::_feat_check("deta_hbb_sv"))     feats["deta_hbb_sv"]     = FeatComp::delta_eta(h_bb, svfit);
     if (FeatComp::_feat_check("deta_hbb_httmet")) feats["deta_hbb_httmet"] = FeatComp::delta_eta(h_bb, met);
+    if (FeatComp::_feat_check("deta_vbf1_vbf2"))  feats["deta_vbf1_vbf2"]  = FeatComp::delta_eta(vbf_1, vbf_2);
 
     // Delta R
     if (FeatComp::_feat_check("dR_l1_l2"))      feats["dR_l1_l2"]      = FeatComp::delta_r(l_1, l_2);
     if (FeatComp::_feat_check("dR_b1_b2"))      feats["dR_b1_b2"]      = FeatComp::delta_r(b_1, b_2);
     if (FeatComp::_feat_check("dR_hbb_httmet")) feats["dR_hbb_httmet"] = FeatComp::delta_r(h_bb, h_tt_met);
     if (FeatComp::_feat_check("dR_hbb_sv"))     feats["dR_hbb_sv"]     = FeatComp::delta_r(h_bb, svfit);
+    if (FeatComp::_feat_check("dR_vbf1_vbf2"))  feats["dR_vbf1_vbf2"]  = FeatComp::delta_r(vbf_1, vbf_2);
+
     if (FeatComp::_feat_check("dR_b1_b2_x_h_bb_pT"))     feats["dR_b1_b2_x_h_bb_pT"]     = FeatComp::delta_r(b_1, b_2)*h_bb.Pt();
     if (FeatComp::_feat_check("dR_l1_l2_x_h_tt_met_pT")) feats["dR_l1_l2_x_h_tt_met_pT"] = FeatComp::delta_r(l_1, l_2)*h_tt_met.Pt();
     if (FeatComp::_feat_check("dR_l1_l2_x_sv_pT"))       feats["dR_l1_l2_x_sv_pT"]       = FeatComp::delta_r(l_1, l_2)*svfit.Pt();
@@ -114,7 +122,11 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("costheta_hbb_hh_met"))     feats["costheta_hbb_hh_met"]     = FeatComp::calc_cos_delta(h_bb, h_tt_met+h_bb);
     if (FeatComp::_feat_check("costheta_htt_hh"))         feats["costheta_htt_hh"]         = FeatComp::calc_cos_delta(svfit, hh);
     if (FeatComp::_feat_check("costheta_htt_met_hh"))     feats["costheta_htt_met_hh"]     = FeatComp::calc_cos_delta(h_tt_met, hh);
-    if (FeatComp::_feat_check("costheta_hbb_hh"))         feats["costheta_hbb_hh"]         = FeatComp::calc_cos_delta(h_bb, hh);            
+    if (FeatComp::_feat_check("costheta_hbb_hh"))         feats["costheta_hbb_hh"]         = FeatComp::calc_cos_delta(h_bb, hh);
+
+    // Assorted VBF
+    if (FeatComp::_feat_check("vbd_eta_prod_sign")) feats["vbd_eta_prod_sign"]= std::sign(vbf_1.eta()*vbf_2.eta());
+    
 
     return feats;
 }
