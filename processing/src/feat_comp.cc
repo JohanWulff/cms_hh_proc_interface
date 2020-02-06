@@ -125,7 +125,7 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("costheta_hbb_hh"))         feats["costheta_hbb_hh"]         = FeatComp::calc_cos_delta(h_bb, hh);
 
     // Assorted VBF
-    if (FeatComp::_feat_check("vbd_eta_prod_sign")) feats["vbd_eta_prod_sign"]= std::sign(vbf_1.eta()*vbf_2.eta());
+    if (FeatComp::_feat_check("vbd_eta_prod_sign")) feats["vbd_eta_prod_sign"] = (vbf_1.eta()*vbf_2.eta() >= 0) ? 1 : 0;
     
 
     return feats;
