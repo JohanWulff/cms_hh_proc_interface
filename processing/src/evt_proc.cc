@@ -170,7 +170,8 @@ std::vector<std::string> EvtProc::get_feats() {
     /* Returns list of features that will be computed in general operation */
 
     std::map<std::string, float> feats = EvtProc::process(LorentzVector(), LorentzVector(), LorentzVector(), LorentzVector(), LorentzVector(), LorentzVector(),
-                                                          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false, 0, 0, 0, 0, Channel(tauTau), Year(y16), 0, Spin(nonres), 0);
+                                                          LorentzVector(), LorentzVector()0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false, 0, 0, 0, 0, Channel(tauTau),
+                                                          Year(y16), 0, Spin(nonres), 0);
     std::vector<std::string> names;
     for (auto const& f : feats) names.push_back(f.first);
     return names;
