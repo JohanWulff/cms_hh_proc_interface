@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
     std::cout << "\nReceived: ";
     for (auto const& f : feats)     std::cout << f.first << " ";
 
-    std::cout << "Processing event as vector... ";
+    std::cout << "\nProcessing event as vector... ";
     std::vector<float> vec = evt_proc2.process_as_vec(b_1, b_2, l_1, l_2, met, sv, vbf_1, vbf_2, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, pzetavisible, pzeta,
                                                       top_1_mass, top_2_mass, l_1_mt, l_2_mt,
                                                       is_boosted, csv_1, csv_2, deepcsv_1, deepcsv_2, channel, year, res_mass, spin, klambda);

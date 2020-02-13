@@ -28,7 +28,7 @@ private:
     bool _all, _use_deep_csv;
     std::set<std::string> _requested;
 	std::vector<float> _csv_wps{0, 0.5426, 0.8484, 0.9535};  // TODO: Check these
-	std::vector<float> _deep_csv_wps{0, 0.5426, 0.8484, 0.9535};  //TODO: Update these
+	std::vector<float> _deep_csv_wps{0, 0.0494, 0.2770, 0.7264};  //TODO: Update these
 
 	// Methods
 	void _add_jet_flags(const float&, const float&, const float&, const float&, std::map<std::string, float>&);
