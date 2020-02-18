@@ -3,7 +3,7 @@
 EvtProc::EvtProc(bool return_all, std::vector<std::string> requested, bool use_deep_csv) {
     _all = return_all;
     _requested = requested;
-    _feat_comp = new FeatComp(return_all, std::set<std::string>(_requested.begin(), _requested.end()), use_deep_csv);
+    _feat_comp = new FeatComp(return_all, _requested, use_deep_csv);
 }
 
 EvtProc::~EvtProc() {}
@@ -72,7 +72,7 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
     return _all ? feats : EvtProc::_sort_feats(feats);
 }
 
-inline bool EvtProc::_feat_check(std::string feat) {return (_all ? true : _requested.find(feat) != _requested.end());}
+inline bool EvtProc::_feat_check(std::string feat) {return (_all ? true : std::find(_requested.begin(), _requested.end(), feat) != _requested.end());}
 
 std::map<std::string, float> EvtProc::_sort_feats(std::map<std::string, float> feats) {
     std::map<std::string, float> sf;

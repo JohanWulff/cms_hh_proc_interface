@@ -36,7 +36,7 @@ private:
 
 public:
     // Methods
-	FeatComp(bool return_all=true, std::set<std::string> requested={}, bool use_deep_csv=true);
+	FeatComp(bool return_all=true, std::vector<std::string> requested={}, bool use_deep_csv=true);
 	~FeatComp();
 	std::map<std::string, float> process(const LorentzVector&,  // b_1
 										 const LorentzVector&,  // b_2
