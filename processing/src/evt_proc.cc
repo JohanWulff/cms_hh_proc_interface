@@ -3,7 +3,7 @@
 EvtProc::EvtProc(bool return_all, std::vector<std::string> requested, bool use_deep_csv) {
     _all = return_all;
     _requested = requested;
-    _feat_comp = new FeatComp(return_all, std::set<std::string>(_requested.begin(), _requested.end()), use_deep_csv);
+    _feat_comp = new FeatComp(return_all, _requested, use_deep_csv);
 }
 
 EvtProc::~EvtProc() {}
