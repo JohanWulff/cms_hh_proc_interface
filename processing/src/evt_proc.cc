@@ -77,7 +77,10 @@ inline bool EvtProc::_feat_check(std::string feat) {return (_all ? true : _reque
 std::map<std::string, float> EvtProc::_sort_feats(std::map<std::string, float> feats) {
     std::cout << "Sorting feature\n";
     std::map<std::string, float> sf;
-    for (auto const& f : _requested) sf[f] = feats[f];
+    for (auto const& f : _requested) {
+        std::cout << f << "\n";
+        sf[f] = feats[f];
+    }
     return sf;
 }
 
