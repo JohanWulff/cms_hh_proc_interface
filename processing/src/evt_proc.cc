@@ -1,12 +1,9 @@
 #include "cms_hh_proc_interface/processing/interface/evt_proc.hh"
 
-EvtProc::EvtProc(bool return_all, std::set<std::string> requested, bool use_deep_csv) {
+EvtProc::EvtProc(bool return_all, std::vector<std::string> requested, bool use_deep_csv) {
     _all = return_all;
     _requested = requested;
-    for (auto const& f : requested) {
-        std::cout << f << "\n";
-    }
-    _feat_comp = new FeatComp(return_all, requested, use_deep_csv);
+    _feat_comp = new FeatComp(return_all, std::set<std::string>(_requested.begin(), _requested.end()), use_deep_csv);
 }
 
 EvtProc::~EvtProc() {}

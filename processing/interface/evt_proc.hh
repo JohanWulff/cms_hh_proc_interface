@@ -28,7 +28,7 @@ private:
 	// Variables
     bool _all;
 	FeatComp* _feat_comp;
-    std::set<std::string> _requested;
+    std::vector<std::string> _requested;
 
 	// Methods
 	inline bool _feat_check(std::string);
