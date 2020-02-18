@@ -52,7 +52,7 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("dphi_hbb_met"))    feats["dphi_hbb_met"]    = FeatComp::delta_phi(h_bb, met);
     if (FeatComp::_feat_check("dphi_hbb_sv"))     feats["dphi_hbb_sv"]     = FeatComp::delta_phi(h_bb, svfit);
     if (FeatComp::_feat_check("dphi_hbb_httmet")) feats["dphi_hbb_httmet"] = FeatComp::delta_phi(h_bb, h_tt_met);
-    if (FeatComp::_feat_check("dphi_vbf1_vbf2"))  feats["dphi_vbf1_vbf1"]  = FeatComp::delta_phi(vbf_1, vbf_2);
+    if (FeatComp::_feat_check("dphi_vbf1_vbf2"))  feats["dphi_vbf1_vbf2"]  = FeatComp::delta_phi(vbf_1, vbf_2);
     if (FeatComp::_feat_check("dphi_vbf1_met"))   feats["dphi_vbf1_met"]   = FeatComp::delta_phi(vbf_1, met);
     if (FeatComp::_feat_check("dphi_vbf2_met"))   feats["dphi_vbf2_met"]   = FeatComp::delta_phi(vbf_2, met);
 
