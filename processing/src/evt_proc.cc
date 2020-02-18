@@ -74,15 +74,6 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
 
 inline bool EvtProc::_feat_check(std::string feat) {return (_all ? true : std::find(_requested.begin(), _requested.end(), feat) != _requested.end());}
 
-std::map<std::string, float> EvtProc::_sort_feats(std::map<std::string, float> feats) {
-    std::map<std::string, float> sf;
-    for (auto const& f : _requested) {
-        sf[f] = feats[f];
-    }
-    return sf;
-}
-
-
 std::vector<float> EvtProc::process_as_vec(const LorentzVector& b_1,
                                            const LorentzVector& b_2,
                                            const LorentzVector& l_1,

@@ -33,7 +33,6 @@ private:
 
 	// Methods
 	inline bool _feat_check(std::string);
-	std::map<std::string, float> _sort_feats(std::map<std::string, float>);
 
 public:
     // Methods

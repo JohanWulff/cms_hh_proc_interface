@@ -76,7 +76,7 @@ int main(int argc, char *argv[]) {
     for (auto const& f : names) std::cout << f << " ";
     std::cout << "\n";
 
-    std::cout << "Processing event ot vector of pointers to zeros... ";
+    std::cout << "Processing event to vector of pointers to zeros... ";
     unsigned int _n_feats = names.size();
     std::vector<std::unique_ptr<float>> feat_vals;
     feat_vals.reserve(_n_feats);
