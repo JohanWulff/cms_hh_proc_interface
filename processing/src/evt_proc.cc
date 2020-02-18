@@ -125,7 +125,7 @@ std::vector<float> EvtProc::process_as_vec(const LorentzVector& b_1,
         }
     } else {
         for (auto const& f : _requested) {
-            vec[i] = feats[f].second;
+            vec[i] = feats[f];
             i++;
         }
     }
@@ -176,7 +176,7 @@ void EvtProc::process_to_vec(std::vector<std::unique_ptr<float>>& feats,
         }
     } else {
         for (auto const& f : _requested) {
-            *(feats[i]) = feat_vals[f].second;
+            *(feats[i]) = feat_vals[f];
             i++;
         }
     }
