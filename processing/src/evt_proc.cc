@@ -1,9 +1,9 @@
 #include "cms_hh_proc_interface/processing/interface/evt_proc.hh"
 
-EvtProc::EvtProc(bool return_all, std::vector<std::string> requested, bool use_deep_csv) {
+EvtProc::EvtProc(bool return_all, std::set<std::string> requested, bool use_deep_csv) {
     _all = return_all;
     _requested = requested;
-    _feat_comp = new FeatComp(return_all, _requested, use_deep_csv);
+    _feat_comp = new FeatComp(return_all, requested, use_deep_csv);
 }
 
 EvtProc::~EvtProc() {}
@@ -36,7 +36,7 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
                                               const float& res_mass,
                                               Spin spin,
                                               const float& klambda) {
-    /* Processes (requested) features for an event and returns a map of features->values (in order of requested features) */
+    /* Processes (requested) features for an event and returns a map of features->values */
     
     std::map<std::string, float> feats = _feat_comp->process(b_1, b_2, l_1, l_2, met, svfit, vbf_1, vbf_2, hh_kinfit_mass, is_boosted,
                                                              b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, channel, year);
@@ -69,20 +69,15 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
     if (EvtProc::_feat_check("vbf_1_E"))  feats["vbf_1_E"]  = vbf_1.E();
     if (EvtProc::_feat_check("vbf_2_E"))  feats["vbf_2_E"]  = vbf_2.E();
 
-    return _all ? feats : EvtProc::_sort_feats(feats);
+    return feats;
 }
 
-inline bool EvtProc::_feat_check(std::string feat) {return (_all ? true : std::find(_requested.begin(), _requested.end(), feat) != _requested.end());}
+inline bool EvtProc::_feat_check(std::string feat) {return (_all ? true : _requested.find(feat) != _requested.end());}
 
 std::map<std::string, float> EvtProc::_sort_feats(std::map<std::string, float> feats) {
     std::map<std::string, float> sf;
     for (auto const& f : _requested) {
-        std::cout << f << " ";
         sf[f] = feats[f];
-    }
-    std::cout << "\n";
-    for (auto f : sf) {
-        std::cout << f.first << " ";
     }
     return sf;
 }
@@ -123,9 +118,16 @@ std::vector<float> EvtProc::process_as_vec(const LorentzVector& b_1,
                                                           is_boosted, b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, channel, year, res_mass, spin, klambda);
     std::vector<float> vec(feats.size());
     int i = 0;
-    for (auto const& f : feats) {
-        vec[i] = f.second;
-        i++;
+    if (_all) {
+        for (auto const& f : feats) {
+            vec[i] = f.second;
+            i++;
+        }
+    } else {
+        for (auto const& f : _requested) {
+            vec[i] = feats[f].second;
+            i++;
+        }
     }
     return vec;
 }
@@ -167,10 +169,18 @@ void EvtProc::process_to_vec(std::vector<std::unique_ptr<float>>& feats,
     if (feat_vals.size() != feats.size()) throw std::length_error("Length of computed map (" + std::to_string(feat_vals.size()) + ") does not match length of \
                                                                    vector to fill (" + std::to_string(feats.size()) + ")\n");
     int i = 0;
-    for (auto const& f : feat_vals) {
-        *(feats[i]) = f.second;
-        i++;
+    if (_all) {
+        for (auto const& f : feat_vals) {
+            *(feats[i]) = f.second;
+            i++;
+        }
+    } else {
+        for (auto const& f : _requested) {
+            *(feats[i]) = feat_vals[f].second;
+            i++;
+        }
     }
+    
 }
 
 std::vector<std::string> EvtProc::get_feats() {
