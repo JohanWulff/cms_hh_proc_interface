@@ -7,6 +7,7 @@
 #include <map>
 #include <vector>
 #include <set>
+#include <algorithm>
 
 // ROOT
 #include <Math/VectorUtil.h>
@@ -28,7 +29,7 @@ private:
 	// Variables
     bool _all;
 	FeatComp* _feat_comp;
-    std::set<std::string> _requested;
+    std::vector<std::string> _requested;
 
 	// Methods
 	inline bool _feat_check(std::string);
@@ -36,7 +37,7 @@ private:
 
 public:
     // Methods
-	EvtProc(bool return_all=true, std::set<std::string> requested={}, bool use_deep_csv=true);
+	EvtProc(bool return_all=true, std::vector<std::string> requested={}, bool use_deep_csv=true);
 	~EvtProc();
 	std::map<std::string, float> process(const LorentzVector&,  // b_1
 										 const LorentzVector&,  // b_2

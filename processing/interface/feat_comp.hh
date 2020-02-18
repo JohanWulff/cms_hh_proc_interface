@@ -7,6 +7,7 @@
 #include <map>
 #include <vector>
 #include <set>
+#include <algorithm>
 
 // ROOT
 #include <Math/VectorUtil.h>
@@ -26,7 +27,7 @@ private:
 
 	// Variables
     bool _all, _use_deep_csv;
-    std::set<std::string> _requested;
+    std::vector<std::string> _requested;
 	std::vector<float> _csv_wps{0, 0.5426, 0.8484, 0.9535};  // TODO: Check these
 	std::vector<float> _deep_csv_wps{0, 0.0494, 0.2770, 0.7264};  //TODO: Update these
 
@@ -36,7 +37,7 @@ private:
 
 public:
     // Methods
-	FeatComp(bool return_all=true, std::set<std::string> requested={}, bool use_deep_csv=true);
+	FeatComp(bool return_all=true, std::vector<std::string> requested={}, bool use_deep_csv=true);
 	~FeatComp();
 	std::map<std::string, float> process(const LorentzVector&,  // b_1
 										 const LorentzVector&,  // b_2

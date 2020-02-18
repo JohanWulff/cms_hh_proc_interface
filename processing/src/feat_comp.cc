@@ -1,6 +1,6 @@
 #include "cms_hh_proc_interface/processing/interface/feat_comp.hh"
 
-FeatComp::FeatComp(bool return_all, std::set<std::string> requested, bool use_deep_csv) {
+FeatComp::FeatComp(bool return_all, std::vector<std::string> requested, bool use_deep_csv) {
     _all = return_all;
     _requested = requested;
     _use_deep_csv = use_deep_csv;
@@ -131,7 +131,7 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     return feats;
 }
 
-inline bool FeatComp::_feat_check(std::string feat) {return (_all ? true : _requested.find(feat) != _requested.end());}
+inline bool FeatComp::_feat_check(std::string feat) {return (_all ? true : std::find(_requested.begin(), _requested.end(), feat) != _requested.end());}
 
 inline float FeatComp::delta_phi(const LorentzVector& v_0, const LorentzVector& v_1) {return std::abs(ROOT::Math::VectorUtil::DeltaPhi(v_0, v_1));}
 
