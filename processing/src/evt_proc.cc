@@ -109,7 +109,7 @@ std::vector<float> EvtProc::process_as_vec(const LorentzVector& b_1,
                                                           is_boosted, b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, channel, year, res_mass, spin, klambda);
     std::cout << "EvtProc::process_as_vec " << feats.size() << " " << _requested.size() << "\n";
     for (auto const& f : _requested) {
-        if (std::find(feats.begin(), feats.end(), f) == _requested.end()) std::cout << "Missing " << f << "\n";
+        if (feats.find(f) == feats.end()) std::cout << "Missing " << f << "\n";
     }
 
 
