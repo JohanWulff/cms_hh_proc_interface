@@ -82,7 +82,7 @@ std::map<std::string, float> EvtProc::_sort_feats(std::map<std::string, float> f
     }
     std::cout << "\n";
     for (auto f : sf) {
-        std::cout << f << " ";
+        std::cout << f.first << " ";
     }
     return sf;
 }
