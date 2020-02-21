@@ -46,8 +46,8 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     feats["boosted"]    = is_boosted;
     feats["channel"]    = channel;
     feats["year"]       = year;
-    feats["svfit_conv"] = svfit_conv
-    feats["n_vbf"]      = n_vbf
+    feats["svfit_conv"] = svfit_conv;
+    feats["n_vbf"]      = n_vbf;
     FeatComp::_add_jet_flags(b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, feats);
 
     // Delta phi
