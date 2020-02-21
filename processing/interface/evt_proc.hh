@@ -63,10 +63,12 @@ public:
 										 const float&,			// b_2 Deep CSV
 										 Channel,				// Channel
 										 Year,	            	// Year
-										 const float&,		    // Resonant mass (set to zero is non-resonant)
+										 const float&,		    // Resonant mass (set to 125 if non-resonant)
 										 Spin,   				// Graviton or radion
-										 const float&);		    // KLambda coupling (set to zer if resonant)
-
+										 const float&		    // KLambda coupling (set to 1 if resonant)
+										 const int&,			// n_vbf
+                                         const bool&,			// svfit_conv
+                                         const bool&);			// hh_kinfit_conv
 	std::vector<float> process_as_vec(const LorentzVector&,  // b_1
 									  const LorentzVector&,  // b_2
 									  const LorentzVector&,  // l_1
@@ -92,9 +94,12 @@ public:
 									  const float&,			 // b_2 Deep CSV
 									  Channel,				 // Channel
 									  Year,	            	 // Year
-									  const float&,		     // Resonant mass (set to zero is non-resonant)
+									  const float&,		     // Resonant mass (set to 125 if non-resonant)
 									  Spin,   				 // Graviton or radion
-									  const float&);	     // KLambda coupling (set to zer if resonant)
+									  const float&  	     // KLambda coupling (set to 1 if resonant)
+									  const int&,	    	 // n_vbf
+                                      const bool&,			 // svfit_conv
+                                      const bool&);			 // hh_kinfit_conv
 	void process_to_vec(std::vector<std::unique_ptr<float>>&,  // vector to fill
 						const LorentzVector&,  // b_1
 						const LorentzVector&,  // b_2
@@ -121,9 +126,12 @@ public:
 						const float&,		   // b_2 Deep CSV
 						Channel,			   // Channel
 						Year,	               // Year
-						const float&,		   // Resonant mass (set to zero is non-resonant)
+						const float&,		   // Resonant mass (set to 125 if non-resonant)
 						Spin,   			   // Graviton or radion
-						const float&);	       // KLambda coupling (set to zer if resonant)
+						const float&);	       // KLambda coupling (set to zero if resonant)
+						const int&,			   // n_vbf
+                        const bool&,		   // svfit_conv
+                        const bool&);		   // hh_kinfit_conv
 	std::vector<std::string> get_feats();
 };
 

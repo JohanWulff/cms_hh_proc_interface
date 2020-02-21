@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
 
     std::cout << "Processing event... ";
     std::map<std::string, float> feats = feat_comp.process(b_1, b_2, l_1, l_2, met, sv, vbf_1, vbf_2, hh_kinfit_mass, is_boosted,
-                                                           csv_1, csv_2, deepcsv_1, deepcsv_2, channel, year);
+                                                           csv_1, csv_2, deepcsv_1, deepcsv_2, channel, year, 0, true, true);
     std::cout << "Processed\n";
 
     for (auto const& f : feats) std::cout << f.first << ":" << f.second << "\n";

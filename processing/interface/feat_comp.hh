@@ -54,7 +54,10 @@ public:
 										 const float&,			// b_1 Deep CSV
 										 const float&,			// b_2 Deep CSV
 										 Channel,				// Channel	
-										 Year);	            	// Year
+										 Year 	            	// Year
+										 const int&,			// n_vbf
+                                         const bool&,			// svfit_conv
+                                         const bool&);			// hh_kinfit_conv
 	inline float delta_eta(const LorentzVector&, const LorentzVector&);
 	inline float delta_phi(const LorentzVector&, const LorentzVector&);
 	inline float delta_r(const LorentzVector&, const LorentzVector&);

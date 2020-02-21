@@ -35,13 +35,16 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
                                               Year year,
                                               const float& res_mass,
                                               Spin spin,
-                                              const float& klambda) {
+                                              const float& klambda
+                                              const int& n_vbf,
+                                              const bool& svfit_conv,
+                                              const bool& hh_kinfit_conv) {
     /* Processes (requested) features for an event and returns a map of features->values */
     
     std::map<std::string, float> feats = _feat_comp->process(b_1, b_2, l_1, l_2, met, svfit, vbf_1, vbf_2, hh_kinfit_mass, is_boosted,
-                                                             b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, channel, year);
+                                                             b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, channel, year, n_vbf, svfit_conv, hh_kinfit_conv);
     // Non-comp extra HL
-    if (EvtProc::_feat_check("hh_kinfit_chi2")) feats["hh_kinfit_chi2"] = hh_kinfit_chi2 >= 0 ? hh_kinfit_chi2 : std::nanf("1");
+    if (EvtProc::_feat_check("hh_kinfit_chi2")) feats["hh_kinfit_chi2"] = hh_kinfit_conv ? hh_kinfit_chi2 : std::nanf("1");
     if (EvtProc::_feat_check("mt2"))            feats["mt2"]            = mt2;
     if (EvtProc::_feat_check("mt_tot"))         feats["mt_tot"]         = mt_tot; 
     if (EvtProc::_feat_check("res_mass"))       feats["res_mass"]       = res_mass;
@@ -101,12 +104,15 @@ std::vector<float> EvtProc::process_as_vec(const LorentzVector& b_1,
                                            Year year,
                                            const float& res_mass,
                                            Spin spin,
-                                           const float& klambda) {
+                                           const float& klambda
+                                           const int& n_vbf,
+                                           const bool& svfit_conv,
+                                           const bool& hh_kinfit_conv) {
     /* Calls  EvtProc::process and processes result into a vector */
 
-    std::map<std::string, float> feats = EvtProc::process(b_1, b_2, l_1, l_2, met, svfit, vbf_1, vbf_2, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, p_zetavisible, p_zeta,
-                                                          top_1_mass, top_2_mass, l_1_mt, l_2_mt,
-                                                          is_boosted, b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, channel, year, res_mass, spin, klambda);
+    std::map<std::string, float> feats = EvtProc::process(b_1, b_2, l_1, l_2, met, svfit, vbf_1, vbf_2, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot,
+                                                          p_zetavisible, p_zeta, top_1_mass, top_2_mass, l_1_mt, l_2_mt, is_boosted, b_1_csv, b_2_csv,
+                                                          b_1_deepcsv, b_2_deepcsv, channel, year, res_mass, spin, klambda, n_vbf, svfit_conv, hh_kinfit_conv);
     std::vector<float> vec(feats.size());
     int i = 0;
     if (_all) {
@@ -151,12 +157,16 @@ void EvtProc::process_to_vec(std::vector<std::unique_ptr<float>>& feats,
                              Year year,
                              const float& res_mass,
                              Spin spin,
-                             const float& klambda) {
+                             const float& klambda,
+                             const int& n_vbf,
+                             const bool& svfit_conv,
+                             const bool& hh_kinfit_conv) {
     /* Calls  EvtProc::process and processes result into a supplied vector */
 
-    std::map<std::string, float> feat_vals = EvtProc::process(b_1, b_2, l_1, l_2, met, svfit, vbf_1, vbf_2, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, p_zetavisible, p_zeta,
-                                                              top_1_mass, top_2_mass, l_1_mt, l_2_mt,
-                                                              is_boosted, b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, channel, year, res_mass, spin, klambda);
+    std::map<std::string, float> feat_vals = EvtProc::process(b_1, b_2, l_1, l_2, met, svfit, vbf_1, vbf_2, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot,
+                                                              p_zetavisible, p_zeta, top_1_mass, top_2_mass, l_1_mt, l_2_mt, is_boosted, b_1_csv, b_2_csv,
+                                                              b_1_deepcsv, b_2_deepcsv, channel, year, res_mass, spin, klambda, n_vbf, svfit_conv,
+                                                              hh_kinfit_conv);
     if (feat_vals.size() != feats.size()) throw std::length_error("Length of computed map (" + std::to_string(feat_vals.size()) + ") does not match length of \
                                                                    vector to fill (" + std::to_string(feats.size()) + ")\n");
     int i = 0;
