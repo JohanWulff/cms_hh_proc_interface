@@ -195,7 +195,7 @@ std::vector<std::string> EvtProc::get_feats() {
         for (auto const& f : feats)      names.push_back(f.first);
     } else {
         for (auto const& f : _requested) {
-            assert(feats.find(f) != feats.end());
+            if (feats.find(f) == feats.end()) throw std::invalid_argument("Requested feature " + f + " not compued\n");
             names.push_back(f);
         }
     }
