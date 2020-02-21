@@ -195,7 +195,7 @@ std::vector<std::string> EvtProc::get_feats() {
         for (auto const& f : feats)      names.push_back(f.first);
     } else {
         for (auto const& f : _requested) {
-            assert(feats.find(f) != feats.end())
+            assert(feats.find(f) != feats.end());
             names.push_back(f);
         }
     }
