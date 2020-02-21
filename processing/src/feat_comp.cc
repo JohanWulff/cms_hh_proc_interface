@@ -28,7 +28,7 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
                                                const bool& svfit_conv,
                                                const bool& hh_kinfit_conv) {
     /* Compute HL features from base event*/
-    
+
     bool use_vbf = n_vbf >= 2;
     // Extra vectors
     LorentzVector h_bb(b_1 + b_2);
@@ -38,7 +38,7 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (!hh_kinfit_conv) {  // HHKinFit didn't converge
         hh = svfit_conv? h_bb+svfit : h_bb+h_tt_met;
     } else if (!svfit_conv) {  // HHKinFit converge but SVFit didn't
-        hh(h_bb.Px()+h_tt_met.Px(), h_bb.Py()+h_tt_met.Py(), h_bb.Pz()+h_tt_met.Pz(), hh_kinfit_m) 
+        hh = LorentzVector(h_bb.Px()+h_tt_met.Px(), h_bb.Py()+h_tt_met.Py(), h_bb.Pz()+h_tt_met.Pz(), hh_kinfit_m);
     }
     std::map<std::string, float> feats;
 

@@ -35,7 +35,7 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
                                               Year year,
                                               const float& res_mass,
                                               Spin spin,
-                                              const float& klambda
+                                              const float& klambda,
                                               const int& n_vbf,
                                               const bool& svfit_conv,
                                               const bool& hh_kinfit_conv) {
@@ -104,7 +104,7 @@ std::vector<float> EvtProc::process_as_vec(const LorentzVector& b_1,
                                            Year year,
                                            const float& res_mass,
                                            Spin spin,
-                                           const float& klambda
+                                           const float& klambda,
                                            const int& n_vbf,
                                            const bool& svfit_conv,
                                            const bool& hh_kinfit_conv) {
