@@ -65,7 +65,7 @@ public:
 										 Year,	            	// Year
 										 const float&,		    // Resonant mass (set to 125 if non-resonant)
 										 Spin,   				// Graviton or radion
-										 const float&		    // KLambda coupling (set to 1 if resonant)
+										 const float&,		    // KLambda coupling (set to 1 if resonant)
 										 const int&,			// n_vbf
                                          const bool&,			// svfit_conv
                                          const bool&);			// hh_kinfit_conv
@@ -96,7 +96,7 @@ public:
 									  Year,	            	 // Year
 									  const float&,		     // Resonant mass (set to 125 if non-resonant)
 									  Spin,   				 // Graviton or radion
-									  const float&  	     // KLambda coupling (set to 1 if resonant)
+									  const float&,  	     // KLambda coupling (set to 1 if resonant)
 									  const int&,	    	 // n_vbf
                                       const bool&,			 // svfit_conv
                                       const bool&);			 // hh_kinfit_conv
@@ -128,7 +128,7 @@ public:
 						Year,	               // Year
 						const float&,		   // Resonant mass (set to 125 if non-resonant)
 						Spin,   			   // Graviton or radion
-						const float&);	       // KLambda coupling (set to zero if resonant)
+						const float&,	       // KLambda coupling (set to zero if resonant)
 						const int&,			   // n_vbf
                         const bool&,		   // svfit_conv
                         const bool&);		   // hh_kinfit_conv

@@ -54,7 +54,7 @@ public:
 										 const float&,			// b_1 Deep CSV
 										 const float&,			// b_2 Deep CSV
 										 Channel,				// Channel	
-										 Year 	            	// Year
+										 Year, 	            	// Year
 										 const int&,			// n_vbf
                                          const bool&,			// svfit_conv
                                          const bool&);			// hh_kinfit_conv
