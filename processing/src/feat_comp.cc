@@ -43,11 +43,11 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     std::map<std::string, float> feats;
 
     // Categoricals
-    feats["boosted"]    = is_boosted;
-    feats["channel"]    = channel;
-    feats["year"]       = year;
-    feats["svfit_conv"] = svfit_conv;
-    feats["n_vbf"]      = n_vbf;
+    if (FeatComp::_feat_check("boosted"))    feats["boosted"]    = is_boosted;
+    if (FeatComp::_feat_check("channel"))    feats["channel"]    = channel;
+    if (FeatComp::_feat_check("year"))       feats["year"]       = year;
+    if (FeatComp::_feat_check("svfit_conv")) feats["svfit_conv"] = svfit_conv;
+    if (FeatComp::_feat_check("n_vbf"))      feats["n_vbf"]      = n_vbf;
     FeatComp::_add_jet_flags(b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, feats);
 
     // Delta phi
@@ -204,6 +204,6 @@ void FeatComp::_add_jet_flags(const float& b_1_csv, const float& b_2_csv,
         if (csv_1 >= wp) tag_1++;
         if (csv_2 >= wp) tag_2++;
     }
-    feats["jet_1_quality"] = tag_1;
-    feats["jet_2_quality"] = tag_2;
+    if (FeatComp::_feat_check("jet_1_quality")) feats["jet_1_quality"] = tag_1;
+    if (FeatComp::_feat_check("jet_2_quality")) feats["jet_2_quality"] = tag_2;
 }

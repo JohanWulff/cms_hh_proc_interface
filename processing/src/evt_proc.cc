@@ -191,6 +191,13 @@ std::vector<std::string> EvtProc::get_feats() {
                                                           LorentzVector(), LorentzVector(), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false, 0, 0, 0, 0, Channel(tauTau),
                                                           Year(y16), 0, Spin(nonres), 0, 2, true, true);
     std::vector<std::string> names;
-    for (auto const& f : feats) names.push_back(f.first);
+    if (_all) {
+        for (auto const& f : feats)      names.push_back(f.first);
+    } else {
+        for (auto const& f : _requested) {
+            assert(feats.find(f) != feats.end())
+            names.push_back(f);
+        }
+    }
     return names;
 }
