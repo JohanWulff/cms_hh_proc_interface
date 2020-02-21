@@ -192,7 +192,7 @@ std::vector<std::string> EvtProc::get_feats() {
                                                           Year(y16), 0, Spin(nonres), 0, 2, true, true);
     std::vector<std::string> names;
     if (_all) {
-        for (auto const& f : feats)      names.push_back(f.first);
+        for (auto const& f : feats) names.push_back(f.first);
     } else {
         for (auto const& f : _requested) {
             if (feats.find(f) == feats.end()) throw std::invalid_argument("Requested feature " + f + " not compued\n");

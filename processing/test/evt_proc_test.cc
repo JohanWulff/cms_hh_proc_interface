@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
     std::cout << feats.size() << " features returned\n\n";
 
     std::cout << "Instantiating requested EvtProc... ";
-    std::vector<std::string> requested = {"costheta_met_htt", "phi", "hh_kinfit_chi2", "is_boosted", "costheta_l1_httmet"};
+    std::vector<std::string> requested = {"costheta_met_htt", "phi", "hh_kinfit_chi2", "boosted", "costheta_l1_httmet"};
     EvtProc evt_proc2(false, requested);
 
     std::cout << "\nProcessing event as vector... ";
