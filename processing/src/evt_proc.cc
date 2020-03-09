@@ -72,6 +72,28 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
     if (EvtProc::_feat_check("vbf_1_E"))  feats["vbf_1_E"]  = vbf_1.E();
     if (EvtProc::_feat_check("vbf_2_E"))  feats["vbf_2_E"]  = vbf_2.E();
 
+    //3-vectors
+    if (EvtProc::_feat_check("l_1_px"))   feats["l_1_px"]   = l_1.Px();
+    if (EvtProc::_feat_check("l_1_py"))   feats["l_1_py"]   = l_1.Py();
+    if (EvtProc::_feat_check("l_1_pz"))   feats["l_1_pz"]   = l_1.Pz();
+    if (EvtProc::_feat_check("l_2_px"))   feats["l_2_px"]   = l_2.Px();
+    if (EvtProc::_feat_check("l_2_py"))   feats["l_2_py"]   = l_2.Py();
+    if (EvtProc::_feat_check("l_2_pz"))   feats["l_2_pz"]   = l_2.Pz();
+    if (EvtProc::_feat_check("b_1_px"))   feats["b_1_px"]   = b_1.Px();
+    if (EvtProc::_feat_check("b_1_py"))   feats["b_1_py"]   = b_1.Py();
+    if (EvtProc::_feat_check("b_1_pz"))   feats["b_1_pz"]   = b_1.Pz();
+    if (EvtProc::_feat_check("b_2_px"))   feats["b_2_px"]   = b_2.Px();
+    if (EvtProc::_feat_check("b_2_py"))   feats["b_2_py"]   = b_2.Py();
+    if (EvtProc::_feat_check("b_2_pz"))   feats["b_2_pz"]   = b_2.Pz();
+    if (EvtProc::_feat_check("vbf_1_px")) feats["vbf_1_px"] = vbf_1.Px();
+    if (EvtProc::_feat_check("vbf_1_py")) feats["vbf_1_py"] = vbf_1.Py();
+    if (EvtProc::_feat_check("vbf_1_pz")) feats["vbf_1_pz"] = vbf_1.Pz();
+    if (EvtProc::_feat_check("vbf_2_px")) feats["vbf_2_px"] = vbf_2.Px();
+    if (EvtProc::_feat_check("vbf_2_py")) feats["vbf_2_py"] = vbf_2.Py();
+    if (EvtProc::_feat_check("vbf_2_pz")) feats["vbf_2_pz"] = vbf_2.Pz();
+    if (EvtProc::_feat_check("met_px"))   feats["met_px"]   = met.Px();
+    if (EvtProc::_feat_check("met_py"))   feats["met_py"]   = met.Px();
+    
     return feats;
 }
 
