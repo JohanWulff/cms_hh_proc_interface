@@ -43,6 +43,8 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
     
     std::map<std::string, float> feats = _feat_comp->process(b_1, b_2, l_1, l_2, met, svfit, vbf_1, vbf_2, hh_kinfit_mass, is_boosted,
                                                              b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, channel, year, n_vbf, svfit_conv, hh_kinfit_conv);
+    bool use_vbf = n_vbf >= 2;
+    
     // Non-comp extra HL
     if (EvtProc::_feat_check("hh_kinfit_chi2")) feats["hh_kinfit_chi2"] = hh_kinfit_conv ? hh_kinfit_chi2 : std::nanf("1");
     if (EvtProc::_feat_check("mt2"))            feats["mt2"]            = mt2;
@@ -67,10 +69,10 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
     if (EvtProc::_feat_check("b_1_pT"))   feats["b_1_pT"]   = b_1.Pt();
     if (EvtProc::_feat_check("b_2_pT"))   feats["b_2_pT"]   = b_2.Pt();
     if (EvtProc::_feat_check("met_pT"))   feats["met_pT"]   = met.Pt();
-    if (EvtProc::_feat_check("vbf_1_pT")) feats["vbf_1_pT"] = vbf_1.Pt();
-    if (EvtProc::_feat_check("vbf_2_pT")) feats["vbf_2_pT"] = vbf_2.Pt();
-    if (EvtProc::_feat_check("vbf_1_E"))  feats["vbf_1_E"]  = vbf_1.E();
-    if (EvtProc::_feat_check("vbf_2_E"))  feats["vbf_2_E"]  = vbf_2.E();
+    if (EvtProc::_feat_check("vbf_1_pT")) feats["vbf_1_pT"] = use_vbf ? vbf_1.Pt() : std::nanf("1");
+    if (EvtProc::_feat_check("vbf_2_pT")) feats["vbf_2_pT"] = use_vbf ? vbf_2.Pt() : std::nanf("1");
+    if (EvtProc::_feat_check("vbf_1_E"))  feats["vbf_1_E"]  = use_vbf ? vbf_1.E()  : std::nanf("1");
+    if (EvtProc::_feat_check("vbf_2_E"))  feats["vbf_2_E"]  = use_vbf ? vbf_2.E()  : std::nanf("1");
 
     //3-vectors
     if (EvtProc::_feat_check("l_1_px"))   feats["l_1_px"]   = l_1.Px();
@@ -85,12 +87,12 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
     if (EvtProc::_feat_check("b_2_px"))   feats["b_2_px"]   = b_2.Px();
     if (EvtProc::_feat_check("b_2_py"))   feats["b_2_py"]   = b_2.Py();
     if (EvtProc::_feat_check("b_2_pz"))   feats["b_2_pz"]   = b_2.Pz();
-    if (EvtProc::_feat_check("vbf_1_px")) feats["vbf_1_px"] = vbf_1.Px();
-    if (EvtProc::_feat_check("vbf_1_py")) feats["vbf_1_py"] = vbf_1.Py();
-    if (EvtProc::_feat_check("vbf_1_pz")) feats["vbf_1_pz"] = vbf_1.Pz();
-    if (EvtProc::_feat_check("vbf_2_px")) feats["vbf_2_px"] = vbf_2.Px();
-    if (EvtProc::_feat_check("vbf_2_py")) feats["vbf_2_py"] = vbf_2.Py();
-    if (EvtProc::_feat_check("vbf_2_pz")) feats["vbf_2_pz"] = vbf_2.Pz();
+    if (EvtProc::_feat_check("vbf_1_px")) feats["vbf_1_px"] = use_vbf ? vbf_1.Px() : std::nanf("1");
+    if (EvtProc::_feat_check("vbf_1_py")) feats["vbf_1_py"] = use_vbf ? vbf_1.Py() : std::nanf("1");
+    if (EvtProc::_feat_check("vbf_1_pz")) feats["vbf_1_pz"] = use_vbf ? vbf_1.Pz() : std::nanf("1");
+    if (EvtProc::_feat_check("vbf_2_px")) feats["vbf_2_px"] = use_vbf ? vbf_2.Px() : std::nanf("1");
+    if (EvtProc::_feat_check("vbf_2_py")) feats["vbf_2_py"] = use_vbf ? vbf_2.Py() : std::nanf("1");
+    if (EvtProc::_feat_check("vbf_2_pz")) feats["vbf_2_pz"] = use_vbf ? vbf_2.Pz() : std::nanf("1");
     if (EvtProc::_feat_check("met_px"))   feats["met_px"]   = met.Px();
     if (EvtProc::_feat_check("met_py"))   feats["met_py"]   = met.Px();
     
