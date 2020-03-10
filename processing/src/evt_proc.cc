@@ -94,7 +94,8 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
     if (EvtProc::_feat_check("vbf_2_py")) feats["vbf_2_py"] = use_vbf ? vbf_2.Py() : std::nanf("1");
     if (EvtProc::_feat_check("vbf_2_pz")) feats["vbf_2_pz"] = use_vbf ? vbf_2.Pz() : std::nanf("1");
     if (EvtProc::_feat_check("met_px"))   feats["met_px"]   = met.Px();
-    if (EvtProc::_feat_check("met_py"))   feats["met_py"]   = met.Px();
+    if (EvtProc::_feat_check("met_py"))   feats["met_py"]   = met.Py();
+    if (EvtProc::_feat_check("met_E"))    feats["met_E"]    = met.E();
     
     return feats;
 }
