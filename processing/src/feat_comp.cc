@@ -36,7 +36,7 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     LorentzVector h_tt_met(h_tt_vis + met);
     LorentzVector hh(h_bb.Px()+svfit.Px(), h_bb.Py()+svfit.Py(), h_bb.Pz()+svfit.Pz(), hh_kinfit_m);  // I assume 4th component is a mass, but who knows...
     if (!hh_kinfit_conv) {  // HHKinFit didn't converge
-        hh = svfit_conv? h_bb+svfit : h_bb+h_tt_met;
+        hh = svfit_conv ? h_bb+svfit : h_bb+h_tt_met;
     } else if (!svfit_conv) {  // HHKinFit converge but SVFit didn't
         hh = LorentzVector(h_bb.Px()+h_tt_met.Px(), h_bb.Py()+h_tt_met.Py(), h_bb.Pz()+h_tt_met.Pz(), hh_kinfit_m);
     }
@@ -106,7 +106,9 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("hh_pT"))   feats["hh_pT"]   = hh.Pt();
 
     // Energies
+    if (FeatComp::_feat_check("sv_E"))   feats["sv_E"]   = svfit_conv ? sv.E() : std::nanf("1");
     if (FeatComp::_feat_check("h_bb_E")) feats["h_bb_E"] = h_bb.E();
+    if (FeatComp::_feat_check("hh_E"))   feats["hh_E"]   = hh.E();
 
     // Angle Deltas
     if (FeatComp::_feat_check("phi_met")) feats["phi_met"] = FeatComp::calc_phi(l_1, l_2, b_1, b_2, h_bb+h_tt_met);
