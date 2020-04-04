@@ -106,7 +106,7 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("hh_pT"))   feats["hh_pT"]   = hh.Pt();
 
     // Energies
-    if (FeatComp::_feat_check("sv_E"))   feats["sv_E"]   = svfit_conv ? sv.E() : std::nanf("1");
+    if (FeatComp::_feat_check("sv_E"))   feats["sv_E"]   = svfit_conv ? svfit.E() : std::nanf("1");
     if (FeatComp::_feat_check("h_bb_E")) feats["h_bb_E"] = h_bb.E();
     if (FeatComp::_feat_check("hh_E"))   feats["hh_E"]   = hh.E();
 
