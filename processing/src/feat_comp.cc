@@ -251,19 +251,28 @@ inline float FeatComp::calc_centrality( const LorentzVector& v, const LorentzVec
 
 inline float FeatComp::calc_hh_centrality( const LorentzVector& bh, const LorentzVector& tauh, const LorentzVector& VBFjet1, const LorentzVector& VBFjet2)
 {
-    return  FeatComp::calcDeltaEtaMinus(bh, tauh, VBFjet1, VBFjet2) <  FeatComp::calcDeltaEtaPlus(bh, tauh, VBFjet1, VBFjet2) ?  FeatComp::calcDeltaEtaMinus(bh, tauh, VBFjet1, VBFjet2) :  FeatComp::calcDeltaEtaPlus(bh, tauh, VBFjet1, VBFjet2);
+    float tmp_eta_minus = FeatComp::calcDeltaEtaMinus(bh, tauh, VBFjet1, VBFjet2);
+    float tmp_eta_plus = FeatComp::calcDeltaEtaPlus(bh, tauh, VBFjet1, VBFjet2);
+    if (tmp_eta_minus < tmp_eta_plus) return tmp_eta_minus;
+    else return tmp_eta_plus;  
 }
 
 inline float FeatComp::calcDeltaEtaMinus(const LorentzVector& bh, const LorentzVector& tauh, const LorentzVector& VBFjet1, const LorentzVector& VBFjet2)  
 {
-    float min_eta_H = bh.Eta() < tauh.Eta() ? bh.Eta() : tauh.Eta(); 
-    float min_eta_vbf = VBFjet1.Eta() < VBFjet2.Eta() ? VBFjet1.Eta() : VBFjet2.Eta(); 
-    return min_eta_H - min_eta_vbf;
+    float bh_eta = bh.Eta(), tauh_eta = tauh.Eta(), VBFjet1_eta=VBFjet1.Eta(), VBFjet2_eta=VBFjet2.Eta(), min_eta_h, min_eta_vbf;
+    if (bh_eta < tauh_eta) min_eta_h = bh_eta; 
+    else min_eta_h = tauh_eta;
+    if (VBFjet1_eta < VBFjet2_eta) min_eta_vbf = VBFjet1_eta; 
+    else min_eta_vbf = VBFjet2_eta;
+    return min_eta_h - min_eta_vbf;
 }
 
 inline float FeatComp::calcDeltaEtaPlus(const LorentzVector& bh, const LorentzVector& tauh, const LorentzVector& VBFjet1, const LorentzVector& VBFjet2)  
 {
-    float max_eta_H = bh.Eta() > tauh.Eta() ? bh.Eta() : tauh.Eta(); 
-    float max_eta_vbf = VBFjet1.Eta() > VBFjet2.Eta() ? VBFjet1.Eta() : VBFjet2.Eta(); 
-    return max_eta_vbf - max_eta_H;
+    float bh_eta = bh.Eta(), tauh_eta = tauh.Eta(), VBFjet1_eta=VBFjet1.Eta(), VBFjet2_eta=VBFjet2.Eta(), max_eta_h, max_eta_vbf;
+    if (bh_eta > tauh_eta) max_eta_h = bh_eta; 
+    else max_eta_h = tauh_eta;
+    if (VBFjet1_eta > VBFjet2_eta) max_eta_vbf = VBFjet1_eta; 
+    else max_eta_vbf = VBFjet2_eta;
+    return max_eta_vbf - max_eta_h;
 }
