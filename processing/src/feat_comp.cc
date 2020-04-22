@@ -1,4 +1,3 @@
-//#include "feat_comp.hh"
 #include "cms_hh_proc_interface/processing/interface/feat_comp.hh"
 
 FeatComp::FeatComp(bool return_all, std::vector<std::string> requested, bool use_deep_csv) {
@@ -90,17 +89,23 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("min_dR_vbfj_l")) 
     {
       float min_dR_vbfj_l = FeatComp::delta_r(vbf_1, l_1); 
-      min_dR_vbfj_l = min_dR_vbfj_l <  FeatComp::delta_r(vbf_1, l_2) ? min_dR_vbfj_l : FeatComp::delta_r(vbf_1, l_2);  
-      min_dR_vbfj_l = min_dR_vbfj_l <  FeatComp::delta_r(vbf_2, l_1) ? min_dR_vbfj_l : FeatComp::delta_r(vbf_2, l_1);  
-      min_dR_vbfj_l = min_dR_vbfj_l <  FeatComp::delta_r(vbf_2, l_2) ? min_dR_vbfj_l : FeatComp::delta_r(vbf_2, l_2);  
-      feats["min_dR_vbfj_l"]      = min_dR_vbfj_l;
+      float tmp_dr = FeatComp::delta_r(vbf_1, l_2);
+      if (tmp_dr < min_dR_vbfj_l) min_dR_vbfj_l = tmp_dr;
+      tmp_dr = FeatComp::delta_r(vbf_2, l_1);
+      if (tmp_dr < min_dR_vbfj_l) min_dR_vbfj_l = tmp_dr;
+      tmp_dr = FeatComp::delta_r(vbf_2, l_2);
+      if (tmp_dr < min_dR_vbfj_l) min_dR_vbfj_l = tmp_dr;
+      feats["min_dR_vbfj_b"]      = min_dR_vbfj_l;
     }
     if (FeatComp::_feat_check("min_dR_vbfj_b")) 
     {
       float min_dR_vbfj_b = FeatComp::delta_r(vbf_1, b_1); 
-      min_dR_vbfj_b = min_dR_vbfj_b <  FeatComp::delta_r(vbf_1, b_2) ? min_dR_vbfj_b : FeatComp::delta_r(vbf_1, b_2);  
-      min_dR_vbfj_b = min_dR_vbfj_b <  FeatComp::delta_r(vbf_2, b_1) ? min_dR_vbfj_b : FeatComp::delta_r(vbf_2, b_1);  
-      min_dR_vbfj_b = min_dR_vbfj_b <  FeatComp::delta_r(vbf_2, b_2) ? min_dR_vbfj_b : FeatComp::delta_r(vbf_2, b_2);  
+      float tmp_dr = FeatComp::delta_r(vbf_1, b_2);
+      if (tmp_dr < min_dR_vbfj_b) min_dR_vbfj_b = tmp_dr;
+      tmp_dr = FeatComp::delta_r(vbf_2, b_1);
+      if (tmp_dr < min_dR_vbfj_b) min_dR_vbfj_b = tmp_dr;
+      tmp_dr = FeatComp::delta_r(vbf_2, b_2);
+      if (tmp_dr < min_dR_vbfj_b) min_dR_vbfj_b = tmp_dr;
       feats["min_dR_vbfj_b"]      = min_dR_vbfj_b;
     }
 
