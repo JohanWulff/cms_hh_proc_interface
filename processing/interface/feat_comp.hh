@@ -67,6 +67,10 @@ public:
 	inline float calc_phi_1(const LorentzVector&, const LorentzVector&, const LorentzVector&, const LorentzVector&);
 	inline float calc_cos_delta_star(const LorentzVector&, const LorentzVector&);
 	inline float calc_cos_delta(const LorentzVector&, const LorentzVector&);
+  inline float calc_centrality( const LorentzVector&, const LorentzVector&, const LorentzVector&);
+  inline float calc_hh_centrality( const LorentzVector&, const LorentzVector&, const LorentzVector&, const LorentzVector&);
+  inline float calcDeltaEtaMinus( const LorentzVector&, const LorentzVector&, const LorentzVector&, const LorentzVector&);
+  inline float calcDeltaEtaPlus( const LorentzVector&, const LorentzVector&, const LorentzVector&, const LorentzVector&);
 };
 
 #endif /* FEAT_COMP_HH_ */
