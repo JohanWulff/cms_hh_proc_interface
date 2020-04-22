@@ -1,3 +1,4 @@
+//#include "feat_comp.hh"
 #include "cms_hh_proc_interface/processing/interface/feat_comp.hh"
 
 FeatComp::FeatComp(bool return_all, std::vector<std::string> requested, bool use_deep_csv) {
@@ -86,7 +87,24 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("dR_b1_b2_boosted_hbb"))     feats["dR_b1_b2_boosted_hbb"]     = FeatComp::delta_r_boosted(b_1, b_2, h_bb);
     if (FeatComp::_feat_check("dR_l1_l2_boosted_htt_met")) feats["dR_l1_l2_boosted_htt_met"] = FeatComp::delta_r_boosted(l_1, l_2, h_tt_met);
     if (FeatComp::_feat_check("dR_l1_l2_boosted_sv"))      feats["dR_l1_l2_boosted_sv"]      = svfit_conv ? FeatComp::delta_r_boosted(l_1, l_2, svfit) : std::nanf("1");
-    
+    if (FeatComp::_feat_check("min_dR_vbfj_l")) 
+    {
+      float min_dR_vbfj_l = FeatComp::delta_r(vbf_1, l_1); 
+      min_dR_vbfj_l = min_dR_vbfj_l <  FeatComp::delta_r(vbf_1, l_2) ? min_dR_vbfj_l : FeatComp::delta_r(vbf_1, l_2);  
+      min_dR_vbfj_l = min_dR_vbfj_l <  FeatComp::delta_r(vbf_2, l_1) ? min_dR_vbfj_l : FeatComp::delta_r(vbf_2, l_1);  
+      min_dR_vbfj_l = min_dR_vbfj_l <  FeatComp::delta_r(vbf_2, l_2) ? min_dR_vbfj_l : FeatComp::delta_r(vbf_2, l_2);  
+      feats["min_dR_vbfj_l"]      = min_dR_vbfj_l;
+    }
+    if (FeatComp::_feat_check("min_dR_vbfj_b")) 
+    {
+      float min_dR_vbfj_b = FeatComp::delta_r(vbf_1, b_1); 
+      min_dR_vbfj_b = min_dR_vbfj_b <  FeatComp::delta_r(vbf_1, b_2) ? min_dR_vbfj_b : FeatComp::delta_r(vbf_1, b_2);  
+      min_dR_vbfj_b = min_dR_vbfj_b <  FeatComp::delta_r(vbf_2, b_1) ? min_dR_vbfj_b : FeatComp::delta_r(vbf_2, b_1);  
+      min_dR_vbfj_b = min_dR_vbfj_b <  FeatComp::delta_r(vbf_2, b_2) ? min_dR_vbfj_b : FeatComp::delta_r(vbf_2, b_2);  
+      feats["min_dR_vbfj_b"]      = min_dR_vbfj_b;
+    }
+
+
     // Masses
     if (FeatComp::_feat_check("sv_mass"))       feats["sv_mass"]       = svfit_conv ? svfit.M() : std::nanf("1");
     if (FeatComp::_feat_check("h_tt_vis_mass")) feats["h_tt_vis_mass"] = h_tt_vis.M();
@@ -136,6 +154,17 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("costheta_htt_hh"))         feats["costheta_htt_hh"]         = svfit_conv ? FeatComp::calc_cos_delta(svfit, hh) : std::nanf("1");
     if (FeatComp::_feat_check("costheta_htt_met_hh"))     feats["costheta_htt_met_hh"]     = FeatComp::calc_cos_delta(h_tt_met, hh);
     if (FeatComp::_feat_check("costheta_hbb_hh"))         feats["costheta_hbb_hh"]         = FeatComp::calc_cos_delta(h_bb, hh);
+
+    //Centralities
+    if (FeatComp::_feat_check("l_1_centrality"))         feats["l_1_centrality"]           =  FeatComp::calc_centrality(l_1, vbf_1, vbf_2);
+    if (FeatComp::_feat_check("l_2_centrality"))         feats["l_2_centrality"]           =  FeatComp::calc_centrality(l_2, vbf_1, vbf_2);
+    if (FeatComp::_feat_check("b_1_centrality"))         feats["b_1_centrality"]           =  FeatComp::calc_centrality(b_1, vbf_1, vbf_2);
+    if (FeatComp::_feat_check("b_2_centrality"))         feats["b_2_centrality"]           =  FeatComp::calc_centrality(b_2, vbf_1, vbf_2);
+    if (FeatComp::_feat_check("h_bb_centrality"))        feats["h_bb_centrality"]          =  FeatComp::calc_centrality(h_bb, vbf_1, vbf_2);
+    if (FeatComp::_feat_check("h_tt_vis_centrality"))    feats["h_tt_vis_centrality"]      =  FeatComp::calc_centrality(h_tt_vis, vbf_1, vbf_2);
+    if (FeatComp::_feat_check("hh_centrality"))          feats["hh_centrality"]            =  FeatComp::calc_hh_centrality(h_bb, h_tt_vis, vbf_1, vbf_2);
+
+
 
     // Assorted VBF
     if (FeatComp::_feat_check("vbf_eta_prod_sign")) {
@@ -208,4 +237,28 @@ void FeatComp::_add_jet_flags(const float& b_1_csv, const float& b_2_csv,
     }
     if (FeatComp::_feat_check("jet_1_quality")) feats["jet_1_quality"] = tag_1;
     if (FeatComp::_feat_check("jet_2_quality")) feats["jet_2_quality"] = tag_2;
+}
+
+inline float FeatComp::calc_centrality( const LorentzVector& v, const LorentzVector& VBFjet1, const LorentzVector& VBFjet2)
+{
+    return (v.Eta() - 0.5*(VBFjet1.Eta() + VBFjet2.Eta() ))/(std::fabs(VBFjet1.Eta() - VBFjet2.Eta()));
+}
+
+inline float FeatComp::calc_hh_centrality( const LorentzVector& bh, const LorentzVector& tauh, const LorentzVector& VBFjet1, const LorentzVector& VBFjet2)
+{
+    return  FeatComp::calcDeltaEtaMinus(bh, tauh, VBFjet1, VBFjet2) <  FeatComp::calcDeltaEtaPlus(bh, tauh, VBFjet1, VBFjet2) ?  FeatComp::calcDeltaEtaMinus(bh, tauh, VBFjet1, VBFjet2) :  FeatComp::calcDeltaEtaPlus(bh, tauh, VBFjet1, VBFjet2);
+}
+
+inline float FeatComp::calcDeltaEtaMinus(const LorentzVector& bh, const LorentzVector& tauh, const LorentzVector& VBFjet1, const LorentzVector& VBFjet2)  
+{
+    float min_eta_H = bh.Eta() < tauh.Eta() ? bh.Eta() : tauh.Eta(); 
+    float min_eta_vbf = VBFjet1.Eta() < VBFjet2.Eta() ? VBFjet1.Eta() : VBFjet2.Eta(); 
+    return min_eta_H - min_eta_vbf;
+}
+
+inline float FeatComp::calcDeltaEtaPlus(const LorentzVector& bh, const LorentzVector& tauh, const LorentzVector& VBFjet1, const LorentzVector& VBFjet2)  
+{
+    float max_eta_H = bh.Eta() > tauh.Eta() ? bh.Eta() : tauh.Eta(); 
+    float max_eta_vbf = VBFjet1.Eta() > VBFjet2.Eta() ? VBFjet1.Eta() : VBFjet2.Eta(); 
+    return max_eta_vbf - max_eta_H;
 }
