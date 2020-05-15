@@ -58,10 +58,10 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
     if (EvtProc::_feat_check("p_zeta"))         feats["p_zeta"]         = p_zeta;
     if (EvtProc::_feat_check("top_1_mass"))     feats["top_1_mass"]     = top_1_mass;
     if (EvtProc::_feat_check("top_2_mass"))     feats["top_2_mass"]     = top_2_mass;
-    if (EvtProc::_feat_check("b_1_HHbtag"))     feats["b_1_HHbtag"]     = b_1_HHbtag;
-    if (EvtProc::_feat_check("b_2_HHbtag"))     feats["b_2_HHbtag"]     = b_2_HHbtag;
-    if (EvtProc::_feat_check("vbf_1_HHbtag"))   feats["vbf_1_HHbtag"]   = vbf_1_HHbtag;
-    if (EvtProc::_feat_check("vbf_2_HHbtag"))   feats["vbf_2_HHbtag"]   = vbf_2_HHbtag;
+    if (EvtProc::_feat_check("b_1_hhbtag"))     feats["b_1_hhbtag"]     = b_1_hhbtag;
+    if (EvtProc::_feat_check("b_2_hhbtag"))     feats["b_2_hhbtag"]     = b_2_hhbtag;
+    if (EvtProc::_feat_check("vbf_1_hhbtag"))   feats["vbf_1_hhbtag"]   = vbf_1_hhbtag;
+    if (EvtProc::_feat_check("vbf_2_hhbtag"))   feats["vbf_2_hhbtag"]   = vbf_2_hhbtag;
     
     // Non-comp extra LL
     if (EvtProc::_feat_check("l_1_mt"))   feats["l_1_mt"]   = l_1_mt;
