@@ -1,9 +1,9 @@
 #include "cms_hh_proc_interface/processing/interface/feat_comp.hh"
 
-FeatComp::FeatComp(bool return_all, std::vector<std::string> requested, bool use_deep_csv) {
+FeatComp::FeatComp(bool return_all, std::vector<std::string> requested, bool use_deep_bjet_wps) {
     _all = return_all;
     _requested = requested;
-    _use_deep_csv = use_deep_csv;
+    _use_deep_bjet_wps = use_deep_bjet_wps;
 }
 
 FeatComp::~FeatComp() {}
@@ -20,8 +20,6 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
                                                const bool& is_boosted,
                                                const float& b_1_csv,
                                                const float& b_2_csv,
-                                               const float& b_1_deepcsv,
-                                               const float& b_2_deepcsv,
                                                Channel channel,
                                                Year year,
                                                const int& n_vbf,
@@ -48,7 +46,7 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("year"))       feats["year"]       = year;
     if (FeatComp::_feat_check("svfit_conv")) feats["svfit_conv"] = svfit_conv;
     if (FeatComp::_feat_check("n_vbf"))      feats["n_vbf"]      = n_vbf;
-    FeatComp::_add_jet_flags(b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, feats);
+    FeatComp::_add_jet_flags(b_1_csv, b_2_csv, feats);
 
     // Delta phi
     if (FeatComp::_feat_check("dphi_l1_l2"))      feats["dphi_l1_l2"]      = FeatComp::delta_phi(l_1, l_2);
@@ -70,7 +68,8 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("deta_l1_l2"))      feats["deta_l1_l2"]      = FeatComp::delta_eta(l_1, l_2);
     if (FeatComp::_feat_check("deta_b1_b2"))      feats["deta_b1_b2"]      = FeatComp::delta_eta(b_1, b_2);
     if (FeatComp::_feat_check("deta_hbb_sv"))     feats["deta_hbb_sv"]     = svfit_conv ? FeatComp::delta_eta(h_bb, svfit) : std::nanf("1");
-    if (FeatComp::_feat_check("deta_hbb_httmet")) feats["deta_hbb_httmet"] = FeatComp::delta_eta(h_bb, met);
+    if (FeatComp::_feat_check("deta_hbb_httmet")) feats["deta_hbb_httmet"] = FeatComp::delta_eta(h_bb, h_tt_met);
+    if (FeatComp::_feat_check("deta_hbb_httvis")) feats["deta_hbb_httvis"] = FeatComp::delta_eta(h_bb, h_tt_vis);
     if (FeatComp::_feat_check("deta_vbf1_vbf2"))  feats["deta_vbf1_vbf2"]  = use_vbf ? FeatComp::delta_eta(vbf_1, vbf_2) : std::nanf("1");
 
     // Delta R
@@ -231,12 +230,9 @@ inline float FeatComp::calc_cos_delta(const LorentzVector& v, const LorentzVecto
     return  CosTheta(boost(v, r.BoostToCM()), r);
 }
 
-void FeatComp::_add_jet_flags(const float& b_1_csv, const float& b_2_csv,
-                              const float& b_1_deepcsv, const float& b_2_deepcsv,
-                              std::map<std::string, float>& feats) {
+void FeatComp::_add_jet_flags(const float& b_1_csv, const float& b_2_csv, std::map<std::string, float>& feats) {
     int tag_1(0), tag_2(0);
-    float csv_1(_use_deep_csv ? b_1_deepcsv : b_1_csv), csv_2(_use_deep_csv ? b_2_deepcsv : b_2_csv);
-    for (float wp : (_use_deep_csv ? _deep_csv_wps : _csv_wps)) {
+    for (float wp : (_use_deep_bjet_wps ? _deep_bjet_wps : _bjet_wps)) {
         if (csv_1 >= wp) tag_1++;
         if (csv_2 >= wp) tag_2++;
     }

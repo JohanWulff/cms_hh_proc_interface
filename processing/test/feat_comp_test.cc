@@ -31,14 +31,14 @@ int main(int argc, char *argv[]) {
     LorentzVector vbf_2(mom(rng),mom(rng),mom(rng),energy(rng));
     float hh_kinfit_mass = energy(rng);
     bool is_boosted = csv(rng) > 1.;
-    float csv_1(csv(rng)), csv_2(csv(rng)), deepcsv_1(csv(rng)), deepcsv_2(csv(rng));
+    float csv_1(csv(rng)), csv_2(csv(rng));
     Channel channel = tauTau;
     Year year = y16;
     std::cout << "Generated\n";
 
     std::cout << "Processing event... ";
     std::map<std::string, float> feats = feat_comp.process(b_1, b_2, l_1, l_2, met, sv, vbf_1, vbf_2, hh_kinfit_mass, is_boosted,
-                                                           csv_1, csv_2, deepcsv_1, deepcsv_2, channel, year, 0, true, true);
+                                                           csv_1, csv_2, channel, year, 0, true, true);
     std::cout << "Processed\n";
 
     for (auto const& f : feats) std::cout << f.first << ":" << f.second << "\n";

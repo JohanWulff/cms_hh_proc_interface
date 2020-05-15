@@ -1,9 +1,9 @@
 #include "cms_hh_proc_interface/processing/interface/evt_proc.hh"
 
-EvtProc::EvtProc(bool return_all, std::vector<std::string> requested, bool use_deep_csv) {
+EvtProc::EvtProc(bool return_all, std::vector<std::string> requested, bool use_deep_bjet_wps) {
     _all = return_all;
     _requested = requested;
-    _feat_comp = new FeatComp(return_all, _requested, use_deep_csv);
+    _feat_comp = new FeatComp(return_all, _requested, use_deep_bjet_wps);
 }
 
 EvtProc::~EvtProc() {}
@@ -29,8 +29,6 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
                                               const bool&  is_boosted,
                                               const float& b_1_csv,
                                               const float& b_2_csv,
-                                              const float& b_1_deepcsv,
-                                              const float& b_2_deepcsv,
                                               Channel channel,
                                               Year year,
                                               const float& res_mass,
@@ -42,7 +40,7 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
     /* Processes (requested) features for an event and returns a map of features->values */
     
     std::map<std::string, float> feats = _feat_comp->process(b_1, b_2, l_1, l_2, met, svfit, vbf_1, vbf_2, hh_kinfit_mass, is_boosted,
-                                                             b_1_csv, b_2_csv, b_1_deepcsv, b_2_deepcsv, channel, year, n_vbf, svfit_conv, hh_kinfit_conv);
+                                                             b_1_csv, b_2_csv, channel, year, n_vbf, svfit_conv, hh_kinfit_conv);
     bool use_vbf = n_vbf >= 2;
     
     // Non-comp extra HL
@@ -123,8 +121,6 @@ std::vector<float> EvtProc::process_as_vec(const LorentzVector& b_1,
                                            const bool& is_boosted,
                                            const float& b_1_csv,
                                            const float& b_2_csv,
-                                           const float& b_1_deepcsv,
-                                           const float& b_2_deepcsv,
                                            Channel channel,
                                            Year year,
                                            const float& res_mass,
@@ -137,7 +133,7 @@ std::vector<float> EvtProc::process_as_vec(const LorentzVector& b_1,
 
     std::map<std::string, float> feats = EvtProc::process(b_1, b_2, l_1, l_2, met, svfit, vbf_1, vbf_2, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot,
                                                           p_zetavisible, p_zeta, top_1_mass, top_2_mass, l_1_mt, l_2_mt, is_boosted, b_1_csv, b_2_csv,
-                                                          b_1_deepcsv, b_2_deepcsv, channel, year, res_mass, spin, klambda, n_vbf, svfit_conv, hh_kinfit_conv);
+                                                          channel, year, res_mass, spin, klambda, n_vbf, svfit_conv, hh_kinfit_conv);
     std::vector<float> vec(feats.size());
     int i = 0;
     if (_all) {
@@ -176,8 +172,6 @@ void EvtProc::process_to_vec(std::vector<std::unique_ptr<float>>& feats,
                              const bool& is_boosted,
                              const float& b_1_csv,
                              const float& b_2_csv,
-                             const float& b_1_deepcsv,
-                             const float& b_2_deepcsv,
                              Channel channel,
                              Year year,
                              const float& res_mass,
@@ -190,7 +184,7 @@ void EvtProc::process_to_vec(std::vector<std::unique_ptr<float>>& feats,
 
     std::map<std::string, float> feat_vals = EvtProc::process(b_1, b_2, l_1, l_2, met, svfit, vbf_1, vbf_2, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot,
                                                               p_zetavisible, p_zeta, top_1_mass, top_2_mass, l_1_mt, l_2_mt, is_boosted, b_1_csv, b_2_csv,
-                                                              b_1_deepcsv, b_2_deepcsv, channel, year, res_mass, spin, klambda, n_vbf, svfit_conv,
+                                                              channel, year, res_mass, spin, klambda, n_vbf, svfit_conv,
                                                               hh_kinfit_conv);
     if (feat_vals.size() != feats.size()) throw std::length_error("Length of computed map (" + std::to_string(feat_vals.size()) + ") does not match length of \
                                                                    vector to fill (" + std::to_string(feats.size()) + ")\n");
