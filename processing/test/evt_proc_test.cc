@@ -39,6 +39,8 @@ int main(int argc, char *argv[]) {
     bool is_boosted      = csv(rng) > 1.;
     float csv_1(csv(rng)), csv_2(csv(rng));
     float b_1_hhbtag(csv(rng)), b_2_hhbtag(csv(rng)), vbf_1_hhbtag(csv(rng)), vbf_2_hhbtag(csv(rng));
+    float b_1_csvl(csv(rng)), b_2_csvl(csv(rng)), vbf_1_csvl(csv(rng)), vbf_2_csvl(csv(rng));
+    float b_1_csvb(csv(rng)), b_2_csvb(csv(rng)), vbf_1_csvb(csv(rng)), vbf_2_csvb(csv(rng));
     Channel channel = tauTau;
     Year year = y16;
     float res_mass = 450;
@@ -53,7 +55,8 @@ int main(int argc, char *argv[]) {
     std::map<std::string, float> feats = evt_proc.process(b_1, b_2, l_1, l_2, met, sv, vbf_1, vbf_2, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, pzetavisible,
                                                           pzeta, top_1_mass, top_2_mass, l_1_mt, l_2_mt, is_boosted, csv_1, csv_2,
                                                           channel, year, res_mass, spin, klambda, 1, true, false,
-                                                          b_1_hhbtag, b_2_hhbtag, vbf_1_hhbtag, vbf_2_hhbtag);
+                                                          b_1_hhbtag, b_2_hhbtag, vbf_1_hhbtag, vbf_2_hhbtag,
+                                                          b_1_cvsl, b_2_cvsl, vbf_1_cvsl, vbf_2_cvsl, b_1_cvsb, b_2_cvsb, vbf_1_cvsb, vbf_2_cvsb);
     std::cout << "Processed\n";
     for (auto const& f : feats) std::cout << f.first << " : " << f.second << "\n";
     std::cout << feats.size() << " features returned\n\n";
@@ -65,7 +68,8 @@ int main(int argc, char *argv[]) {
     std::cout << "\nProcessing event as vector... ";
     std::vector<float> vec = evt_proc2.process_as_vec(b_1, b_2, l_1, l_2, met, sv, vbf_1, vbf_2, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, pzetavisible,
                                                       pzeta, top_1_mass, top_2_mass, l_1_mt, l_2_mt, is_boosted, csv_1, csv_2, channel,
-                                                      year, res_mass, spin, klambda, 2, false, true, b_1_hhbtag, b_2_hhbtag, vbf_1_hhbtag, vbf_2_hhbtag);
+                                                      year, res_mass, spin, klambda, 2, false, true, b_1_hhbtag, b_2_hhbtag, vbf_1_hhbtag, vbf_2_hhbtag,
+                                                      b_1_cvsl, b_2_cvsl, vbf_1_cvsl, vbf_2_cvsl, b_1_cvsb, b_2_cvsb, vbf_1_cvsb, vbf_2_cvsb);
     std::cout << "Processed\n";
     std::cout << "Recieved vector of " << vec.size() << " elements\n";
     for (auto const& f : vec) std::cout << f << " ";
@@ -85,7 +89,8 @@ int main(int argc, char *argv[]) {
     for (unsigned int i = 0; i < _n_feats; i++) feat_vals.emplace_back(new float(0));
     evt_proc2.process_to_vec(feat_vals, b_1, b_2, l_1, l_2, met, sv, vbf_1, vbf_2, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot, pzetavisible, pzeta,
                              top_1_mass, top_2_mass, l_1_mt, l_2_mt, is_boosted, csv_1, csv_2, channel, year, res_mass, spin, klambda,
-                             3, false, false, b_1_hhbtag, b_2_hhbtag, vbf_1_hhbtag, vbf_2_hhbtag);
+                             3, false, false, b_1_hhbtag, b_2_hhbtag, vbf_1_hhbtag, vbf_2_hhbtag,
+                             b_1_cvsl, b_2_cvsl, vbf_1_cvsl, vbf_2_cvsl, b_1_cvsb, b_2_cvsb, vbf_1_cvsb, vbf_2_cvsb);
     std::cout << "Processed, vector values now: \n";
     for (unsigned int i = 0; i < _n_feats; i++) std::cout << *(feat_vals[i]) << " ";
     std::cout << "\n";

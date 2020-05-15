@@ -70,7 +70,15 @@ public:
 										 const float& b_1_hhbtag,
 										 const float& b_2_hhbtag,
 										 const float& vbf_1_hhbtag,
-										 const float& vbf_2_hhbtag);
+										 const float& vbf_2_hhbtag,
+										 const float& b_1_cvsl,
+										 const float& b_2_cvsl,
+										 const float& vbf_1_cvsl,
+										 const float& vbf_2_cvsl,
+										 const float& b_1_cvsb,
+										 const float& b_2_cvsb,
+										 const float& vbf_1_cvsb,
+										 const float& vbf_2_cvsb);
 	std::vector<float> process_as_vec(const LorentzVector& b_1,
                                       const LorentzVector& b_2,
                                       const LorentzVector& l_1,
@@ -103,7 +111,15 @@ public:
 									  const float& b_1_hhbtag,
 									  const float& b_2_hhbtag,
 									  const float& vbf_1_hhbtag,
-									  const float& vbf_2_hhbtag);
+									  const float& vbf_2_hhbtag,
+									  const float& b_1_cvsl,
+									  const float& b_2_cvsl,
+									  const float& vbf_1_cvsl,
+									  const float& vbf_2_cvsl,
+									  const float& b_1_cvsb,
+									  const float& b_2_cvsb,
+									  const float& vbf_1_cvsb,
+									  const float& vbf_2_cvsb);
 	void process_to_vec(std::vector<std::unique_ptr<float>>& feats,
                         const LorentzVector& b_1,
                         const LorentzVector& b_2,
@@ -137,7 +153,15 @@ public:
 						const float& b_1_hhbtag,
 						const float& b_2_hhbtag,
 						const float& vbf_1_hhbtag,
-						const float& vbf_2_hhbtag);
+						const float& vbf_2_hhbtag,
+						const float& b_1_cvsl,
+						const float& b_2_cvsl,
+						const float& vbf_1_cvsl,
+						const float& vbf_2_cvsl,
+						const float& b_1_cvsb,
+						const float& b_2_cvsb,
+						const float& vbf_1_cvsb,
+						const float& vbf_2_cvsb);
 	std::vector<std::string> get_feats();
 };
 
