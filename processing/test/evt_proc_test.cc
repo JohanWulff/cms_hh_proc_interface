@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
     bool is_boosted      = csv(rng) > 1.;
     float csv_1(csv(rng)), csv_2(csv(rng));
     float b_1_hhbtag(csv(rng)), b_2_hhbtag(csv(rng)), vbf_1_hhbtag(csv(rng)), vbf_2_hhbtag(csv(rng));
-    float b_1_cvs(csv(rng)), b_2_cvsl(csv(rng)), vbf_1_cvsl(csv(rng)), vbf_2_cvsl(csv(rng));
+    float b_1_cvsl(csv(rng)), b_2_cvsl(csv(rng)), vbf_1_cvsl(csv(rng)), vbf_2_cvsl(csv(rng));
     float b_1_cvsb(csv(rng)), b_2_cvsb(csv(rng)), vbf_1_cvsb(csv(rng)), vbf_2_cvsb(csv(rng));
     Channel channel = tauTau;
     Year year = y16;
