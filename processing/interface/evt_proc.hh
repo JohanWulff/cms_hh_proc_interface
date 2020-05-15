@@ -78,7 +78,10 @@ public:
 										 const float& b_1_cvsb,
 										 const float& b_2_cvsb,
 										 const float& vbf_1_cvsb,
-										 const float& vbf_2_cvsb);
+										 const float& vbf_2_cvsb,
+										 const float& cv,
+										 const float& c2v,
+										 const float& c3);
 	std::vector<float> process_as_vec(const LorentzVector& b_1,
                                       const LorentzVector& b_2,
                                       const LorentzVector& l_1,
@@ -119,7 +122,10 @@ public:
 									  const float& b_1_cvsb,
 									  const float& b_2_cvsb,
 									  const float& vbf_1_cvsb,
-									  const float& vbf_2_cvsb);
+									  const float& vbf_2_cvsb,
+									  const float& cv,
+									  const float& c2v,
+									  const float& c3);
 	void process_to_vec(std::vector<std::unique_ptr<float>>& feats,
                         const LorentzVector& b_1,
                         const LorentzVector& b_2,
@@ -161,7 +167,10 @@ public:
 						const float& b_1_cvsb,
 						const float& b_2_cvsb,
 						const float& vbf_1_cvsb,
-						const float& vbf_2_cvsb);
+						const float& vbf_2_cvsb,
+						const float& cv,
+						const float& c2v,
+						const float& c3);
 	std::vector<std::string> get_feats();
 };
 
