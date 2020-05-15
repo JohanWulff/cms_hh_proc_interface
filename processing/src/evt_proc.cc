@@ -146,7 +146,7 @@ std::vector<float> EvtProc::process_as_vec(const LorentzVector& b_1,
     std::map<std::string, float> feats = EvtProc::process(b_1, b_2, l_1, l_2, met, svfit, vbf_1, vbf_2, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot,
                                                           p_zetavisible, p_zeta, top_1_mass, top_2_mass, l_1_mt, l_2_mt, is_boosted, b_1_csv, b_2_csv,
                                                           channel, year, res_mass, spin, klambda, n_vbf, svfit_conv, hh_kinfit_conv,
-                                                          b_1_HHbtag, b_2_HHbtag, vbf_1_HHbtag, vbf_2_HHbtag);
+                                                          b_1_hhbtag, b_2_hhbtag, vbf_1_hhbtag, vbf_2_hhbtag);
     std::vector<float> vec(feats.size());
     int i = 0;
     if (_all) {
@@ -202,7 +202,7 @@ void EvtProc::process_to_vec(std::vector<std::unique_ptr<float>>& feats,
     std::map<std::string, float> feat_vals = EvtProc::process(b_1, b_2, l_1, l_2, met, svfit, vbf_1, vbf_2, hh_kinfit_mass, hh_kinfit_chi2, mt2, mt_tot,
                                                               p_zetavisible, p_zeta, top_1_mass, top_2_mass, l_1_mt, l_2_mt, is_boosted, b_1_csv, b_2_csv,
                                                               channel, year, res_mass, spin, klambda, n_vbf, svfit_conv,
-                                                              hh_kinfit_conv, b_1_HHbtag, b_2_HHbtag, vbf_1_HHbtag, vbf_2_HHbtag);
+                                                              hh_kinfit_conv, b_1_hhbtag, b_2_hhbtag, vbf_1_hhbtag, vbf_2_hhbtag);
     if (feat_vals.size() != feats.size()) throw std::length_error("Length of computed map (" + std::to_string(feat_vals.size()) + ") does not match length of \
                                                                    vector to fill (" + std::to_string(feats.size()) + ")\n");
     int i = 0;
