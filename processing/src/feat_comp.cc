@@ -160,13 +160,13 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("costheta_hbb_hh"))         feats["costheta_hbb_hh"]         = FeatComp::calc_cos_delta(h_bb, hh);
 
     //Centralities
-    if (FeatComp::_feat_check("l_1_centrality"))         feats["l_1_centrality"]           =  FeatComp::calc_centrality(l_1, vbf_1, vbf_2);
-    if (FeatComp::_feat_check("l_2_centrality"))         feats["l_2_centrality"]           =  FeatComp::calc_centrality(l_2, vbf_1, vbf_2);
-    if (FeatComp::_feat_check("b_1_centrality"))         feats["b_1_centrality"]           =  FeatComp::calc_centrality(b_1, vbf_1, vbf_2);
-    if (FeatComp::_feat_check("b_2_centrality"))         feats["b_2_centrality"]           =  FeatComp::calc_centrality(b_2, vbf_1, vbf_2);
-    if (FeatComp::_feat_check("h_bb_centrality"))        feats["h_bb_centrality"]          =  FeatComp::calc_centrality(h_bb, vbf_1, vbf_2);
-    if (FeatComp::_feat_check("h_tt_vis_centrality"))    feats["h_tt_vis_centrality"]      =  FeatComp::calc_centrality(h_tt_vis, vbf_1, vbf_2);
-    if (FeatComp::_feat_check("hh_centrality"))          feats["hh_centrality"]            =  FeatComp::calc_hh_centrality(h_bb, h_tt_vis, vbf_1, vbf_2);
+    if (FeatComp::_feat_check("l_1_centrality"))      feats["l_1_centrality"]      =  use_vbf ? FeatComp::calc_centrality(l_1, vbf_1, vbf_2) : std::nanf("1");
+    if (FeatComp::_feat_check("l_2_centrality"))      feats["l_2_centrality"]      =  use_vbf ? FeatComp::calc_centrality(l_2, vbf_1, vbf_2) : std::nanf("1");
+    if (FeatComp::_feat_check("b_1_centrality"))      feats["b_1_centrality"]      =  use_vbf ? FeatComp::calc_centrality(b_1, vbf_1, vbf_2) : std::nanf("1");
+    if (FeatComp::_feat_check("b_2_centrality"))      feats["b_2_centrality"]      =  use_vbf ? FeatComp::calc_centrality(b_2, vbf_1, vbf_2) : std::nanf("1");
+    if (FeatComp::_feat_check("h_bb_centrality"))     feats["h_bb_centrality"]     =  use_vbf ? FeatComp::calc_centrality(h_bb, vbf_1, vbf_2) : std::nanf("1");
+    if (FeatComp::_feat_check("h_tt_vis_centrality")) feats["h_tt_vis_centrality"] =  use_vbf ? FeatComp::calc_centrality(h_tt_vis, vbf_1, vbf_2) : std::nanf("1");
+    if (FeatComp::_feat_check("hh_centrality"))       feats["hh_centrality"]       =  use_vbf ? FeatComp::calc_hh_centrality(h_bb, h_tt_vis, vbf_1, vbf_2) : std::nanf("1");
 
 
 
