@@ -183,10 +183,10 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     // Assorted HL
     if (FeatComp::_feat_check("p_zetavisible")) feats["p_zetavisible"] = FeatComp::calc_pzeta_visible(l_1, l_2);
     if (FeatComp::_feat_check("p_zeta"))        feats["p_zeta"]        = FeatComp::calc_pzeta(l_1, l_2, met);
-    if (EvtProc::_feat_check("top_1_mass") || EvtProc::_feat_check("top_2_mass")) {
+    if (FeatComp::_feat_check("top_1_mass") || FeatComp::_feat_check("top_2_mass")) {
         std::pair<float, float> top_masses = FeatComp::calc_top_masses(l_1, l_2, b_1, b_2, met);
-        if (EvtProc::_feat_check("top_1_mass")) feats["top_1_mass"] = top_masses.first;
-        if (EvtProc::_feat_check("top_2_mass")) feats["top_2_mass"] = top_masses.second;
+        if (FeatComp::_feat_check("top_1_mass")) feats["top_1_mass"] = top_masses.first;
+        if (FeatComp::_feat_check("top_2_mass")) feats["top_2_mass"] = top_masses.second;
     }
     return feats;
 }

@@ -54,7 +54,6 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
     // Non-comp extra HL
     if (EvtProc::_feat_check("hh_kinfit_chi2")) feats["hh_kinfit_chi2"] = hh_kinfit_conv ? hh_kinfit_chi2 : std::nanf("1");
     if (EvtProc::_feat_check("mt2"))            feats["mt2"]            = mt2;
-    if (EvtProc::_feat_check("mt_tot"))         feats["mt_tot"]         = mt_tot; 
     if (EvtProc::_feat_check("res_mass"))       feats["res_mass"]       = res_mass;
     if (EvtProc::_feat_check("spin"))           feats["spin"]           = spin;
     if (EvtProc::_feat_check("klambda"))        feats["klambda"]        = klambda;
@@ -243,7 +242,7 @@ std::vector<std::string> EvtProc::get_feats() {
     /* Returns list of features that will be computed in general operation */
 
     std::map<std::string, float> feats = EvtProc::process(LorentzVector(), LorentzVector(), LorentzVector(), LorentzVector(), LorentzVector(), LorentzVector(),
-                                                          LorentzVector(), LorentzVector(), 0, 0, 0, false, 0, 0, 0, 0, Channel(tauTau),
+                                                          LorentzVector(), LorentzVector(), 0, 0, 0, false, 0, 0, Channel(tauTau),
                                                           Year(y16), 0, Spin(nonres), 0, 2, true, true, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     std::vector<std::string> names;
     if (_all) {
