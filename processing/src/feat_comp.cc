@@ -108,7 +108,6 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
       feats["min_dR_vbfj_b"]      = min_dR_vbfj_b;
     }
 
-
     // Masses
     if (FeatComp::_feat_check("sv_mass"))       feats["sv_mass"]       = svfit_conv ? svfit.M() : std::nanf("1");
     if (FeatComp::_feat_check("h_tt_vis_mass")) feats["h_tt_vis_mass"] = h_tt_vis.M();
@@ -116,6 +115,10 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("hh_kinfit_m"))   feats["hh_kinfit_m"]   = hh_kinfit_conv ? hh_kinfit_m : std::nanf("1");
     if (FeatComp::_feat_check("sv_mt"))         feats["sv_mt"]         = svfit_conv ? FeatComp::calc_mt(svfit, met) : std::nanf("1");
     if (FeatComp::_feat_check("h_tt_met_mt"))   feats["h_tt_met_mt"]   = FeatComp::calc_mt(h_tt_met, met);
+    if (FeatComp::_feat_check("l_1_mt"))        feats["l_1_mt"]        = FeatComp::calc_mt(l_1, met);
+    if (FeatComp::_feat_check("l_2_mt"))        feats["l_2_mt"]        = FeatComp::calc_mt(l_2, met);
+    if (FeatComp::_feat_check("ll_mt"))         feats["ll_mt"]         = FeatComp::calc_mt(l_1, l_2);
+    if (FeatComp::_feat_check("mt_tot"))        feats["mt_tot"]        = FeatComp::calc_mt_tot(l_1, l_2, met);
     if (FeatComp::_feat_check("diH_mass_met"))  feats["diH_mass_met"]  = (h_bb+h_tt_met).M();
     if (FeatComp::_feat_check("diH_mass_sv"))   feats["diH_mass_sv"]   = svfit_conv ? (h_bb+svfit).M() : std::nanf("1");
     if (FeatComp::_feat_check("diH_mass_vis"))  feats["diH_mass_vis"]  = (h_bb+h_tt_vis).M();
@@ -168,8 +171,6 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("h_tt_vis_centrality")) feats["h_tt_vis_centrality"] =  use_vbf ? FeatComp::calc_centrality(h_tt_vis, vbf_1, vbf_2) : std::nanf("1");
     if (FeatComp::_feat_check("hh_centrality"))       feats["hh_centrality"]       =  use_vbf ? FeatComp::calc_hh_centrality(h_bb, h_tt_vis, vbf_1, vbf_2) : std::nanf("1");
 
-
-
     // Assorted VBF
     if (FeatComp::_feat_check("vbf_eta_prod_sign")) {
         if (use_vbf) {
@@ -179,6 +180,14 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
         }
     }
 
+    // Assorted HL
+    if (FeatComp::_feat_check("p_zetavisible")) feats["p_zetavisible"] = FeatComp::calc_pzeta_visible(l_1, l_2);
+    if (FeatComp::_feat_check("p_zeta"))        feats["p_zeta"]        = FeatComp::calc_pzeta(l_1, l_2, met);
+    if (EvtProc::_feat_check("top_1_mass") || EvtProc::_feat_check("top_2_mass")) {
+        std::pair<float, float> top_masses = FeatComp::calc_top_masses(l_1, l_2, b_1, b_2, met);
+        if (EvtProc::_feat_check("top_1_mass")) feats["top_1_mass"] = top_masses.first;
+        if (EvtProc::_feat_check("top_2_mass")) feats["top_2_mass"] = top_masses.second;
+    }
     return feats;
 }
 
@@ -271,4 +280,60 @@ inline float FeatComp::calcDeltaEtaPlus(const LorentzVector& bh, const LorentzVe
     if (VBFjet1_eta > VBFjet2_eta) max_eta_vbf = VBFjet1_eta; 
     else max_eta_vbf = VBFjet2_eta;
     return max_eta_vbf - max_eta_h;
+}
+
+
+inline float FeatComp::calc_mt_tot(const LorentzVector& l_1, const LorentzVector& l_2, const LorentzVector& met) {
+    /* Modified from https://github.com/hh-italian-group/AnalysisTools/blob/1be0da0748d69827ed7ebda6d9b8198b87f170fd/Core/include/AnalysisMath.h */
+
+    return std::sqrt(std::pow(FeatComp::calc_mt(l_1, met), 2) + std::pow(FeatComp::calc_mt(l_2, met), 2) + std::pow(FeatComp::calc_mt(l_1, l_2), 2));
+}
+
+
+float FeatComp::calc_pzeta(const LorentzVector& l_1, const LorentzVector& l_2, const LorentzVector& met) {
+    /* Modified from https://github.com/hh-italian-group/AnalysisTools/blob/1be0da0748d69827ed7ebda6d9b8198b87f170fd/Core/include/AnalysisMath.h */
+
+    const LorentzVector ll_p4 = l1_p4 + l2_p4;
+    const TVector2 ll_p2(ll_p4.Px(), ll_p4.Py());
+    const TVector2 met_p2(met_p4.Px(), met_p4.Py());
+    const TVector2 ll_s = ll_p2 + met_p2;
+    const TVector2 l1_u(std::cos(l1_p4.Phi()), std::sin(l1_p4.Phi()));
+    const TVector2 l2_u(std::cos(l2_p4.Phi()), std::sin(l2_p4.Phi()));
+    const TVector2 ll_u = l1_u + l2_u;
+    const float ll_u_met = ll_s * ll_u;
+    const float ll_mod = ll_u.Mod();
+    return ll_u_met / ll_mod;
+}
+
+
+float FeatComp::calc_pzeta_visible(const LorentzVector& l_1, const LorentzVector& l_2) {
+    /* Modified from https://github.com/hh-italian-group/AnalysisTools/blob/1be0da0748d69827ed7ebda6d9b8198b87f170fd/Core/include/AnalysisMath.h */
+
+    const LorentzVector ll_p4 = l1_p4 + l2_p4;
+    const TVector2 ll_p2(ll_p4.Px(), ll_p4.Py());
+    const TVector2 l1_u(std::cos(l1_p4.Phi()), std::sin(l1_p4.Phi()));
+    const TVector2 l2_u(std::cos(l2_p4.Phi()), std::sin(l2_p4.Phi()));
+    const TVector2 ll_u = l1_u + l2_u;
+    const float ll_p2u = ll_p2 * ll_u;
+    const float ll_mod = ll_u.Mod();
+    return ll_p2u / ll_mod;
+}
+
+
+std::pair<float, float> FeatComp::calc_top_masses(const LorentzVector& l_1, const LorentzVector& l_2, const LorentzVector& b_1, const LorentzVector& b_2,
+                                                  const LorentzVector& met) {
+    /* Modified from https://github.com/hh-italian-group/AnalysisTools/blob/1be0da0748d69827ed7ebda6d9b8198b87f170fd/Core/include/AnalysisMath.h */
+
+    std::vector<std::pair<float, float>> vector_mass_top = {
+        {(lepton1_p4 + bjet_1 + met_p4).mass(), (lepton2_p4 + bjet_2).mass()},
+        {(lepton1_p4 + bjet_2 + met_p4).mass(), (lepton2_p4 + bjet_1).mass()},
+        {(lepton1_p4 + bjet_1).mass(),          (lepton2_p4 + bjet_2 + met_p4).mass()},
+        {(lepton1_p4 + bjet_2).mass(),          (lepton2_p4 + bjet_1 + met_p4).mass()}
+    };
+    std::vector<std::pair<unsigned int, float>> distance;
+    for (unsigned int i = 0; i < vector_mass_top.size(); ++i) distance.emplace_back(i, pow(vector_mass_top[i].first - 172.5,2) + pow(vector_mass_top[i].second - 172.5,2));
+    std::sort(distance.begin(), distance.end(), [](const std::pair<unsigned int, float>& el1,const std::pair<unsigned int, float>& el2) {
+        return el1.second < el2.second;
+    });
+    return vector_mass_top.at(distance.front().first);
 }

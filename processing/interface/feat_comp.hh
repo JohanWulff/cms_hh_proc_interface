@@ -40,22 +40,22 @@ public:
 	FeatComp(bool return_all=true, std::vector<std::string> requested={}, bool use_deep_bjet_wps=true);
 	~FeatComp();
 	std::map<std::string, float> process(const LorentzVector& b_1,
-										       const LorentzVector& b_2, 
-										       const LorentzVector& l_1,
-										       const LorentzVector& l_2,
-										       const LorentzVector& met,
-										       const LorentzVector& svfit,
-                                               const LorentzVector& vbf_1,
-                                               const LorentzVector& vbf_2,
-										       const float& hh_kinfit_m,
-                                               const bool& is_boosted,
-                                               const float& b_1_csv,
-                                               const float& b_2_csv,
-                                               Channel channel,
-                                               Year year,
-                                               const int& n_vbf,
-                                               const bool& svfit_conv,
-                                               const bool& hh_kinfit_conv);
+										 const LorentzVector& b_2, 
+										 const LorentzVector& l_1,
+										 const LorentzVector& l_2,
+										 const LorentzVector& met,
+										 const LorentzVector& svfit,
+                                         const LorentzVector& vbf_1,
+                                         const LorentzVector& vbf_2,
+										 const float& hh_kinfit_m,
+                                         const bool& is_boosted,
+                                         const float& b_1_csv,
+                                         const float& b_2_csv,
+                                         Channel channel,
+                                         Year year,
+                                         const int& n_vbf,
+                                         const bool& svfit_conv,
+                                         const bool& hh_kinfit_conv);
 	inline float delta_eta(const LorentzVector&, const LorentzVector&);
 	inline float delta_phi(const LorentzVector&, const LorentzVector&);
 	inline float delta_r(const LorentzVector&, const LorentzVector&);
@@ -69,6 +69,11 @@ public:
   inline float calc_hh_centrality( const LorentzVector&, const LorentzVector&, const LorentzVector&, const LorentzVector&);
   inline float calcDeltaEtaMinus( const LorentzVector&, const LorentzVector&, const LorentzVector&, const LorentzVector&);
   inline float calcDeltaEtaPlus( const LorentzVector&, const LorentzVector&, const LorentzVector&, const LorentzVector&);
+  inline float calc_mt_tot(const LorentzVector& l_1, const LorentzVector& l_2, const LorentzVector& met);
+  float calc_pzeta(const LorentzVector& l_1, const LorentzVector& l_2, const LorentzVector& met);
+  float calc_pzeta_visible(const LorentzVector& l_1, const LorentzVector& l_2);
+  std::pair<float, float> calc_top_masses(const LorentzVector& l_1, const LorentzVector& l_2, const LorentzVector& b_1, const LorentzVector& b_2,
+                                          const LorentzVector& met);
 };
 
 #endif /* FEAT_COMP_HH_ */
