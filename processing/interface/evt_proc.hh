@@ -36,102 +36,120 @@ private:
 
 public:
     // Methods
-	EvtProc(bool return_all=true, std::vector<std::string> requested={}, bool use_deep_csv=true);
+	EvtProc(bool return_all=true, std::vector<std::string> requested={}, bool use_deep_bjet_wps=true);
 	~EvtProc();
-	std::map<std::string, float> process(const LorentzVector&,  // b_1
-										 const LorentzVector&,  // b_2
-										 const LorentzVector&,  // l_1
-										 const LorentzVector&,  // l_2
-										 const LorentzVector&,  // MET
-										 const LorentzVector&,  // SVFit
-										 const LorentzVector&,  // VBF_1
-										 const LorentzVector&,  // VBF_2
-										 const float&,          // HH KinFit mass
-										 const float&,          // HH KinFit chi2
-										 const float&,          // MT2
-										 const float&,          // MT total
-										 const float&,          // pzeta vis
-										 const float&,          // pzeta
-										 const float&,          // top 1 mass
-										 const float&,          // top 2 mass
-										 const float&,          // mT l1
-										 const float&,          // mT l2
-										 const bool&, 			// Is boosted
-										 const float&,			// b_1 CSV
-										 const float&,			// b_2 CSV
-										 const float&,			// b_1 Deep CSV
-										 const float&,			// b_2 Deep CSV
-										 Channel,				// Channel
-										 Year,	            	// Year
-										 const float&,		    // Resonant mass (set to 125 if non-resonant)
-										 Spin,   				// Graviton or radion
-										 const float&,		    // KLambda coupling (set to 1 if resonant)
-										 const int&,			// n_vbf
-                                         const bool&,			// svfit_conv
-                                         const bool&);			// hh_kinfit_conv
-	std::vector<float> process_as_vec(const LorentzVector&,  // b_1
-									  const LorentzVector&,  // b_2
-									  const LorentzVector&,  // l_1
-									  const LorentzVector&,  // l_2
-									  const LorentzVector&,  // MET
-									  const LorentzVector&,  // SVFit
-									  const LorentzVector&,  // VBF_1
-									  const LorentzVector&,  // VBF_2
-									  const float&,          // HH KinFit mass
-									  const float&,          // HH KinFit chi2
-									  const float&,          // MT2
-									  const float&,          // MT total
-									  const float&,          // pzeta vis
-									  const float&,          // pzeta
-									  const float&,          // top 1 mass
-									  const float&,          // top 2 mass
-									  const float&,          // mT l1
-									  const float&,          // mT l2
-									  const bool&, 			 // Is boosted
-									  const float&,			 // b_1 CSV
-									  const float&,			 // b_2 CSV
-									  const float&,			 // b_1 Deep CSV
-									  const float&,			 // b_2 Deep CSV
-									  Channel,				 // Channel
-									  Year,	            	 // Year
-									  const float&,		     // Resonant mass (set to 125 if non-resonant)
-									  Spin,   				 // Graviton or radion
-									  const float&,  	     // KLambda coupling (set to 1 if resonant)
-									  const int&,	    	 // n_vbf
-                                      const bool&,			 // svfit_conv
-                                      const bool&);			 // hh_kinfit_conv
-	void process_to_vec(std::vector<std::unique_ptr<float>>&,  // vector to fill
-						const LorentzVector&,  // b_1
-						const LorentzVector&,  // b_2
-						const LorentzVector&,  // l_1
-						const LorentzVector&,  // l_2
-						const LorentzVector&,  // MET
-						const LorentzVector&,  // SVFit
-						const LorentzVector&,  // VBF_1
-						const LorentzVector&,  // VBF_2
-						const float&,          // HH KinFit mass
-						const float&,          // HH KinFit chi2
-						const float&,          // MT2
-						const float&,          // MT total
-						const float&,          // pzeta vis
-						const float&,          // pzeta
-						const float&,          // top 1 mass
-						const float&,          // top 2 mass
-						const float&,          // mT l1
-						const float&,          // mT l2
-						const bool&, 		   // Is boosted
-						const float&,		   // b_1 CSV
-						const float&,		   // b_2 CSV
-						const float&,		   // b_1 Deep CSV
-						const float&,		   // b_2 Deep CSV
-						Channel,			   // Channel
-						Year,	               // Year
-						const float&,		   // Resonant mass (set to 125 if non-resonant)
-						Spin,   			   // Graviton or radion
-						const float&,	       // KLambda coupling (set to zero if resonant)
-						const int&,			   // n_vbf
-                        const bool&,		   // svfit_conv
-                        const bool&);		   // hh_kinfit_conv
+	std::map<std::string, float> process(const LorentzVector& b_1,
+										 const LorentzVector& b_2,
+										 const LorentzVector& l_1,
+										 const LorentzVector& l_2,
+										 const LorentzVector& met,
+										 const LorentzVector& svfit,
+										 const LorentzVector& vbf_1,
+										 const LorentzVector& vbf_2,
+										 const float& hh_kinfit_mass,
+										 const float& hh_kinfit_chi2,
+										 const float& mt2,
+										 const bool&  is_boosted,
+										 const float& b_1_csv,
+										 const float& b_2_csv,
+										 Channel channel,
+										 Year year,
+										 const float& res_mass,
+										 Spin spin,
+										 const float& klambda,
+										 const int& n_vbf,
+										 const bool& svfit_conv,
+										 const bool& hh_kinfit_conv,
+										 const float& b_1_hhbtag,
+										 const float& b_2_hhbtag,
+										 const float& vbf_1_hhbtag,
+										 const float& vbf_2_hhbtag,
+										 const float& b_1_cvsl,
+										 const float& b_2_cvsl,
+										 const float& vbf_1_cvsl,
+										 const float& vbf_2_cvsl,
+										 const float& b_1_cvsb,
+										 const float& b_2_cvsb,
+										 const float& vbf_1_cvsb,
+										 const float& vbf_2_cvsb,
+										 const float& cv,
+										 const float& c2v,
+										 const float& c3);
+	std::vector<float> process_as_vec(const LorentzVector& b_1,
+                                      const LorentzVector& b_2,
+                                      const LorentzVector& l_1,
+                                      const LorentzVector& l_2,
+                                      const LorentzVector& met,
+                                      const LorentzVector& svfit,
+                                      const LorentzVector& vbf_1,
+                                      const LorentzVector& vbf_2,
+                                      const float& hh_kinfit_mass,
+                                      const float& hh_kinfit_chi2,
+                                      const float& mt2,
+                                      const bool& is_boosted,
+                                      const float& b_1_csv,
+                                      const float& b_2_csv,
+                                      Channel channel,
+                                      Year year,
+                                      const float& res_mass,
+                                      Spin spin,
+                                      const float& klambda,
+                                      const int& n_vbf,
+                                      const bool& svfit_conv,
+                                      const bool& hh_kinfit_conv,
+									  const float& b_1_hhbtag,
+									  const float& b_2_hhbtag,
+									  const float& vbf_1_hhbtag,
+									  const float& vbf_2_hhbtag,
+									  const float& b_1_cvsl,
+									  const float& b_2_cvsl,
+									  const float& vbf_1_cvsl,
+									  const float& vbf_2_cvsl,
+									  const float& b_1_cvsb,
+									  const float& b_2_cvsb,
+									  const float& vbf_1_cvsb,
+									  const float& vbf_2_cvsb,
+									  const float& cv,
+									  const float& c2v,
+									  const float& c3);
+	void process_to_vec(std::vector<std::unique_ptr<float>>& feats,
+                        const LorentzVector& b_1,
+                        const LorentzVector& b_2,
+                        const LorentzVector& l_1,
+                        const LorentzVector& l_2,
+                        const LorentzVector& met,
+                        const LorentzVector& svfit,
+                        const LorentzVector& vbf_1,
+                        const LorentzVector& vbf_2,
+                        const float& hh_kinfit_mass,
+                        const float& hh_kinfit_chi2,
+                        const float& mt2,
+                        const bool& is_boosted,
+                        const float& b_1_csv,
+                        const float& b_2_csv,
+                        Channel channel,
+                        Year year,
+                        const float& res_mass,
+                        Spin spin,
+                        const float& klambda,
+                        const int& n_vbf,
+                        const bool& svfit_conv,
+                        const bool& hh_kinfit_conv,
+						const float& b_1_hhbtag,
+						const float& b_2_hhbtag,
+						const float& vbf_1_hhbtag,
+						const float& vbf_2_hhbtag,
+						const float& b_1_cvsl,
+						const float& b_2_cvsl,
+						const float& vbf_1_cvsl,
+						const float& vbf_2_cvsl,
+						const float& b_1_cvsb,
+						const float& b_2_cvsb,
+						const float& vbf_1_cvsb,
+						const float& vbf_2_cvsb,
+						const float& cv,
+						const float& c2v,
+						const float& c3);
 	std::vector<std::string> get_feats();
 };
 
