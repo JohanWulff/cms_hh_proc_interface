@@ -293,8 +293,8 @@ inline float FeatComp::calc_mt_tot(const LorentzVector& l_1, const LorentzVector
 float FeatComp::calc_pzeta(const LorentzVector& l_1, const LorentzVector& l_2, const LorentzVector& met) {
     /* Modified from https://github.com/hh-italian-group/AnalysisTools/blob/1be0da0748d69827ed7ebda6d9b8198b87f170fd/Core/include/AnalysisMath.h */
 
-    const LorentzVector ll = l_1 + l_2;
-    const TVector2 ll_p2(ll.Px(), ll.Py());
+    const LorentzVector ll_p4 = l_1 + l_2;
+    const TVector2 ll_p2(ll_p4.Px(), ll_p4.Py());
     const TVector2 met_p2(met.Px(), met.Py());
     const TVector2 ll_s = ll_p2 + met_p2;
     const TVector2 l1_u(std::cos(l_1.Phi()), std::sin(l_1.Phi()));
@@ -309,8 +309,8 @@ float FeatComp::calc_pzeta(const LorentzVector& l_1, const LorentzVector& l_2, c
 float FeatComp::calc_pzeta_visible(const LorentzVector& l_1, const LorentzVector& l_2) {
     /* Modified from https://github.com/hh-italian-group/AnalysisTools/blob/1be0da0748d69827ed7ebda6d9b8198b87f170fd/Core/include/AnalysisMath.h */
 
-    const LorentzVector ll = l_1 + l_2;
-    const TVector2 ll_p2(ll.Px(), ll.Py());
+    const LorentzVector ll_p4 = l_1 + l_2;
+    const TVector2 ll_p2(ll_p4.Px(), ll_p4.Py());
     const TVector2 l1_u(std::cos(l_1.Phi()), std::sin(l_1.Phi()));
     const TVector2 l2_u(std::cos(l_2.Phi()), std::sin(l_2.Phi()));
     const TVector2 ll_u = l1_u + l2_u;
