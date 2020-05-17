@@ -293,12 +293,12 @@ inline float FeatComp::calc_mt_tot(const LorentzVector& l_1, const LorentzVector
 float FeatComp::calc_pzeta(const LorentzVector& l_1, const LorentzVector& l_2, const LorentzVector& met) {
     /* Modified from https://github.com/hh-italian-group/AnalysisTools/blob/1be0da0748d69827ed7ebda6d9b8198b87f170fd/Core/include/AnalysisMath.h */
 
-    const LorentzVector ll_p4 = l1_p4 + l2_p4;
-    const TVector2 ll_p2(ll_p4.Px(), ll_p4.Py());
-    const TVector2 met_p2(met_p4.Px(), met_p4.Py());
+    const LorentzVector ll = l_1 + l_2;
+    const TVector2 ll_p2(ll.Px(), ll.Py());
+    const TVector2 met_p2(met.Px(), met.Py());
     const TVector2 ll_s = ll_p2 + met_p2;
-    const TVector2 l1_u(std::cos(l1_p4.Phi()), std::sin(l1_p4.Phi()));
-    const TVector2 l2_u(std::cos(l2_p4.Phi()), std::sin(l2_p4.Phi()));
+    const TVector2 l1_u(std::cos(l_1.Phi()), std::sin(l_1.Phi()));
+    const TVector2 l2_u(std::cos(l_2.Phi()), std::sin(l_2.Phi()));
     const TVector2 ll_u = l1_u + l2_u;
     const float ll_u_met = ll_s * ll_u;
     const float ll_mod = ll_u.Mod();
@@ -309,10 +309,10 @@ float FeatComp::calc_pzeta(const LorentzVector& l_1, const LorentzVector& l_2, c
 float FeatComp::calc_pzeta_visible(const LorentzVector& l_1, const LorentzVector& l_2) {
     /* Modified from https://github.com/hh-italian-group/AnalysisTools/blob/1be0da0748d69827ed7ebda6d9b8198b87f170fd/Core/include/AnalysisMath.h */
 
-    const LorentzVector ll_p4 = l1_p4 + l2_p4;
-    const TVector2 ll_p2(ll_p4.Px(), ll_p4.Py());
-    const TVector2 l1_u(std::cos(l1_p4.Phi()), std::sin(l1_p4.Phi()));
-    const TVector2 l2_u(std::cos(l2_p4.Phi()), std::sin(l2_p4.Phi()));
+    const LorentzVector ll = l_1 + l_2;
+    const TVector2 ll_p2(ll.Px(), ll.Py());
+    const TVector2 l1_u(std::cos(l_1.Phi()), std::sin(l_1.Phi()));
+    const TVector2 l2_u(std::cos(l_2.Phi()), std::sin(l_2.Phi()));
     const TVector2 ll_u = l1_u + l2_u;
     const float ll_p2u = ll_p2 * ll_u;
     const float ll_mod = ll_u.Mod();
@@ -325,10 +325,10 @@ std::pair<float, float> FeatComp::calc_top_masses(const LorentzVector& l_1, cons
     /* Modified from https://github.com/hh-italian-group/AnalysisTools/blob/1be0da0748d69827ed7ebda6d9b8198b87f170fd/Core/include/AnalysisMath.h */
 
     std::vector<std::pair<float, float>> vector_mass_top = {
-        {(lepton1_p4 + bjet_1 + met_p4).mass(), (lepton2_p4 + bjet_2).mass()},
-        {(lepton1_p4 + bjet_2 + met_p4).mass(), (lepton2_p4 + bjet_1).mass()},
-        {(lepton1_p4 + bjet_1).mass(),          (lepton2_p4 + bjet_2 + met_p4).mass()},
-        {(lepton1_p4 + bjet_2).mass(),          (lepton2_p4 + bjet_1 + met_p4).mass()}
+        {(l_1 + b_1 + met).mass(), (l_2 + b_2).mass()},
+        {(l_1 + b_2 + met).mass(), (l_2 + b_1).mass()},
+        {(l_1 + b_1).mass(),       (l_2 + b_2 + met).mass()},
+        {(l_1 + b_2).mass(),       (l_2 + b_1 + met).mass()}
     };
     std::vector<std::pair<unsigned int, float>> distance;
     for (unsigned int i = 0; i < vector_mass_top.size(); ++i) distance.emplace_back(i, pow(vector_mass_top[i].first - 172.5,2) + pow(vector_mass_top[i].second - 172.5,2));

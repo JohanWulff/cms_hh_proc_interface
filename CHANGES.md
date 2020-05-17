@@ -18,3 +18,11 @@
     - const float& cv,
 	- const float& c2v,
 	- const float& c3
+- `EvtProc::process`, `EvtProc::process_as_vec`, and `EvtProc::process_to_vec` now no longer take the following arguments:
+	- const float& mt_tot,
+    - const float& p_zetavisible,
+    - const float& p_zeta,
+    - const float& top_1_mass,
+    - const float& top_2_mass,
+    - const float& l_1_mt,
+    - const float& l_2_mt,
