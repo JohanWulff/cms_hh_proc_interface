@@ -47,8 +47,9 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
 										      const float& c3) {
     /* Processes (requested) features for an event and returns a map of features->values */
     
-    std::map<std::string, float> feats = _feat_comp->process(b_1, b_2, l_1, l_2, met, svfit, vbf_1, vbf_2, hh_kinfit_mass, is_boosted,
-                                                             b_1_csv, b_2_csv, channel, year, n_vbf, svfit_conv, hh_kinfit_conv);
+    std::map<std::string, float> feats = _feat_comp->process(b_1, b_2, l_1, l_2, met, svfit, vbf_1, vbf_2, hh_kinfit_mass, is_boosted, b_1_csv, b_2_csv,
+                                                             channel, year, n_vbf, svfit_conv, hh_kinfit_conv,b_1_cvsl, b_2_cvsl, vbf_1_cvsl, vbf_2_cvsl,
+                                                             b_1_cvsb, b_2_cvsb, vbf_1_cvsb, vbf_2_cvsb);
     bool use_vbf = n_vbf >= 2;
     
     // Non-comp extra HL
@@ -64,14 +65,6 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
     if (EvtProc::_feat_check("b_2_hhbtag"))     feats["b_2_hhbtag"]     = b_2_hhbtag;
     if (EvtProc::_feat_check("vbf_1_hhbtag"))   feats["vbf_1_hhbtag"]   = use_vbf ? vbf_1_hhbtag : std::nanf("1");
     if (EvtProc::_feat_check("vbf_2_hhbtag"))   feats["vbf_2_hhbtag"]   = use_vbf ? vbf_2_hhbtag : std::nanf("1");
-    if (EvtProc::_feat_check("b_1_cvsl"))       feats["b_1_cvsl"]       = b_1_cvsl;
-    if (EvtProc::_feat_check("b_2_cvsl"))       feats["b_2_cvsl"]       = b_2_cvsl;
-    if (EvtProc::_feat_check("vbf_1_cvsl"))     feats["vbf_1_cvsl"]     = use_vbf ? vbf_1_cvsl : std::nanf("1");
-    if (EvtProc::_feat_check("vbf_2_cvsl"))     feats["vbf_2_cvsl"]     = use_vbf ? vbf_2_cvsl : std::nanf("1");
-    if (EvtProc::_feat_check("b_1_cvsb"))       feats["b_1_cvsb"]       = b_1_cvsb;
-    if (EvtProc::_feat_check("b_2_cvsb"))       feats["b_2_cvsb"]       = b_2_cvsb;
-    if (EvtProc::_feat_check("vbf_1_cvsb"))     feats["vbf_1_cvsb"]     = use_vbf ? vbf_1_cvsb : std::nanf("1");
-    if (EvtProc::_feat_check("vbf_2_cvsb"))     feats["vbf_2_cvsb"]     = use_vbf ? vbf_2_cvsb : std::nanf("1");
 
     // Non-comp extra LL
     if (EvtProc::_feat_check("l_1_E"))    feats["l_1_E"]    = l_1.E();

@@ -28,11 +28,23 @@ private:
 	// Variables
     bool _all, _use_deep_bjet_wps;
     std::vector<std::string> _requested;
-	std::vector<float> _bjet_wps{0, 0.5426, 0.8484, 0.9535};  // TODO: Check these
-	std::vector<float> _deep_bjet_wps{0, 0.0494, 0.2770, 0.7264};  //TODO: Update these
+	std::map<int,std::vector<float>> _deep_wps{{0, {0,0.5803,0.8838,0.9693}},   // Not provided for 2016, copied 2017
+											   {1, {0,0.5803,0.8838,0.9693}},
+											   {2, {0,0.5803,0.8838,0.9693}}};  // Not provided for 2018, copied 2017
+	std::map<int,std::vector<float>> _deep_bjet_wps{{0, {0,0.0614,0.3093,0.7221}},
+													{1, {0,0.0521,0.3033,0.7489}},
+													{2, {0,0.0494,0.2770,0.7264}}};
+	std::map<int,std::vector<float>> _cvsl_wps{{0, {0,0.03,0.085,0.48}},
+											   {1, {0,0.03,0.085,0.48}},  // Not provided for 2017, copied 2016
+											   {2, {0,0.03,0.085,0.48}}};	
+	std::map<int,std::vector<float>> _cvsb_wps{{0, {0.4,0.29,0.05,0}},
+											   {1, {0.4,0.29,0.05,0}},  // Not provided for 2017, copied 2016
+											   {2, {0.4,0.29,0.05,0}}};												
 
 	// Methods
-	void _add_jet_flags(const float& b_1_csv, const float& b_2_csv, std::map<std::string, float>& feats);
+	void _add_btag_flags(Year year, const float& b_1_csv, const float& b_2_csv, std::map<std::string, float>& feats);
+	int _get_cvsl_flag(Year year, const float& score);
+	int _get_cvsb_flag(Year year, const float& score);
 	inline bool _feat_check(std::string);
 
 public:
@@ -55,7 +67,15 @@ public:
                                          Year year,
                                          const int& n_vbf,
                                          const bool& svfit_conv,
-                                         const bool& hh_kinfit_conv);
+                                         const bool& hh_kinfit_conv,
+										 const float& b_1_cvsl,
+										 const float& b_2_cvsl,
+										 const float& vbf_1_cvsl,
+										 const float& vbf_2_cvsl,
+										 const float& b_1_cvsb,
+										 const float& b_2_cvsb,
+										 const float& vbf_1_cvsb,
+										 const float& vbf_2_cvsb);
 	inline float delta_eta(const LorentzVector&, const LorentzVector&);
 	inline float delta_phi(const LorentzVector&, const LorentzVector&);
 	inline float delta_r(const LorentzVector&, const LorentzVector&);
