@@ -54,14 +54,14 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("year"))       feats["year"]       = year;
     if (FeatComp::_feat_check("svfit_conv")) feats["svfit_conv"] = svfit_conv;
     if (FeatComp::_feat_check("n_vbf"))      feats["n_vbf"]      = n_vbf;
-    if (EvtProc::_feat_check("b_1_cvsl"))    feats["b_1_cvsl"]   = FeatComp::_get_cvsb_flag(year, b_1_cvsl);
-    if (EvtProc::_feat_check("b_2_cvsl"))    feats["b_2_cvsl"]   = FeatComp::_get_cvsb_flag(year, b_2_cvsl);
-    if (EvtProc::_feat_check("vbf_1_cvsl"))  feats["vbf_1_cvsl"] = use_vbf ? FeatComp::_get_cvsb_flag(year, vbf_1_cvsl) : std::nanf("1");
-    if (EvtProc::_feat_check("vbf_2_cvsl"))  feats["vbf_2_cvsl"] = use_vbf ? FeatComp::_get_cvsb_flag(year, vbf_2_cvsl) : std::nanf("1");
-    if (EvtProc::_feat_check("b_1_cvsb"))    feats["b_1_cvsb"]   = FeatComp::_get_cvsb_flag(year, b_1_cvsb);
-    if (EvtProc::_feat_check("b_2_cvsb"))    feats["b_2_cvsb"]   = FeatComp::_get_cvsb_flag(year, b_2_cvsb);
-    if (EvtProc::_feat_check("vbf_1_cvsb"))  feats["vbf_1_cvsb"] = use_vbf ? FeatComp::_get_cvsb_flag(year, vbf_1_cvsb) : std::nanf("1");
-    if (EvtProc::_feat_check("vbf_2_cvsb"))  feats["vbf_2_cvsb"] = use_vbf ? FeatComp::_get_cvsb_flag(year, vbf_2_cvsb) : std::nanf("1");
+    if (FeatComp::_feat_check("b_1_cvsl"))    feats["b_1_cvsl"]   = FeatComp::_get_cvsb_flag(year, b_1_cvsl);
+    if (FeatComp::_feat_check("b_2_cvsl"))    feats["b_2_cvsl"]   = FeatComp::_get_cvsb_flag(year, b_2_cvsl);
+    if (FeatComp::_feat_check("vbf_1_cvsl"))  feats["vbf_1_cvsl"] = use_vbf ? FeatComp::_get_cvsb_flag(year, vbf_1_cvsl) : std::nanf("1");
+    if (FeatComp::_feat_check("vbf_2_cvsl"))  feats["vbf_2_cvsl"] = use_vbf ? FeatComp::_get_cvsb_flag(year, vbf_2_cvsl) : std::nanf("1");
+    if (FeatComp::_feat_check("b_1_cvsb"))    feats["b_1_cvsb"]   = FeatComp::_get_cvsb_flag(year, b_1_cvsb);
+    if (FeatComp::_feat_check("b_2_cvsb"))    feats["b_2_cvsb"]   = FeatComp::_get_cvsb_flag(year, b_2_cvsb);
+    if (FeatComp::_feat_check("vbf_1_cvsb"))  feats["vbf_1_cvsb"] = use_vbf ? FeatComp::_get_cvsb_flag(year, vbf_1_cvsb) : std::nanf("1");
+    if (FeatComp::_feat_check("vbf_2_cvsb"))  feats["vbf_2_cvsb"] = use_vbf ? FeatComp::_get_cvsb_flag(year, vbf_2_cvsb) : std::nanf("1");
     FeatComp::_add_btag_flags(year, b_1_csv, b_2_csv, feats);
 
     // Delta phi

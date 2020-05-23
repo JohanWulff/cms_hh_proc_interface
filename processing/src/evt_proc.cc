@@ -236,7 +236,8 @@ std::vector<std::string> EvtProc::get_feats() {
 
     std::map<std::string, float> feats = EvtProc::process(LorentzVector(), LorentzVector(), LorentzVector(), LorentzVector(), LorentzVector(), LorentzVector(),
                                                           LorentzVector(), LorentzVector(), 0, 0, 0, false, 0, 0, Channel(tauTau),
-                                                          Year(y16), 0, Spin(nonres), 0, 2, true, true, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                                                          Year(y16), 0, Spin(nonres), 0, 2, true, true, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                                          0, 0, 0, 0, 0, 0, 0, 0);
     std::vector<std::string> names;
     if (_all) {
         for (auto const& f : feats) names.push_back(f.first);
