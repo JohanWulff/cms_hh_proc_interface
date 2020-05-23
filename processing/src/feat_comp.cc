@@ -56,12 +56,12 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("n_vbf"))      feats["n_vbf"]      = n_vbf;
     if (FeatComp::_feat_check("b_1_cvsl"))    feats["b_1_cvsl"]   = FeatComp::_get_cvsb_flag(year, b_1_cvsl);
     if (FeatComp::_feat_check("b_2_cvsl"))    feats["b_2_cvsl"]   = FeatComp::_get_cvsb_flag(year, b_2_cvsl);
-    if (FeatComp::_feat_check("vbf_1_cvsl"))  feats["vbf_1_cvsl"] = use_vbf ? FeatComp::_get_cvsb_flag(year, vbf_1_cvsl) : std::nanf("1");
-    if (FeatComp::_feat_check("vbf_2_cvsl"))  feats["vbf_2_cvsl"] = use_vbf ? FeatComp::_get_cvsb_flag(year, vbf_2_cvsl) : std::nanf("1");
+    if (FeatComp::_feat_check("vbf_1_cvsl"))  feats["vbf_1_cvsl"] = use_vbf ? FeatComp::_get_cvsb_flag(year, vbf_1_cvsl) : 4;
+    if (FeatComp::_feat_check("vbf_2_cvsl"))  feats["vbf_2_cvsl"] = use_vbf ? FeatComp::_get_cvsb_flag(year, vbf_2_cvsl) : 4;
     if (FeatComp::_feat_check("b_1_cvsb"))    feats["b_1_cvsb"]   = FeatComp::_get_cvsb_flag(year, b_1_cvsb);
     if (FeatComp::_feat_check("b_2_cvsb"))    feats["b_2_cvsb"]   = FeatComp::_get_cvsb_flag(year, b_2_cvsb);
-    if (FeatComp::_feat_check("vbf_1_cvsb"))  feats["vbf_1_cvsb"] = use_vbf ? FeatComp::_get_cvsb_flag(year, vbf_1_cvsb) : std::nanf("1");
-    if (FeatComp::_feat_check("vbf_2_cvsb"))  feats["vbf_2_cvsb"] = use_vbf ? FeatComp::_get_cvsb_flag(year, vbf_2_cvsb) : std::nanf("1");
+    if (FeatComp::_feat_check("vbf_1_cvsb"))  feats["vbf_1_cvsb"] = use_vbf ? FeatComp::_get_cvsb_flag(year, vbf_1_cvsb) : 4;
+    if (FeatComp::_feat_check("vbf_2_cvsb"))  feats["vbf_2_cvsb"] = use_vbf ? FeatComp::_get_cvsb_flag(year, vbf_2_cvsb) : 4;
     FeatComp::_add_btag_flags(year, b_1_csv, b_2_csv, feats);
 
     // Delta phi
@@ -128,7 +128,7 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("sv_mass"))       feats["sv_mass"]       = svfit_conv ? svfit.M() : std::nanf("1");
     if (FeatComp::_feat_check("h_tt_vis_mass")) feats["h_tt_vis_mass"] = h_tt_vis.M();
     if (FeatComp::_feat_check("h_bb_mass"))     feats["h_bb_mass"]     = h_bb.M();
-    if (FeatComp::_feat_check("hh_kinfit_m"))   feats["hh_kinfit_m"]   = hh_kinfit_conv ? hh_kinfit_m : std::nanf("1");
+    if (FeatComp::_feat_check("hh_kinfit_m"))   feats["hh_kinfit_m"]   = hh_kinfit_conv ? hh_kinfit_m : 0;
     if (FeatComp::_feat_check("sv_mt"))         feats["sv_mt"]         = svfit_conv ? FeatComp::calc_mt(svfit, met) : std::nanf("1");
     if (FeatComp::_feat_check("h_tt_met_mt"))   feats["h_tt_met_mt"]   = FeatComp::calc_mt(h_tt_met, met);
     if (FeatComp::_feat_check("l_1_mt"))        feats["l_1_mt"]        = FeatComp::calc_mt(l_1, met);
