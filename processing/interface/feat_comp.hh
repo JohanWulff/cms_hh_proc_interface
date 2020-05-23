@@ -28,7 +28,7 @@ private:
 	// Variables
     bool _all, _use_deep_bjet_wps;
     std::vector<std::string> _requested;
-	std::map<int,std::vector<float>> _deep_wps{{0, {0,0.5803,0.8838,0.9693}},   // Not provided for 2016, copied 2017
+	std::map<int,std::vector<float>> _bjet_wps{{0, {0,0.5803,0.8838,0.9693}},   // Not provided for 2016, copied 2017
 											   {1, {0,0.5803,0.8838,0.9693}},
 											   {2, {0,0.5803,0.8838,0.9693}}};  // Not provided for 2018, copied 2017
 	std::map<int,std::vector<float>> _deep_bjet_wps{{0, {0,0.0614,0.3093,0.7221}},
