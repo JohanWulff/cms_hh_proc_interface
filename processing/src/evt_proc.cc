@@ -65,6 +65,14 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
     if (EvtProc::_feat_check("b_2_hhbtag"))     feats["b_2_hhbtag"]     = b_2_hhbtag;
     if (EvtProc::_feat_check("vbf_1_hhbtag"))   feats["vbf_1_hhbtag"]   = use_vbf ? vbf_1_hhbtag : std::nanf("1");
     if (EvtProc::_feat_check("vbf_2_hhbtag"))   feats["vbf_2_hhbtag"]   = use_vbf ? vbf_2_hhbtag : std::nanf("1");
+    if (EvtProc::_feat_check("b_1_cvsl_raw"))   feats["b_1_cvsl_raw"]   = b_1_cvsl;
+    if (EvtProc::_feat_check("b_2_cvsl_raw"))   feats["b_2_cvsl_raw"]   = b_2_cvsl;
+    if (EvtProc::_feat_check("vbf_1_cvsl_raw")) feats["vbf_1_cvsl_raw"] = use_vbf ? vbf_1_cvsl : std::nanf("1");
+    if (EvtProc::_feat_check("vbf_2_cvsl_raw")) feats["vbf_2_cvsl_raw"] = use_vbf ? vbf_2_cvsl : std::nanf("1");
+    if (EvtProc::_feat_check("b_1_cvsb_raw"))   feats["b_1_cvsb_raw"]   = b_1_cvsb;
+    if (EvtProc::_feat_check("b_2_cvsb_raw"))   feats["b_2_cvsb_raw"]   = b_2_cvsb;
+    if (EvtProc::_feat_check("vbf_1_cvsb_raw")) feats["vbf_1_cvsb_raw"] = use_vbf ? vbf_1_cvsb : std::nanf("1");
+    if (EvtProc::_feat_check("vbf_2_cvsb_raw")) feats["vbf_2_cvsb_raw"] = use_vbf ? vbf_2_cvsb : std::nanf("1");
 
     // Non-comp extra LL
     if (EvtProc::_feat_check("l_1_E"))    feats["l_1_E"]    = l_1.E();
