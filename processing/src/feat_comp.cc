@@ -188,11 +188,12 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("hh_centrality"))       feats["hh_centrality"]       =  use_vbf ? FeatComp::calc_hh_centrality(h_bb, h_tt_vis, vbf_1, vbf_2) : std::nanf("1");
 
     // Assorted VBF
+    if (FeatComp::_feat_check("vbf_eta_prod")) feats["vbf_eta_prod"] = use_vbf ? vbf_1.eta()*vbf_2.eta() : std::nanf("1");
     if (FeatComp::_feat_check("vbf_eta_prod_sign")) {
         if (use_vbf) {
-            feats["vbf_eta_prod_sign"] = (vbf_1.eta()*vbf_2.eta() >= 0) ? 1 : 0;
+            feats["vbf_eta_prod_sign"] = (vbf_1.eta()*vbf_2.eta() >= 0) ? 2 : 1;
         } else {
-            feats["vbf_eta_prod_sign"] = std::nanf("1");
+            feats["vbf_eta_prod_sign"] = 0;
         }
     }
 
@@ -279,7 +280,7 @@ int FeatComp::_get_cvsb_flag(Year year, const float& score) {
 
 inline float FeatComp::calc_centrality( const LorentzVector& v, const LorentzVector& VBFjet1, const LorentzVector& VBFjet2)
 {
-    return (v.Eta() - 0.5*(VBFjet1.Eta() + VBFjet2.Eta() ))/(std::fabs(VBFjet1.Eta() - VBFjet2.Eta()));
+    return std::abs(v.Eta() - 0.5*(VBFjet1.Eta() + VBFjet2.Eta() ))/(std::fabs(VBFjet1.Eta() - VBFjet2.Eta()));
 }
 
 inline float FeatComp::calc_hh_centrality( const LorentzVector& bh, const LorentzVector& tauh, const LorentzVector& VBFjet1, const LorentzVector& VBFjet2)
