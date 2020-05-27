@@ -50,6 +50,7 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
 
     // Categoricals
     if (FeatComp::_feat_check("boosted"))    feats["boosted"]    = is_boosted;
+    if (FeatComp::_feat_check("is_vbf"))     feats["is_vbf"]     = n_vbf >= 2;
     if (FeatComp::_feat_check("channel"))    feats["channel"]    = channel;
     if (FeatComp::_feat_check("year"))       feats["year"]       = year;
     if (FeatComp::_feat_check("svfit_conv")) feats["svfit_conv"] = svfit_conv;
@@ -189,13 +190,6 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
 
     // Assorted VBF
     if (FeatComp::_feat_check("vbf_eta_prod")) feats["vbf_eta_prod"] = use_vbf ? vbf_1.eta()*vbf_2.eta() : std::nanf("1");
-    if (FeatComp::_feat_check("vbf_eta_prod_sign")) {
-        if (use_vbf) {
-            feats["vbf_eta_prod_sign"] = (vbf_1.eta()*vbf_2.eta() >= 0) ? 2 : 1;
-        } else {
-            feats["vbf_eta_prod_sign"] = 0;
-        }
-    }
 
     // Assorted HL
     if (FeatComp::_feat_check("p_zetavisible")) feats["p_zetavisible"] = FeatComp::calc_pzeta_visible(l_1, l_2);
