@@ -1,6 +1,6 @@
-# May
+# V3.0
 
-- `FeatComp::process` no takes the following extra arguments:
+- `FeatComp::process` now takes the following extra arguments:
 	- const float& b_1_cvsl,
 	- const float& b_2_cvsl,
 	- const float& vbf_1_cvsl,
@@ -12,6 +12,8 @@
 - Fixed working points for all taggers, per year
 - Charm tagging features now categorical rather than float, float values are available as `*_raw` for feature selection
 - `hh_kinfit_m` now set to zero rather than NaN when invalid
+
+# V2.0
 - `FeatComp::process`, `EvtProc::process`, `EvtProc::process_as_vec`, and `EvtProc::process_to_vec` now only take a single set of CSV values, rather than CSV and deep*. Pass the CSV values you wish to use. 
 - `FeatComp::FeatComp` and `EvtProc::EvtProc` `_use_deep_csv` arguments renamed to `_use_deep_bjet_wps`
 - `EvtProc::process`, `EvtProc::process_as_vec`, and `EvtProc::process_to_vec` now take the following extra arguments:
