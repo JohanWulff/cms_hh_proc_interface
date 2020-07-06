@@ -44,7 +44,7 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
 										      const float& vbf_2_cvsb,
                                               const float& cv,
 										      const float& c2v,
-										      const float& c3
+										      const float& c3,
                                               const bool& cut_pass) {
     /* Processes (requested) features for an event and returns a map of features->values */
     
