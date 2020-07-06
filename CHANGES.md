@@ -1,3 +1,7 @@
+# V4.0
+
+- `EvtProc::process`, `EvtProc::process_as_vec`, and `EvtProc::process_to_vec` now take a `cut_pass` Boolean argument indicating is the event passes the usual ellipse/mass-window cut
+
 # V3.0
 
 - `FeatComp::process` now takes the following extra arguments:
@@ -14,6 +18,7 @@
 - `hh_kinfit_m` now set to zero rather than NaN when invalid
 
 # V2.0
+
 - `FeatComp::process`, `EvtProc::process`, `EvtProc::process_as_vec`, and `EvtProc::process_to_vec` now only take a single set of CSV values, rather than CSV and deep*. Pass the CSV values you wish to use. 
 - `FeatComp::FeatComp` and `EvtProc::EvtProc` `_use_deep_csv` arguments renamed to `_use_deep_bjet_wps`
 - `EvtProc::process`, `EvtProc::process_as_vec`, and `EvtProc::process_to_vec` now take the following extra arguments:

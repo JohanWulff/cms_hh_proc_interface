@@ -44,7 +44,8 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
 										      const float& vbf_2_cvsb,
                                               const float& cv,
 										      const float& c2v,
-										      const float& c3) {
+										      const float& c3
+                                              const bool& cut_pass) {
     /* Processes (requested) features for an event and returns a map of features->values */
     
     std::map<std::string, float> feats = _feat_comp->process(b_1, b_2, l_1, l_2, met, svfit, vbf_1, vbf_2, hh_kinfit_mass, is_boosted, b_1_csv, b_2_csv,
@@ -58,6 +59,7 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
     if (EvtProc::_feat_check("res_mass"))       feats["res_mass"]       = res_mass;
     if (EvtProc::_feat_check("spin"))           feats["spin"]           = spin;
     if (EvtProc::_feat_check("klambda"))        feats["klambda"]        = klambda;
+    if (EvtProc::_feat_check("cut_pass"))       feats["cut_pass"]       = cut_pass;
     if (EvtProc::_feat_check("cv"))             feats["cv"]             = use_vbf ? cv  : std::nanf("1");
     if (EvtProc::_feat_check("c2v"))            feats["c2v"]            = use_vbf ? c2v : std::nanf("1");
     if (EvtProc::_feat_check("c3"))             feats["c3"]             = use_vbf ? c3  : std::nanf("1");
@@ -153,14 +155,15 @@ std::vector<float> EvtProc::process_as_vec(const LorentzVector& b_1,
 										   const float& vbf_2_cvsb,
                                            const float& cv,
 										   const float& c2v,
-										   const float& c3) {
+										   const float& c3,
+                                           const bool& cut_pass) {
     /* Calls  EvtProc::process and processes result into a vector */
 
     std::map<std::string, float> feats = EvtProc::process(b_1, b_2, l_1, l_2, met, svfit, vbf_1, vbf_2, hh_kinfit_mass, hh_kinfit_chi2, mt2, is_boosted,
                                                           b_1_csv, b_2_csv, channel, year, res_mass, spin, klambda, n_vbf, svfit_conv, hh_kinfit_conv,
                                                           b_1_hhbtag, b_2_hhbtag, vbf_1_hhbtag, vbf_2_hhbtag,
                                                           b_1_cvsl, b_2_cvsl, vbf_1_cvsl, vbf_2_cvsl, b_1_cvsb, b_2_cvsb, vbf_1_cvsb, vbf_2_cvsb,
-                                                          cv, c2v, c3);
+                                                          cv, c2v, c3, cut_pass);
     std::vector<float> vec(feats.size());
     int i = 0;
     if (_all) {
@@ -214,14 +217,15 @@ void EvtProc::process_to_vec(std::vector<std::unique_ptr<float>>& feats,
 							 const float& vbf_2_cvsb,
                              const float& cv,
 							 const float& c2v,
-						     const float& c3) {
+						     const float& c3,
+                             const bool& cut_pass) {
     /* Calls  EvtProc::process and processes result into a supplied vector */
 
     std::map<std::string, float> feat_vals = EvtProc::process(b_1, b_2, l_1, l_2, met, svfit, vbf_1, vbf_2, hh_kinfit_mass, hh_kinfit_chi2, mt2,
                                                               is_boosted, b_1_csv, b_2_csv, channel, year, res_mass, spin, klambda, n_vbf, svfit_conv,
                                                               hh_kinfit_conv, b_1_hhbtag, b_2_hhbtag, vbf_1_hhbtag, vbf_2_hhbtag,
                                                               b_1_cvsl, b_2_cvsl, vbf_1_cvsl, vbf_2_cvsl, b_1_cvsb, b_2_cvsb, vbf_1_cvsb, vbf_2_cvsb,
-                                                              cv, c2v, c3);
+                                                              cv, c2v, c3, cut_pass);
     if (feat_vals.size() != feats.size()) throw std::length_error("Length of computed map (" + std::to_string(feat_vals.size()) + ") does not match length of \
                                                                    vector to fill (" + std::to_string(feats.size()) + ")\n");
     int i = 0;
@@ -244,7 +248,7 @@ std::vector<std::string> EvtProc::get_feats() {
 
     std::map<std::string, float> feats = EvtProc::process(LorentzVector(), LorentzVector(), LorentzVector(), LorentzVector(), LorentzVector(), LorentzVector(),
                                                           LorentzVector(), LorentzVector(), 0, 0, 0, false, 0, 0, Channel(tauTau),
-                                                          Year(y16), 0, Spin(nonres), 0, 2, true, true, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                                                          Year(y16), 0, Spin(nonres), 0, 2, true, true, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false);
     std::vector<std::string> names;
     if (_all) {
         for (auto const& f : feats) names.push_back(f.first);
