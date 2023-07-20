@@ -54,7 +54,7 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
     bool use_vbf = n_vbf >= 2;
     
     // Non-comp extra HL
-    if (EvtProc::_feat_check("hh_kinfit_chi2")) feats["hh_kinfit_chi2"] = hh_kinfit_conv ? hh_kinfit_chi2 : std::nanf("1");
+    if (EvtProc::_feat_check("hh_kinfit_chi2")) feats["hh_kinfit_chi2"] = hh_kinfit_conv ? hh_kinfit_chi2 : -1;
     if (EvtProc::_feat_check("mt2"))            feats["mt2"]            = mt2;
     if (EvtProc::_feat_check("res_mass"))       feats["res_mass"]       = res_mass;
     if (EvtProc::_feat_check("spin"))           feats["spin"]           = spin;
