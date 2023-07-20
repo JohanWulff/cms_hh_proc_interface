@@ -12,7 +12,8 @@
 // ROOT
 #include <Math/VectorUtil.h>
 #include <Math/LorentzVector.h>
-#include <Math/PxPyPzM4D.h>
+#include <Math/PxPyPzE4D.h>
+#include <Math/PtEtaPhiE4D.h>
 
 // Local
 #include "feat_comp.hh"

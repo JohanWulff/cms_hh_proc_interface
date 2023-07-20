@@ -13,10 +13,11 @@
 #include <Math/VectorUtil.h>
 #include <Math/LorentzVector.h>
 #include <Math/PxPyPzM4D.h>
+#include <Math/PtEtaPhiE4D.h>
 #include <TVector2.h>
 
 enum Channel{tauTau=0, muTau=1, eTau=2};
-enum Year{y16=0, y17=1, y18=2};
+enum Year{y16=0, y17=1, y18=2, y16APV=3};
 
 class FeatComp {
 	/* Class for computing requested features for final-state LorentzVectors */
@@ -32,14 +33,14 @@ private:
 											   {1, {0,0.5803,0.8838,0.9693}},
 											   {2, {0,0.5803,0.8838,0.9693}}};  // Not provided for 2018, copied 2017
 	std::map<int,std::vector<float>> _deep_bjet_wps{{0, {0,0.0614,0.3093,0.7221}},
-													{1, {0,0.0521,0.3033,0.7489}},
-													{2, {0,0.0494,0.2770,0.7264}}};
+													{1, {0,0.0532,0.4506,0.7738}},
+													{2, {0,0.0490,0.2783,0.7100}}};
 	std::map<int,std::vector<float>> _cvsl_wps{{0, {0,0.03,0.085,0.48}},
-											   {1, {0,0.03,0.085,0.48}},  // Not provided for 2017, copied 2016
-											   {2, {0,0.03,0.085,0.48}}};	
+											   {1, {0,0.03,0.085,0.520}},  // Not provided for 2017, copied 2016
+											   {2, {0,0.038,0.099,0.282}}};	
 	std::map<int,std::vector<float>> _cvsb_wps{{0, {0.4,0.29,0.05,0}},
-											   {1, {0.4,0.29,0.05,0}},  // Not provided for 2017, copied 2016
-											   {2, {0.4,0.29,0.05,0}}};												
+											   {1, {0.4,0.34,0.05,0}},
+											   {2, {0.246,0.325,0.267,0}}};
 
 	// Methods
 	void _add_btag_flags(Year year, const float& b_1_csv, const float& b_2_csv, std::map<std::string, float>& feats);
