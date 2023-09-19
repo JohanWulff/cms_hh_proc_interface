@@ -33,8 +33,8 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
                                               const int& pairType,
                                               const int& dau1_decayMode,
                                               const int& dau2_decayMode,
-                                              const int& dau1_charge,
-                                              const int& dau2_charge,
+                                              const int& dau1_flav,
+                                              const int& dau2_flav,
                                               const bool& svfit_conv,
                                               const bool& hh_kinfit_conv,
                                               const float& b_1_hhbtag,
@@ -82,7 +82,7 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
     /* Processes (requested) features for an event and returns a map of features->values */
     
     std::map<std::string, float> feats = _feat_comp->process(b_1, b_2, l_1, l_2, met, svfit, vbf_1, vbf_2, Nu_1, Nu_2, hh_kinfit_mass, is_boosted, b_1_csv, b_2_csv,
-                                                             channel, year, n_vbf, svfit_conv, hh_kinfit_conv,b_1_cvsl, b_2_cvsl, vbf_1_cvsl, vbf_2_cvsl,
+                                                             channel, year, n_vbf, dau1_flav, dau2_flav, svfit_conv, hh_kinfit_conv,b_1_cvsl, b_2_cvsl, vbf_1_cvsl, vbf_2_cvsl,
                                                              b_1_cvsb, b_2_cvsb, vbf_1_cvsb, vbf_2_cvsb, met_et, met_phi, 
                                                              DeepMET_ResponseTune_px, DeepMET_ResponseTune_py,DeepMET_ResolutionTune_px, DeepMET_ResolutionTune_py);
     bool use_vbf = n_vbf >= 2;
@@ -177,8 +177,6 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
     if (EvtProc::_feat_check("pairType"))          feats["pairType"]          = pairType;
     if (EvtProc::_feat_check("dau1_decayMode"))    feats["dau1_decayMode"]    = dau1_decayMode;
     if (EvtProc::_feat_check("dau2_decayMode"))    feats["dau2_decayMode"]    = dau2_decayMode;
-    if (EvtProc::_feat_check("dau1_charge"))       feats["dau1_charge"]       = dau1_charge;
-    if (EvtProc::_feat_check("dau2_charge"))       feats["dau2_charge"]       = dau2_charge;
 
     return feats;
 }
@@ -210,8 +208,8 @@ std::vector<float> EvtProc::process_as_vec(const LorentzVector& b_1,
                                               const int& pairType,
                                               const int& dau1_decayMode,
                                               const int& dau2_decayMode,
-                                              const int& dau1_charge,
-                                              const int& dau2_charge,
+                                              const int& dau1_flav,
+                                              const int& dau2_flav,
                                               const bool& svfit_conv,
                                               const bool& hh_kinfit_conv,
                                               const float& b_1_hhbtag,
@@ -260,7 +258,7 @@ std::vector<float> EvtProc::process_as_vec(const LorentzVector& b_1,
 
     std::map<std::string, float> feats = EvtProc::process(b_1, b_2, l_1, l_2, met, svfit, vbf_1, vbf_2, Nu_1, Nu_2, hh_kinfit_mass, hh_kinfit_chi2,
                                                           mt2, is_boosted, b_1_csv, b_2_csv, channel, year, res_mass, spin, klambda, n_vbf,
-                                                          pairType, dau1_decayMode, dau2_decayMode, dau1_charge, dau2_charge, svfit_conv, hh_kinfit_conv,
+                                                          pairType, dau1_decayMode, dau2_decayMode, dau1_flav, dau2_flav, svfit_conv, hh_kinfit_conv,
                                                           b_1_hhbtag, b_2_hhbtag, vbf_1_hhbtag, vbf_2_hhbtag, b_1_cvsl, b_2_cvsl, vbf_1_cvsl,
                                                           vbf_2_cvsl, b_1_cvsb, b_2_cvsb, vbf_1_cvsb, vbf_2_cvsb, cv, c2v, c3, cut_pass,
                                                           met_et, met_phi, DeepMET_ResponseTune_px, DeepMET_ResponseTune_py, DeepMET_ResolutionTune_px, DeepMET_ResolutionTune_py,
@@ -310,8 +308,8 @@ void EvtProc::process_to_vec(std::vector<std::unique_ptr<float>>& feats,
                                               const int& pairType,
                                               const int& dau1_decayMode,
                                               const int& dau2_decayMode,
-                                              const int& dau1_charge,
-                                              const int& dau2_charge,
+                                              const int& dau1_flav,
+                                              const int& dau2_flav,
                                               const bool& svfit_conv,
                                               const bool& hh_kinfit_conv,
                                               const float& b_1_hhbtag,
@@ -361,7 +359,7 @@ void EvtProc::process_to_vec(std::vector<std::unique_ptr<float>>& feats,
     std::map<std::string, float> feat_vals = EvtProc::process(b_1, b_2, l_1, l_2, met, svfit, vbf_1, vbf_2, Nu_1, Nu_2,
                                                           hh_kinfit_mass, hh_kinfit_chi2, mt2, is_boosted, b_1_csv, b_2_csv,
                                                           channel, year, res_mass, spin, klambda, n_vbf,
-                                                          pairType, dau1_decayMode, dau2_decayMode, dau1_charge, dau2_charge,
+                                                          pairType, dau1_decayMode, dau2_decayMode, dau1_flav, dau2_flav,
                                                           svfit_conv, hh_kinfit_conv, b_1_hhbtag, b_2_hhbtag, vbf_1_hhbtag, vbf_2_hhbtag,
                                                           b_1_cvsl, b_2_cvsl, vbf_1_cvsl, vbf_2_cvsl, b_1_cvsb, b_2_cvsb, vbf_1_cvsb, vbf_2_cvsb,
                                                           cv, c2v, c3, cut_pass,

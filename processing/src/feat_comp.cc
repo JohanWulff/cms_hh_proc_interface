@@ -25,6 +25,8 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
                                                Channel channel,
                                                Year year,
                                                const int& n_vbf,
+                                               const float& dau1_flav,
+                                               const float& dau2_flav,
                                                const bool& svfit_conv,
                                                const bool& hh_kinfit_conv,
                                                const float& b_1_cvsl,
@@ -215,6 +217,8 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("met_py"))            feats["met_py"] = met_et * std::sin(FeatComp::mpi_to_pi(met_phi - DeepMET_ResolutionTune_phi));
     if (FeatComp::_feat_check("dau1_dphi"))         feats["dau1_dphi"] = FeatComp::mpi_to_pi(l_1.Phi() - DeepMET_ResolutionTune_phi);
     if (FeatComp::_feat_check("dau2_dphi"))         feats["dau2_dphi"] = FeatComp::mpi_to_pi(l_2.Phi() - DeepMET_ResolutionTune_phi);
+    if (FeatComp::_feat_check("dau1_charge"))       feats["dau1_charge"] = dau1_flav/std::abs(dau1_flav);
+    if (FeatComp::_feat_check("dau2_charge"))       feats["dau2_charge"] = dau2_flav/std::abs(dau2_flav);
     if (FeatComp::_feat_check("genNu1_dphi"))       feats["genNu1_dphi"] = FeatComp::mpi_to_pi(Nu_1.Phi() - DeepMET_ResolutionTune_phi);
     if (FeatComp::_feat_check("genNu2_dphi"))       feats["genNu2_dphi"] = FeatComp::mpi_to_pi(Nu_2.Phi() - DeepMET_ResolutionTune_phi);
     if (FeatComp::_feat_check("dau1_px"))           feats["dau1_px"] = l_1.Px();
