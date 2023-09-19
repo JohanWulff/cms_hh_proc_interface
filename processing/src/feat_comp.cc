@@ -16,6 +16,8 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
 										       const LorentzVector& svfit,
                                                const LorentzVector& vbf_1,
                                                const LorentzVector& vbf_2,
+                                               const LorentzVector& Nu_1,
+                                               const LorentzVector& Nu_2,
 										       const float& hh_kinfit_m,
                                                const bool& is_boosted,
                                                const float& b_1_csv,
@@ -32,7 +34,13 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
 										       const float& b_1_cvsb,
 										       const float& b_2_cvsb,
 										       const float& vbf_1_cvsb,
-										       const float& vbf_2_cvsb) {
+										       const float& vbf_2_cvsb,
+                                               const float& met_et,
+                                               const float& met_phi,
+                                               const float& DeepMET_ResponseTune_px,
+                                               const float& DeepMET_ResponseTune_py,
+                                               const float& DeepMET_ResolutionTune_px,
+                                               const float& DeepMET_ResolutionTune_py) {
     /* Compute HL features from base event*/
 
     bool use_vbf = n_vbf >= 2;
@@ -60,6 +68,8 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     // continuous 
 
     // btag csvl and csvb scores
+    if (FeatComp::_feat_check("b_1_csv"))     feats["b_1_csv"]    = b_1_cvsl;
+    if (FeatComp::_feat_check("b_2_csv"))     feats["b_2_csv"]    = b_2_cvsl;
     if (FeatComp::_feat_check("b_1_cvsl"))    feats["b_1_cvsl"]   = b_1_cvsl;
     if (FeatComp::_feat_check("b_2_cvsl"))    feats["b_2_cvsl"]   = b_2_cvsl;
     if (FeatComp::_feat_check("vbf_1_cvsl"))  feats["vbf_1_cvsl"] = use_vbf ? vbf_1_cvsl : -1;
@@ -194,7 +204,46 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     // Assorted VBF
     if (FeatComp::_feat_check("vbf_eta_prod")) feats["vbf_eta_prod"] = use_vbf ? vbf_1.eta()*vbf_2.eta() : std::nanf("1");
 
-    // Assorted HL
+    // Htautau inputs
+    float DeepMET_ResolutionTune_phi = std::atan2(DeepMET_ResponseTune_py, DeepMET_ResponseTune_px);
+    if (FeatComp::_feat_check("met_dphi"))          feats["met_dphi"] = FeatComp::mpi_to_pi(met_phi - DeepMET_ResolutionTune_phi);
+    if (FeatComp::_feat_check("dmet_resp_px"))      feats["dmet_resp_px"] = FeatComp::calc_dmet_px(DeepMET_ResponseTune_px, DeepMET_ResponseTune_py, DeepMET_ResolutionTune_phi);
+    if (FeatComp::_feat_check("dmet_resp_py"))      feats["dmet_resp_py"] = FeatComp::calc_dmet_py(DeepMET_ResponseTune_px, DeepMET_ResponseTune_py, DeepMET_ResolutionTune_phi);
+    if (FeatComp::_feat_check("dmet_reso_px"))      feats["dmet_reso_px"] = FeatComp::calc_dmet_px(DeepMET_ResolutionTune_px,DeepMET_ResolutionTune_py,DeepMET_ResolutionTune_phi);
+    if (FeatComp::_feat_check("dmet_reso_py"))      feats["dmet_reso_py"] = FeatComp::calc_dmet_py(DeepMET_ResolutionTune_px, DeepMET_ResolutionTune_py, DeepMET_ResolutionTune_phi);
+    if (FeatComp::_feat_check("met_px"))            feats["met_px"] = met_et * std::cos(FeatComp::mpi_to_pi(met_phi - DeepMET_ResolutionTune_phi));
+    if (FeatComp::_feat_check("met_py"))            feats["met_py"] = met_et * std::sin(FeatComp::mpi_to_pi(met_phi - DeepMET_ResolutionTune_phi));
+    if (FeatComp::_feat_check("dau1_dphi"))         feats["dau1_dphi"] = FeatComp::mpi_to_pi(l_1.Phi() - DeepMET_ResolutionTune_phi);
+    if (FeatComp::_feat_check("dau2_dphi"))         feats["dau2_dphi"] = FeatComp::mpi_to_pi(l_2.Phi() - DeepMET_ResolutionTune_phi);
+    if (FeatComp::_feat_check("genNu1_dphi"))       feats["genNu1_dphi"] = FeatComp::mpi_to_pi(Nu_1.Phi() - DeepMET_ResolutionTune_phi);
+    if (FeatComp::_feat_check("genNu2_dphi"))       feats["genNu2_dphi"] = FeatComp::mpi_to_pi(Nu_2.Phi() - DeepMET_ResolutionTune_phi);
+    if (FeatComp::_feat_check("dau1_px"))           feats["dau1_px"] = l_1.Px();
+    if (FeatComp::_feat_check("dau1_py"))           feats["dau1_py"] = l_1.Py();
+    if (FeatComp::_feat_check("dau1_pz"))           feats["dau1_pz"] = l_1.Pz();
+    if (FeatComp::_feat_check("dau1_m"))            feats["dau1_m"] = l_1.M();
+    if (FeatComp::_feat_check("dau2_px"))           feats["dau2_px"] = l_2.Px();
+    if (FeatComp::_feat_check("dau2_py"))           feats["dau2_py"] = l_2.Py();
+    if (FeatComp::_feat_check("dau2_pz"))           feats["dau2_pz"] = l_2.Pz();
+    if (FeatComp::_feat_check("dau2_m"))            feats["dau2_m"] = l_2.M();
+    if (FeatComp::_feat_check("ditau_deltaphi"))    feats["ditau_deltaphi"] = std::abs(FeatComp::mpi_to_pi(FeatComp::mpi_to_pi(l_1.Phi() - DeepMET_ResolutionTune_phi) - FeatComp::mpi_to_pi(l_2.Phi() - DeepMET_ResolutionTune_phi)));
+    if (FeatComp::_feat_check("ditau_deltaeta"))    feats["ditau_deltaeta"] = std::abs(l_1.Eta() - l_2.Eta());
+    if (FeatComp::_feat_check("genNu1_px"))         feats["genNu1_px"] = Nu_1.Px();
+    if (FeatComp::_feat_check("genNu1_py"))         feats["genNu1_py"] = Nu_1.Py();
+    if (FeatComp::_feat_check("genNu1_pz"))         feats["genNu1_pz"] = Nu_1.Pz();
+    if (FeatComp::_feat_check("genNu2_px"))         feats["genNu2_px"] = Nu_2.Px();
+    if (FeatComp::_feat_check("genNu2_py"))         feats["genNu2_py"] = Nu_2.Py();
+    if (FeatComp::_feat_check("genNu2_pz"))         feats["genNu2_pz"] = Nu_2.Pz();
+    if (FeatComp::_feat_check("bjet1_dphi"))        feats["bjet1_dphi"] = std::abs(FeatComp::mpi_to_pi(b_1.Phi() - DeepMET_ResolutionTune_phi));
+    if (FeatComp::_feat_check("bjet1_px"))          feats["bjet1_px"] = b_1.Px();
+    if (FeatComp::_feat_check("bjet1_py"))          feats["bjet1_py"] = b_1.Py();
+    if (FeatComp::_feat_check("bjet1_pz"))          feats["bjet1_pz"] = b_1.Pz();
+    if (FeatComp::_feat_check("bjet2_dphi"))        feats["bjet2_dphi"] = std::abs(FeatComp::mpi_to_pi(b_2.Phi() - DeepMET_ResolutionTune_phi));
+    if (FeatComp::_feat_check("bjet2_px"))          feats["bjet2_px"] = b_2.Px();
+    if (FeatComp::_feat_check("bjet2_py"))          feats["bjet2_py"] = b_2.Py();
+    if (FeatComp::_feat_check("bjet2_pz"))          feats["bjet2_pz"] = b_2.Pz();
+
+
+    // Assorted HL 
     if (FeatComp::_feat_check("p_zetavisible")) feats["p_zetavisible"] = FeatComp::calc_pzeta_visible(l_1, l_2);
     if (FeatComp::_feat_check("p_zeta"))        feats["p_zeta"]        = FeatComp::calc_pzeta(l_1, l_2, met);
     if (FeatComp::_feat_check("top_1_mass") || FeatComp::_feat_check("top_2_mass")) {
@@ -218,6 +267,7 @@ inline float  FeatComp::delta_r_boosted(const LorentzVector& v_0, const LorentzV
     using namespace ROOT::Math::VectorUtil;
     return DeltaR(boost(v_0, ref.BoostToCM()), boost(v_1, ref.BoostToCM()));
 }
+
 
 inline float FeatComp::calc_mt(const LorentzVector& v, const LorentzVector& met) {
     return std::sqrt(2.0*v.Pt()*met.Pt()*(1.0-std::cos(ROOT::Math::VectorUtil::DeltaPhi(v,met))));
@@ -251,6 +301,27 @@ inline float FeatComp::calc_cos_delta(const LorentzVector& v, const LorentzVecto
     
     using namespace ROOT::Math::VectorUtil;
     return  CosTheta(boost(v, r.BoostToCM()), r);
+}
+
+inline float FeatComp::calc_dmet_px(const float& px,const float& py,const float& phi) {return std::cos(-phi)*px - std::sin(-phi)*py;}
+inline float FeatComp::calc_dmet_py(const float& px,const float& py,const float& phi) {return std::sin(-phi)*px + std::cos(-phi)*py;}
+float FeatComp::mpi_to_pi(const float& phi)
+{
+    float mod_phi(0);
+    if (phi>TMath::Pi())
+    {
+        mod_phi = phi - 2*TMath::Pi();
+        return mod_phi;
+    }
+    else if (phi<TMath::Pi())
+    {
+        mod_phi = phi + 2*TMath::Pi();
+        return mod_phi;
+    }
+    else
+    {
+        return phi;
+    }
 }
 
 void FeatComp::_add_btag_flags(Year year, const float& b_1_csv, const float& b_2_csv, std::map<std::string, float>& feats) {

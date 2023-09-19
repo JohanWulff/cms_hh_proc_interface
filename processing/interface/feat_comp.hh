@@ -14,6 +14,7 @@
 #include <Math/LorentzVector.h>
 #include <Math/PxPyPzM4D.h>
 #include <Math/PtEtaPhiE4D.h>
+#include <TMath.h>
 #include <TVector2.h>
 
 enum Channel{tauTau=0, muTau=1, eTau=2};
@@ -60,6 +61,8 @@ public:
 										 const LorentzVector& svfit,
                                          const LorentzVector& vbf_1,
                                          const LorentzVector& vbf_2,
+										 const LorentzVector& Nu_1,
+										 const LorentzVector& Nu_2,
 										 const float& hh_kinfit_m,
                                          const bool& is_boosted,
                                          const float& b_1_csv,
@@ -76,7 +79,13 @@ public:
 										 const float& b_1_cvsb,
 										 const float& b_2_cvsb,
 										 const float& vbf_1_cvsb,
-										 const float& vbf_2_cvsb);
+										 const float& vbf_2_cvsb,
+										 const float& met_et,
+										 const float& met_phi,
+										 const float& DeepMET_ResponseTune_px,
+										 const float& DeepMET_ResponseTune_py,
+										 const float& DeepMET_ResolutionTune_px,
+										 const float& DeepMET_ResolutionTune_py);
 	inline float delta_eta(const LorentzVector&, const LorentzVector&);
 	inline float delta_phi(const LorentzVector&, const LorentzVector&);
 	inline float delta_r(const LorentzVector&, const LorentzVector&);
@@ -86,14 +95,17 @@ public:
 	inline float calc_phi_1(const LorentzVector&, const LorentzVector&, const LorentzVector&, const LorentzVector&);
 	inline float calc_cos_delta_star(const LorentzVector&, const LorentzVector&);
 	inline float calc_cos_delta(const LorentzVector&, const LorentzVector&);
-  inline float calc_centrality( const LorentzVector&, const LorentzVector&, const LorentzVector&);
-  inline float calc_hh_centrality( const LorentzVector&, const LorentzVector&, const LorentzVector&, const LorentzVector&);
-  inline float calcDeltaEtaMinus( const LorentzVector&, const LorentzVector&, const LorentzVector&, const LorentzVector&);
-  inline float calcDeltaEtaPlus( const LorentzVector&, const LorentzVector&, const LorentzVector&, const LorentzVector&);
-  inline float calc_mt_tot(const LorentzVector& l_1, const LorentzVector& l_2, const LorentzVector& met);
-  float calc_pzeta(const LorentzVector& l_1, const LorentzVector& l_2, const LorentzVector& met);
-  float calc_pzeta_visible(const LorentzVector& l_1, const LorentzVector& l_2);
-  std::pair<float, float> calc_top_masses(const LorentzVector& l_1, const LorentzVector& l_2, const LorentzVector& b_1, const LorentzVector& b_2,
+  	inline float calc_centrality( const LorentzVector&, const LorentzVector&, const LorentzVector&);
+  	inline float calc_hh_centrality( const LorentzVector&, const LorentzVector&, const LorentzVector&, const LorentzVector&);
+  	inline float calcDeltaEtaMinus( const LorentzVector&, const LorentzVector&, const LorentzVector&, const LorentzVector&);
+  	inline float calcDeltaEtaPlus( const LorentzVector&, const LorentzVector&, const LorentzVector&, const LorentzVector&);
+  	inline float calc_mt_tot(const LorentzVector& l_1, const LorentzVector& l_2, const LorentzVector& met);
+	inline float calc_dmet_px(const float& px,const float& py,const float& phi);
+	inline float calc_dmet_py(const float& px,const float& py,const float& phi);
+	float mpi_to_pi(const float& phi);
+	float calc_pzeta(const LorentzVector& l_1, const LorentzVector& l_2, const LorentzVector& met);
+	float calc_pzeta_visible(const LorentzVector& l_1, const LorentzVector& l_2);
+	std::pair<float, float> calc_top_masses(const LorentzVector& l_1, const LorentzVector& l_2, const LorentzVector& b_1, const LorentzVector& b_2,
                                           const LorentzVector& met);
 };
 
