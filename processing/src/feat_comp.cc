@@ -38,11 +38,7 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
 										       const float& vbf_1_cvsb,
 										       const float& vbf_2_cvsb,
                                                const float& met_et,
-                                               const float& met_phi,
-                                               const float& DeepMET_ResponseTune_px,
-                                               const float& DeepMET_ResponseTune_py,
-                                               const float& DeepMET_ResolutionTune_px,
-                                               const float& DeepMET_ResolutionTune_py) {
+                                               const float& met_phi) {
     /* Compute HL features from base event*/
 
     bool use_vbf = n_vbf >= 2;
@@ -207,11 +203,7 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("vbf_eta_prod")) feats["vbf_eta_prod"] = use_vbf ? vbf_1.eta()*vbf_2.eta() : std::nanf("1");
 
     // Htautau inputs
-    float DeepMET_ResolutionTune_phi = std::atan2(DeepMET_ResponseTune_py, DeepMET_ResponseTune_px);
-    if (FeatComp::_feat_check("dmet_resp_px"))      feats["dmet_resp_px"] = FeatComp::calc_dmet_px(DeepMET_ResponseTune_px, DeepMET_ResponseTune_py, DeepMET_ResolutionTune_phi);
-    if (FeatComp::_feat_check("dmet_resp_py"))      feats["dmet_resp_py"] = FeatComp::calc_dmet_py(DeepMET_ResponseTune_px, DeepMET_ResponseTune_py, DeepMET_ResolutionTune_phi);
-    if (FeatComp::_feat_check("dmet_reso_px"))      feats["dmet_reso_px"] = FeatComp::calc_dmet_px(DeepMET_ResolutionTune_px,DeepMET_ResolutionTune_py,DeepMET_ResolutionTune_phi);
-    if (FeatComp::_feat_check("dmet_reso_py"))      feats["dmet_reso_py"] = FeatComp::calc_dmet_py(DeepMET_ResolutionTune_px, DeepMET_ResolutionTune_py, DeepMET_ResolutionTune_phi);
+    //float DeepMET_ResolutionTune_phi = std::atan2(DeepMET_ResponseTune_py, DeepMET_ResponseTune_px);
     if (FeatComp::_feat_check("met_px"))            feats["met_px"] = met_et * std::cos(met_phi);
     if (FeatComp::_feat_check("met_py"))            feats["met_py"] = met_et * std::sin(met_phi);
     //if (FeatComp::_feat_check("dau1_dphi"))         feats["dau1_dphi"] = FeatComp::mpi_to_pi(l_1.Phi() - DeepMET_ResolutionTune_phi);
