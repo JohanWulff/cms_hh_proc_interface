@@ -83,11 +83,7 @@ public:
 										       const float& vbf_1_cvsb,
 										       const float& vbf_2_cvsb,
                                                const float& met_et,
-                                               const float& met_phi,
-                                               const float& DeepMET_ResponseTune_px,
-                                               const float& DeepMET_ResponseTune_py,
-                                               const float& DeepMET_ResolutionTune_px,
-                                               const float& DeepMET_ResolutionTune_py);
+                                               const float& met_phi);
 	inline float delta_eta(const LorentzVector&, const LorentzVector&);
 	inline float delta_phi(const LorentzVector&, const LorentzVector&);
 	inline float delta_r(const LorentzVector&, const LorentzVector&);
