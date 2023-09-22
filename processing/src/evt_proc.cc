@@ -83,8 +83,7 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
     
     std::map<std::string, float> feats = _feat_comp->process(b_1, b_2, l_1, l_2, met, svfit, vbf_1, vbf_2, Nu_1, Nu_2, hh_kinfit_mass, is_boosted, b_1_csv, b_2_csv,
                                                              channel, year, n_vbf, dau1_flav, dau2_flav, svfit_conv, hh_kinfit_conv,b_1_cvsl, b_2_cvsl, vbf_1_cvsl, vbf_2_cvsl,
-                                                             b_1_cvsb, b_2_cvsb, vbf_1_cvsb, vbf_2_cvsb, met_et, met_phi, 
-                                                             DeepMET_ResponseTune_px, DeepMET_ResponseTune_py,DeepMET_ResolutionTune_px, DeepMET_ResolutionTune_py);
+                                                             b_1_cvsb, b_2_cvsb, vbf_1_cvsb, vbf_2_cvsb, met_et, met_phi);
     bool use_vbf = n_vbf >= 2;
     
     // Non-comp extra HL
@@ -172,6 +171,10 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
     if (EvtProc::_feat_check("b_2_btag")) feats["b_2_btag"] =  b_2_hhbtag;
     if (EvtProc::_feat_check("b_2_csv")) feats["b_2_csv"] =  b_2_csv;
     if (EvtProc::_feat_check("b_2_cID")) feats["b_2_cID"] =  b_2_cID;
+    if (EvtProc::_feat_check("DeepMET_ResponseTune_px")) feats["DeepMET_ResponseTune_px"] = DeepMET_ResponseTune_px;
+    if (EvtProc::_feat_check("DeepMET_ResponseTune_py")) feats["DeepMET_ResponseTune_py"] = DeepMET_ResponseTune_py;
+    if (EvtProc::_feat_check("DeepMET_ResolutionTune_px")) feats["DeepMET_ResolutionTune_px"] = DeepMET_ResolutionTune_px;
+    if (EvtProc::_feat_check("DeepMET_ResolutionTune_py")) feats["DeepMET_ResolutionTune_py"] = DeepMET_ResolutionTune_py;
 
     // Htautau inputs
     if (EvtProc::_feat_check("pairType"))          feats["pairType"]          = pairType;
