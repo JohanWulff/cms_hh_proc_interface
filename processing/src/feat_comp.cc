@@ -20,8 +20,6 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
                                                const LorentzVector& Nu_2,
 										       const float& hh_kinfit_m,
                                                const bool& is_boosted,
-                                               const float& b_1_csv,
-                                               const float& b_2_csv,
                                                Channel channel,
                                                Year year,
                                                const int& n_vbf,
@@ -29,14 +27,6 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
                                                const float& dau2_flav,
                                                const bool& svfit_conv,
                                                const bool& hh_kinfit_conv,
-                                               const float& b_1_cvsl,
-										       const float& b_2_cvsl,
-										       const float& vbf_1_cvsl,
-										       const float& vbf_2_cvsl,
-										       const float& b_1_cvsb,
-										       const float& b_2_cvsb,
-										       const float& vbf_1_cvsb,
-										       const float& vbf_2_cvsb,
                                                const float& met_et,
                                                const float& met_phi) {
     /* Compute HL features from base event*/
@@ -61,21 +51,9 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("year"))       feats["year"]       = year;
     if (FeatComp::_feat_check("svfit_conv")) feats["svfit_conv"] = svfit_conv;
     if (FeatComp::_feat_check("n_vbf"))      feats["n_vbf"]      = n_vbf;
-    FeatComp::_add_btag_flags(year, b_1_csv, b_2_csv, feats);
 
     // continuous 
 
-    // btag csvl and csvb scores
-    if (FeatComp::_feat_check("b_1_csv"))     feats["b_1_csv"]    = b_1_cvsl;
-    if (FeatComp::_feat_check("b_2_csv"))     feats["b_2_csv"]    = b_2_cvsl;
-    if (FeatComp::_feat_check("b_1_cvsl"))    feats["b_1_cvsl"]   = b_1_cvsl;
-    if (FeatComp::_feat_check("b_2_cvsl"))    feats["b_2_cvsl"]   = b_2_cvsl;
-    if (FeatComp::_feat_check("vbf_1_cvsl"))  feats["vbf_1_cvsl"] = use_vbf ? vbf_1_cvsl : -1;
-    if (FeatComp::_feat_check("vbf_2_cvsl"))  feats["vbf_2_cvsl"] = use_vbf ? vbf_2_cvsl : -1;
-    if (FeatComp::_feat_check("b_1_cvsb"))    feats["b_1_cvsb"]   = b_1_cvsb;
-    if (FeatComp::_feat_check("b_2_cvsb"))    feats["b_2_cvsb"]   = b_2_cvsb;
-    if (FeatComp::_feat_check("vbf_1_cvsb"))  feats["vbf_1_cvsb"] = use_vbf ? vbf_1_cvsb : -1;
-    if (FeatComp::_feat_check("vbf_2_cvsb"))  feats["vbf_2_cvsb"] = use_vbf ? vbf_2_cvsb : -1;
     // Delta phi
     if (FeatComp::_feat_check("dphi_l1_l2"))      feats["dphi_l1_l2"]      = FeatComp::delta_phi(l_1, l_2);
     if (FeatComp::_feat_check("dphi_b1_b2"))      feats["dphi_b1_b2"]      = FeatComp::delta_phi(b_1, b_2);
@@ -216,10 +194,12 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("dau1_py"))           feats["dau1_py"] = l_1.Py();
     if (FeatComp::_feat_check("dau1_pz"))           feats["dau1_pz"] = l_1.Pz();
     if (FeatComp::_feat_check("dau1_m"))            feats["dau1_m"] = l_1.M();
+    if (FeatComp::_feat_check("dau1_e"))            feats["dau1_e"] = l_1.E();
     if (FeatComp::_feat_check("dau2_px"))           feats["dau2_px"] = l_2.Px();
     if (FeatComp::_feat_check("dau2_py"))           feats["dau2_py"] = l_2.Py();
     if (FeatComp::_feat_check("dau2_pz"))           feats["dau2_pz"] = l_2.Pz();
     if (FeatComp::_feat_check("dau2_m"))            feats["dau2_m"] = l_2.M();
+    if (FeatComp::_feat_check("dau2_e"))            feats["dau2_e"] = l_2.E();
     //if (FeatComp::_feat_check("ditau_deltaphi"))    feats["ditau_deltaphi"] = std::abs(FeatComp::mpi_to_pi(FeatComp::mpi_to_pi(l_1.Phi() - DeepMET_ResolutionTune_phi) - FeatComp::mpi_to_pi(l_2.Phi() - DeepMET_ResolutionTune_phi)));
     //if (FeatComp::_feat_check("ditau_deltaeta"))    feats["ditau_deltaeta"] = std::abs(l_1.Eta() - l_2.Eta());
     if (FeatComp::_feat_check("genNu1_px"))         feats["genNu1_px"] = Nu_1.Px();

@@ -65,8 +65,6 @@ public:
                                                const LorentzVector& Nu_2,
 										       const float& hh_kinfit_m,
                                                const bool& is_boosted,
-                                               const float& b_1_csv,
-                                               const float& b_2_csv,
                                                Channel channel,
                                                Year year,
                                                const int& n_vbf,
@@ -74,14 +72,6 @@ public:
                                                const float& dau2_flav,
                                                const bool& svfit_conv,
                                                const bool& hh_kinfit_conv,
-                                               const float& b_1_cvsl,
-										       const float& b_2_cvsl,
-										       const float& vbf_1_cvsl,
-										       const float& vbf_2_cvsl,
-										       const float& b_1_cvsb,
-										       const float& b_2_cvsb,
-										       const float& vbf_1_cvsb,
-										       const float& vbf_2_cvsb,
                                                const float& met_et,
                                                const float& met_phi);
 	inline float delta_eta(const LorentzVector&, const LorentzVector&);
