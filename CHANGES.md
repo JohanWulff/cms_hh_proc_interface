@@ -15,7 +15,7 @@
 	- const float& vbf_2_cvsb
 - Fixed working points for all taggers, per year
 - Charm tagging features now categorical rather than float, float values are available as `*_raw` for feature selection
-- `hh_kinfit_m` now set to zero rather than NaN when invalid
+- `HHKin_mass_raw` now set to zero rather than NaN when invalid
 
 # V2.0
 

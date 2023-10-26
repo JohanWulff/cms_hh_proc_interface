@@ -18,7 +18,7 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
                                                const LorentzVector& vbf_2,
                                                const LorentzVector& Nu_1,
                                                const LorentzVector& Nu_2,
-										       const float& hh_kinfit_m,
+										       const float& HHKin_mass_raw,
                                                const bool& is_boosted,
                                                const int& pairType,
                                                Year year,
@@ -36,11 +36,11 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     LorentzVector h_bb(b_1 + b_2);
     LorentzVector h_tt_vis(l_1 + l_2);
     LorentzVector h_tt_met(h_tt_vis + met);
-    LorentzVector hh(h_bb.Px()+svfit.Px(), h_bb.Py()+svfit.Py(), h_bb.Pz()+svfit.Pz(), hh_kinfit_m);  // I assume 4th component is a mass, but who knows...
+    LorentzVector hh(h_bb.Px()+svfit.Px(), h_bb.Py()+svfit.Py(), h_bb.Pz()+svfit.Pz(), HHKin_mass_raw);  // I assume 4th component is a mass, but who knows...
     if (!hh_kinfit_conv) {  // HHKinFit didn't converge
         hh = svfit_conv ? h_bb+svfit : h_bb+h_tt_met;
     } else if (!svfit_conv) {  // HHKinFit converge but SVFit didn't
-        hh = LorentzVector(h_bb.Px()+h_tt_met.Px(), h_bb.Py()+h_tt_met.Py(), h_bb.Pz()+h_tt_met.Pz(), hh_kinfit_m);
+        hh = LorentzVector(h_bb.Px()+h_tt_met.Px(), h_bb.Py()+h_tt_met.Py(), h_bb.Pz()+h_tt_met.Pz(), HHKin_mass_raw);
     }
     std::map<std::string, float> feats;
 
@@ -118,7 +118,7 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("sv_mass"))       feats["sv_mass"]       = svfit_conv ? svfit.M() :-1;
     if (FeatComp::_feat_check("h_tt_vis_mass")) feats["h_tt_vis_mass"] = h_tt_vis.M();
     if (FeatComp::_feat_check("h_bb_mass"))     feats["h_bb_mass"]     = h_bb.M();
-    if (FeatComp::_feat_check("hh_kinfit_m"))   feats["hh_kinfit_m"]   = hh_kinfit_conv ? hh_kinfit_m : 0;
+    if (FeatComp::_feat_check("HHKin_mass_raw"))   feats["HHKin_mass_raw"]   = hh_kinfit_conv ? HHKin_mass_raw : 0;
     if (FeatComp::_feat_check("sv_mt"))         feats["sv_mt"]         = svfit_conv ? FeatComp::calc_mt(svfit, met) :-1;
     if (FeatComp::_feat_check("h_tt_met_mt"))   feats["h_tt_met_mt"]   = FeatComp::calc_mt(h_tt_met, met);
     if (FeatComp::_feat_check("dau1_mt"))        feats["dau1_mt"]        = FeatComp::calc_mt(l_1, met);

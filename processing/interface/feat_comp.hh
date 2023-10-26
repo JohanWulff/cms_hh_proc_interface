@@ -63,7 +63,7 @@ public:
                                                const LorentzVector& vbf_2,
                                                const LorentzVector& Nu_1,
                                                const LorentzVector& Nu_2,
-										       const float& hh_kinfit_m,
+										       const float& HHKin_mass_raw,
                                                const bool& is_boosted,
                                                const int& pairType,
                                                Year year,
