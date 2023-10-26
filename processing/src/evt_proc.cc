@@ -106,15 +106,15 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
     // Non-comp extra LL
     if (EvtProc::_feat_check("dau1_E"))    feats["dau1_E"]    = l_1.E();
     if (EvtProc::_feat_check("dau2_E"))    feats["dau2_E"]    = l_2.E();
-    if (EvtProc::_feat_check("dau1_pT"))   feats["dau1_pT"]   = l_1.Pt();
-    if (EvtProc::_feat_check("dau2_pT"))   feats["dau2_pT"]   = l_2.Pt();
+    if (EvtProc::_feat_check("dau1_pt"))   feats["dau1_pt"]   = l_1.Pt();
+    if (EvtProc::_feat_check("dau2_pt"))   feats["dau2_pt"]   = l_2.Pt();
     if (EvtProc::_feat_check("bjet1_E"))    feats["bjet1_E"]    = b_1.E();
     if (EvtProc::_feat_check("bjet2_E"))    feats["bjet2_E"]    = b_2.E();
-    if (EvtProc::_feat_check("bjet1_pT"))   feats["bjet1_pT"]   = b_1.Pt();
-    if (EvtProc::_feat_check("bjet2_pT"))   feats["bjet2_pT"]   = b_2.Pt();
-    if (EvtProc::_feat_check("met_pT"))   feats["met_pT"]   = met.Pt();
-    if (EvtProc::_feat_check("vbf_1_pT")) feats["vbf_1_pT"] = use_vbf ? vbf_1.Pt() : std::nanf("1");
-    if (EvtProc::_feat_check("vbf_2_pT")) feats["vbf_2_pT"] = use_vbf ? vbf_2.Pt() : std::nanf("1");
+    if (EvtProc::_feat_check("bjet1_pt"))   feats["bjet1_pt"]   = b_1.Pt();
+    if (EvtProc::_feat_check("bjet2_pt"))   feats["bjet2_pt"]   = b_2.Pt();
+    if (EvtProc::_feat_check("met_pt"))   feats["met_pt"]   = met.Pt();
+    if (EvtProc::_feat_check("vbf_1_pt")) feats["vbf_1_pt"] = use_vbf ? vbf_1.Pt() : std::nanf("1");
+    if (EvtProc::_feat_check("vbf_2_pt")) feats["vbf_2_pt"] = use_vbf ? vbf_2.Pt() : std::nanf("1");
     if (EvtProc::_feat_check("vbf_1_E"))  feats["vbf_1_E"]  = use_vbf ? vbf_1.E()  : std::nanf("1");
     if (EvtProc::_feat_check("vbf_2_E"))  feats["vbf_2_E"]  = use_vbf ? vbf_2.E()  : std::nanf("1");
 

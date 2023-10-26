@@ -85,9 +85,9 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("dR_hbb_sv"))     feats["dR_hbb_sv"]     = svfit_conv ? FeatComp::delta_r(h_bb, svfit) :-1;
     if (FeatComp::_feat_check("dR_vbf1_vbf2"))  feats["dR_vbf1_vbf2"]  = use_vbf ? FeatComp::delta_r(vbf_1, vbf_2) :-1;
 
-    if (FeatComp::_feat_check("dR_b1_b2_x_h_bb_pT"))     feats["dR_b1_b2_x_h_bb_pT"]     = FeatComp::delta_r(b_1, b_2)*h_bb.Pt();
-    if (FeatComp::_feat_check("dR_l1_l2_x_h_tt_met_pT")) feats["dR_l1_l2_x_h_tt_met_pT"] = FeatComp::delta_r(l_1, l_2)*h_tt_met.Pt();
-    if (FeatComp::_feat_check("dR_l1_l2_x_sv_pT"))       feats["dR_l1_l2_x_sv_pT"]       = svfit_conv ? FeatComp::delta_r(l_1, l_2)*svfit.Pt() :-1;
+    if (FeatComp::_feat_check("dR_b1_b2_x_h_bb_pt"))     feats["dR_b1_b2_x_h_bb_pt"]     = FeatComp::delta_r(b_1, b_2)*h_bb.Pt();
+    if (FeatComp::_feat_check("dR_l1_l2_x_h_tt_met_pt")) feats["dR_l1_l2_x_h_tt_met_pt"] = FeatComp::delta_r(l_1, l_2)*h_tt_met.Pt();
+    if (FeatComp::_feat_check("dR_l1_l2_x_sv_pt"))       feats["dR_l1_l2_x_sv_pt"]       = svfit_conv ? FeatComp::delta_r(l_1, l_2)*svfit.Pt() :-1;
     if (FeatComp::_feat_check("dR_b1_b2_boosted_hbb"))     feats["dR_b1_b2_boosted_hbb"]     = FeatComp::delta_r_boosted(b_1, b_2, h_bb);
     if (FeatComp::_feat_check("dR_l1_l2_boosted_htt_met")) feats["dR_l1_l2_boosted_htt_met"] = FeatComp::delta_r_boosted(l_1, l_2, h_tt_met);
     if (FeatComp::_feat_check("dR_l1_l2_boosted_sv"))      feats["dR_l1_l2_boosted_sv"]      = svfit_conv ? FeatComp::delta_r_boosted(l_1, l_2, svfit) :-1;
@@ -132,9 +132,9 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("vbf_invmass"))   feats["vbf_invmass"]   = use_vbf ? (vbf_1+vbf_2).M() :-1;
 
     // Momenta
-    if (FeatComp::_feat_check("sv_pT"))   feats["sv_pT"]   = svfit_conv ? svfit.Pt() : -1;
-    if (FeatComp::_feat_check("h_bb_pT")) feats["h_bb_pT"] = h_bb.Pt();
-    if (FeatComp::_feat_check("hh_pT"))   feats["hh_pT"]   = hh.Pt();
+    if (FeatComp::_feat_check("sv_pt"))   feats["sv_pt"]   = svfit_conv ? svfit.Pt() : -1;
+    if (FeatComp::_feat_check("h_bb_pt")) feats["h_bb_pt"] = h_bb.Pt();
+    if (FeatComp::_feat_check("hh_pt"))   feats["hh_pt"]   = hh.Pt();
 
     // Energies
     if (FeatComp::_feat_check("sv_E"))   feats["sv_E"]   = svfit_conv ? svfit.E() :-1;
