@@ -65,7 +65,7 @@ public:
                                                const LorentzVector& Nu_2,
 										       const float& hh_kinfit_m,
                                                const bool& is_boosted,
-                                               Channel channel,
+                                               const int& pairType,
                                                Year year,
                                                const int& n_vbf,
                                                const float& dau1_flav,

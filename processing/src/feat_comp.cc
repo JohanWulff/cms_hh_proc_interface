@@ -20,7 +20,7 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
                                                const LorentzVector& Nu_2,
 										       const float& hh_kinfit_m,
                                                const bool& is_boosted,
-                                               Channel channel,
+                                               const int& pairType,
                                                Year year,
                                                const int& n_vbf,
                                                const float& dau1_flav,
@@ -47,7 +47,7 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     // Categoricals
     if (FeatComp::_feat_check("boosted"))    feats["boosted"]    = is_boosted;
     if (FeatComp::_feat_check("is_vbf"))     feats["is_vbf"]     = n_vbf >= 2;
-    if (FeatComp::_feat_check("channel"))    feats["channel"]    = channel;
+    if (FeatComp::_feat_check("pairType"))    feats["pairType"]    = pairType;
     if (FeatComp::_feat_check("year"))       feats["year"]       = year;
     if (FeatComp::_feat_check("svfit_conv")) feats["svfit_conv"] = svfit_conv;
     if (FeatComp::_feat_check("n_vbf"))      feats["n_vbf"]      = n_vbf;
@@ -121,8 +121,8 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("hh_kinfit_m"))   feats["hh_kinfit_m"]   = hh_kinfit_conv ? hh_kinfit_m : 0;
     if (FeatComp::_feat_check("sv_mt"))         feats["sv_mt"]         = svfit_conv ? FeatComp::calc_mt(svfit, met) :-1;
     if (FeatComp::_feat_check("h_tt_met_mt"))   feats["h_tt_met_mt"]   = FeatComp::calc_mt(h_tt_met, met);
-    if (FeatComp::_feat_check("l_1_mt"))        feats["l_1_mt"]        = FeatComp::calc_mt(l_1, met);
-    if (FeatComp::_feat_check("l_2_mt"))        feats["l_2_mt"]        = FeatComp::calc_mt(l_2, met);
+    if (FeatComp::_feat_check("dau1_mt"))        feats["dau1_mt"]        = FeatComp::calc_mt(l_1, met);
+    if (FeatComp::_feat_check("dau2_mt"))        feats["dau2_mt"]        = FeatComp::calc_mt(l_2, met);
     if (FeatComp::_feat_check("ll_mt"))         feats["ll_mt"]         = FeatComp::calc_mt(l_1, l_2);
     if (FeatComp::_feat_check("mt_tot"))        feats["mt_tot"]        = FeatComp::calc_mt_tot(l_1, l_2, met);
     if (FeatComp::_feat_check("diH_mass_met"))  feats["diH_mass_met"]  = (h_bb+h_tt_met).M();
@@ -169,10 +169,10 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("costheta_hbb_hh"))         feats["costheta_hbb_hh"]         = FeatComp::calc_cos_delta(h_bb, hh);
 
     //Centralities
-    if (FeatComp::_feat_check("l_1_centrality"))      feats["l_1_centrality"]      =  use_vbf ? FeatComp::calc_centrality(l_1, vbf_1, vbf_2) :-1;
-    if (FeatComp::_feat_check("l_2_centrality"))      feats["l_2_centrality"]      =  use_vbf ? FeatComp::calc_centrality(l_2, vbf_1, vbf_2) :-1;
-    if (FeatComp::_feat_check("b_1_centrality"))      feats["b_1_centrality"]      =  use_vbf ? FeatComp::calc_centrality(b_1, vbf_1, vbf_2) :-1;
-    if (FeatComp::_feat_check("b_2_centrality"))      feats["b_2_centrality"]      =  use_vbf ? FeatComp::calc_centrality(b_2, vbf_1, vbf_2) :-1;
+    if (FeatComp::_feat_check("dau1_centrality"))      feats["dau1_centrality"]      =  use_vbf ? FeatComp::calc_centrality(l_1, vbf_1, vbf_2) :-1;
+    if (FeatComp::_feat_check("dau2_centrality"))      feats["dau2_centrality"]      =  use_vbf ? FeatComp::calc_centrality(l_2, vbf_1, vbf_2) :-1;
+    if (FeatComp::_feat_check("bjet1_centrality"))      feats["bjet1_centrality"]      =  use_vbf ? FeatComp::calc_centrality(b_1, vbf_1, vbf_2) :-1;
+    if (FeatComp::_feat_check("bjet2_centrality"))      feats["bjet2_centrality"]      =  use_vbf ? FeatComp::calc_centrality(b_2, vbf_1, vbf_2) :-1;
     if (FeatComp::_feat_check("h_bb_centrality"))     feats["h_bb_centrality"]     =  use_vbf ? FeatComp::calc_centrality(h_bb, vbf_1, vbf_2) :-1;
     if (FeatComp::_feat_check("h_tt_vis_centrality")) feats["h_tt_vis_centrality"] =  use_vbf ? FeatComp::calc_centrality(h_tt_vis, vbf_1, vbf_2) :-1;
     if (FeatComp::_feat_check("hh_centrality"))       feats["hh_centrality"]       =  use_vbf ? FeatComp::calc_hh_centrality(h_bb, h_tt_vis, vbf_1, vbf_2) :-1;

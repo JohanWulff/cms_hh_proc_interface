@@ -53,7 +53,6 @@ public:
                                               const float& hh_kinfit_chi2,
                                               const float& mt2,
                                               const bool&  is_boosted,
-                                              Channel channel,
                                               Year year,
                                               const float& res_mass,
                                               Spin spin,
@@ -117,7 +116,6 @@ public:
                                               const float& hh_kinfit_chi2,
                                               const float& mt2,
                                               const bool&  is_boosted,
-                                              Channel channel,
                                               Year year,
                                               const float& res_mass,
                                               Spin spin,
@@ -182,7 +180,6 @@ public:
                                               const float& hh_kinfit_chi2,
                                               const float& mt2,
                                               const bool&  is_boosted,
-                                              Channel channel,
                                               Year year,
                                               const float& res_mass,
                                               Spin spin,
@@ -220,8 +217,8 @@ public:
                                               const float& bjet1_pnet_uds,
                                               const float& bjet1_pnet_pu,
                                               const float& bjet1_pnet_undef,
-                                              const float& b_1_bID,
-                                              const float& b_1_cID,
+                                              const float& bjet1_bID,
+                                              const float& bjet1_cID,
                                               const float& bjet2_pnet_bb,
                                               const float& bjet2_pnet_cc,
                                               const float& bjet2_pnet_b,
@@ -230,8 +227,8 @@ public:
                                               const float& bjet2_pnet_uds,
                                               const float& bjet2_pnet_pu,
                                               const float& bjet2_pnet_undef,
-                                              const float& b_2_bID,
-                                              const float& b_2_cID);
+                                              const float& bjet2_bID,
+                                              const float& bjet2_cID);
 	std::vector<std::string> get_feats();
 };
 

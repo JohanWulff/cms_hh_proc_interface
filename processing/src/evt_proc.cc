@@ -22,7 +22,6 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
                                               const float& hh_kinfit_chi2,
                                               const float& mt2,
                                               const bool&  is_boosted,
-                                              Channel channel,
                                               Year year,
                                               const float& res_mass,
                                               Spin spin,
@@ -86,7 +85,7 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
                                                              Nu_2,
                                                              hh_kinfit_mass,
                                                              is_boosted,
-                                                             channel,
+                                                             pairType,
                                                              year,
                                                              n_vbf,
                                                              dau1_flav,
@@ -105,14 +104,14 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
     if (EvtProc::_feat_check("cut_pass"))       feats["cut_pass"]       = cut_pass;
 
     // Non-comp extra LL
-    if (EvtProc::_feat_check("l_1_E"))    feats["l_1_E"]    = l_1.E();
-    if (EvtProc::_feat_check("l_2_E"))    feats["l_2_E"]    = l_2.E();
-    if (EvtProc::_feat_check("l_1_pT"))   feats["l_1_pT"]   = l_1.Pt();
-    if (EvtProc::_feat_check("l_2_pT"))   feats["l_2_pT"]   = l_2.Pt();
-    if (EvtProc::_feat_check("b_1_E"))    feats["b_1_E"]    = b_1.E();
-    if (EvtProc::_feat_check("b_2_E"))    feats["b_2_E"]    = b_2.E();
-    if (EvtProc::_feat_check("b_1_pT"))   feats["b_1_pT"]   = b_1.Pt();
-    if (EvtProc::_feat_check("b_2_pT"))   feats["b_2_pT"]   = b_2.Pt();
+    if (EvtProc::_feat_check("dau1_E"))    feats["dau1_E"]    = l_1.E();
+    if (EvtProc::_feat_check("dau2_E"))    feats["dau2_E"]    = l_2.E();
+    if (EvtProc::_feat_check("dau1_pT"))   feats["dau1_pT"]   = l_1.Pt();
+    if (EvtProc::_feat_check("dau2_pT"))   feats["dau2_pT"]   = l_2.Pt();
+    if (EvtProc::_feat_check("bjet1_E"))    feats["bjet1_E"]    = b_1.E();
+    if (EvtProc::_feat_check("bjet2_E"))    feats["bjet2_E"]    = b_2.E();
+    if (EvtProc::_feat_check("bjet1_pT"))   feats["bjet1_pT"]   = b_1.Pt();
+    if (EvtProc::_feat_check("bjet2_pT"))   feats["bjet2_pT"]   = b_2.Pt();
     if (EvtProc::_feat_check("met_pT"))   feats["met_pT"]   = met.Pt();
     if (EvtProc::_feat_check("vbf_1_pT")) feats["vbf_1_pT"] = use_vbf ? vbf_1.Pt() : std::nanf("1");
     if (EvtProc::_feat_check("vbf_2_pT")) feats["vbf_2_pT"] = use_vbf ? vbf_2.Pt() : std::nanf("1");
@@ -120,18 +119,18 @@ std::map<std::string, float> EvtProc::process(const LorentzVector& b_1,
     if (EvtProc::_feat_check("vbf_2_E"))  feats["vbf_2_E"]  = use_vbf ? vbf_2.E()  : std::nanf("1");
 
     //3-vectors
-    if (EvtProc::_feat_check("l_1_px"))   feats["l_1_px"]   = l_1.Px();
-    if (EvtProc::_feat_check("l_1_py"))   feats["l_1_py"]   = l_1.Py();
-    if (EvtProc::_feat_check("l_1_pz"))   feats["l_1_pz"]   = l_1.Pz();
-    if (EvtProc::_feat_check("l_2_px"))   feats["l_2_px"]   = l_2.Px();
-    if (EvtProc::_feat_check("l_2_py"))   feats["l_2_py"]   = l_2.Py();
-    if (EvtProc::_feat_check("l_2_pz"))   feats["l_2_pz"]   = l_2.Pz();
-    if (EvtProc::_feat_check("b_1_px"))   feats["b_1_px"]   = b_1.Px();
-    if (EvtProc::_feat_check("b_1_py"))   feats["b_1_py"]   = b_1.Py();
-    if (EvtProc::_feat_check("b_1_pz"))   feats["b_1_pz"]   = b_1.Pz();
-    if (EvtProc::_feat_check("b_2_px"))   feats["b_2_px"]   = b_2.Px();
-    if (EvtProc::_feat_check("b_2_py"))   feats["b_2_py"]   = b_2.Py();
-    if (EvtProc::_feat_check("b_2_pz"))   feats["b_2_pz"]   = b_2.Pz();
+    if (EvtProc::_feat_check("dau1_px"))   feats["dau1_px"]   = l_1.Px();
+    if (EvtProc::_feat_check("dau1_py"))   feats["dau1_py"]   = l_1.Py();
+    if (EvtProc::_feat_check("dau1_pz"))   feats["dau1_pz"]   = l_1.Pz();
+    if (EvtProc::_feat_check("dau2_px"))   feats["dau2_px"]   = l_2.Px();
+    if (EvtProc::_feat_check("dau2_py"))   feats["dau2_py"]   = l_2.Py();
+    if (EvtProc::_feat_check("dau2_pz"))   feats["dau2_pz"]   = l_2.Pz();
+    if (EvtProc::_feat_check("bjet1_px"))   feats["bjet1_px"]   = b_1.Px();
+    if (EvtProc::_feat_check("bjet1_py"))   feats["bjet1_py"]   = b_1.Py();
+    if (EvtProc::_feat_check("bjet1_pz"))   feats["bjet1_pz"]   = b_1.Pz();
+    if (EvtProc::_feat_check("bjet2_px"))   feats["bjet2_px"]   = b_2.Px();
+    if (EvtProc::_feat_check("bjet2_py"))   feats["bjet2_py"]   = b_2.Py();
+    if (EvtProc::_feat_check("bjet2_pz"))   feats["bjet2_pz"]   = b_2.Pz();
     if (EvtProc::_feat_check("vbf_1_px")) feats["vbf_1_px"] = use_vbf ? vbf_1.Px() : std::nanf("1");
     if (EvtProc::_feat_check("vbf_1_py")) feats["vbf_1_py"] = use_vbf ? vbf_1.Py() : std::nanf("1");
     if (EvtProc::_feat_check("vbf_1_pz")) feats["vbf_1_pz"] = use_vbf ? vbf_1.Pz() : std::nanf("1");
@@ -203,7 +202,6 @@ std::vector<float> EvtProc::process_as_vec(const LorentzVector& b_1,
                                               const float& hh_kinfit_chi2,
                                               const float& mt2,
                                               const bool&  is_boosted,
-                                              Channel channel,
                                               Year year,
                                               const float& res_mass,
                                               Spin spin,
@@ -269,7 +267,6 @@ std::vector<float> EvtProc::process_as_vec(const LorentzVector& b_1,
                                               hh_kinfit_chi2,
                                               mt2,
                                               is_boosted,
-                                              channel,
                                               year,
                                               res_mass,
                                               spin,
@@ -350,7 +347,6 @@ void EvtProc::process_to_vec(std::vector<std::unique_ptr<float>>& feats,
                                               const float& hh_kinfit_chi2,
                                               const float& mt2,
                                               const bool&  is_boosted,
-                                              Channel channel,
                                               Year year,
                                               const float& res_mass,
                                               Spin spin,
@@ -416,7 +412,6 @@ void EvtProc::process_to_vec(std::vector<std::unique_ptr<float>>& feats,
                                               hh_kinfit_chi2,
                                               mt2,
                                               is_boosted,
-                                              channel,
                                               year,
                                               res_mass,
                                               spin,
@@ -500,7 +495,6 @@ std::vector<std::string> EvtProc::get_feats() {
                                               0,
                                               0,
                                               true,
-                                              Channel(tauTau),
                                               Year(y18),
                                               0,
                                               Spin(nonres),
