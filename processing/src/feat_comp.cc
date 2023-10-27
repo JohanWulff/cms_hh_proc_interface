@@ -299,11 +299,11 @@ float FeatComp::mpi_to_pi(const float& phi)
     }
 }
 
-void FeatComp::_add_btag_flags(Year year, const float& b_1_csv, const float& b_2_csv, std::map<std::string, float>& feats) {
+void FeatComp::_add_btag_flags(Year year, const float& bjet1_bID_deepFlavor, const float& bjet2_bID_deepFlavor, std::map<std::string, float>& feats) {
     int tag_1(0), tag_2(0);
     for (float wp : (_use_deep_bjet_wps ? _deep_bjet_wps : _bjet_wps)[year]) {
-        if (b_1_csv >= wp) tag_1++;
-        if (b_2_csv >= wp) tag_2++;
+        if (bjet1_bID_deepFlavor >= wp) tag_1++;
+        if (bjet2_bID_deepFlavor >= wp) tag_2++;
     }
     if (FeatComp::_feat_check("jet_1_quality")) feats["jet_1_quality"] = tag_1;
     if (FeatComp::_feat_check("jet_2_quality")) feats["jet_2_quality"] = tag_2;
