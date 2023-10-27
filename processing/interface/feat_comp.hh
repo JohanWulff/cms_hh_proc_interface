@@ -44,7 +44,7 @@ private:
 											   {2, {0.246,0.325,0.267,0}}};
 
 	// Methods
-	void _add_btag_flags(Year year, const float& b_1_csv, const float& b_2_csv, std::map<std::string, float>& feats);
+	void _add_btag_flags(Year year, const float& bjet1_bID_deepFlavor, const float& b_2_csv, std::map<std::string, float>& feats);
 	int _get_cvsl_flag(Year year, const float& score);
 	int _get_cvsb_flag(Year year, const float& score);
 	inline bool _feat_check(std::string);
