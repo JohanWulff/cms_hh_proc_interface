@@ -64,7 +64,7 @@ public:
                                                const LorentzVector& Nu_1,
                                                const LorentzVector& Nu_2,
 										       const float& HHKin_mass_raw,
-                                               const bool& is_boosted,
+                                               const bool& isBoosted,
                                                const int& pairType,
                                                Year year,
                                                const int& n_vbf,
@@ -77,7 +77,7 @@ public:
 	inline float delta_eta(const LorentzVector&, const LorentzVector&);
 	inline float delta_phi(const LorentzVector&, const LorentzVector&);
 	inline float delta_r(const LorentzVector&, const LorentzVector&);
-	inline float delta_r_boosted(const LorentzVector&, const LorentzVector&, const LorentzVector&);
+	inline float delta_r_isBoosted(const LorentzVector&, const LorentzVector&, const LorentzVector&);
 	inline float calc_mt(const LorentzVector&, const LorentzVector&);
 	inline float calc_phi(const LorentzVector&, const LorentzVector&, const LorentzVector&, const LorentzVector&, const LorentzVector&);
 	inline float calc_phi_1(const LorentzVector&, const LorentzVector&, const LorentzVector&, const LorentzVector&);

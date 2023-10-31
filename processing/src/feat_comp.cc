@@ -19,7 +19,7 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
                                                const LorentzVector& Nu_1,
                                                const LorentzVector& Nu_2,
 										       const float& HHKin_mass_raw,
-                                               const bool& is_boosted,
+                                               const bool& isBoosted,
                                                const int& pairType,
                                                Year year,
                                                const int& n_vbf,
@@ -45,8 +45,8 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     std::map<std::string, float> feats;
 
     // Categoricals
-    if (FeatComp::_feat_check("boosted"))    feats["boosted"]    = is_boosted;
-    if (FeatComp::_feat_check("is_vbf"))     feats["is_vbf"]     = n_vbf >= 2;
+    if (FeatComp::_feat_check("isBoosted"))    feats["isBoosted"]    = isBoosted;
+    if (FeatComp::_feat_check("has_vbf_pair"))     feats["has_vbf_pair"]     = n_vbf >= 2;
     if (FeatComp::_feat_check("pairType"))    feats["pairType"]    = pairType;
     if (FeatComp::_feat_check("year"))       feats["year"]       = year;
     if (FeatComp::_feat_check("svfit_conv")) feats["svfit_conv"] = svfit_conv;
@@ -88,9 +88,9 @@ std::map<std::string, float> FeatComp::process(const LorentzVector& b_1,
     if (FeatComp::_feat_check("dR_b1_b2_x_h_bb_pt"))     feats["dR_b1_b2_x_h_bb_pt"]     = FeatComp::delta_r(b_1, b_2)*h_bb.Pt();
     if (FeatComp::_feat_check("dR_l1_l2_x_h_tt_met_pt")) feats["dR_l1_l2_x_h_tt_met_pt"] = FeatComp::delta_r(l_1, l_2)*h_tt_met.Pt();
     if (FeatComp::_feat_check("dR_l1_l2_x_sv_pt"))       feats["dR_l1_l2_x_sv_pt"]       = svfit_conv ? FeatComp::delta_r(l_1, l_2)*svfit.Pt() :-1;
-    if (FeatComp::_feat_check("dR_b1_b2_boosted_hbb"))     feats["dR_b1_b2_boosted_hbb"]     = FeatComp::delta_r_boosted(b_1, b_2, h_bb);
-    if (FeatComp::_feat_check("dR_l1_l2_boosted_htt_met")) feats["dR_l1_l2_boosted_htt_met"] = FeatComp::delta_r_boosted(l_1, l_2, h_tt_met);
-    if (FeatComp::_feat_check("dR_l1_l2_boosted_sv"))      feats["dR_l1_l2_boosted_sv"]      = svfit_conv ? FeatComp::delta_r_boosted(l_1, l_2, svfit) :-1;
+    if (FeatComp::_feat_check("dR_b1_b2_isBoosted_hbb"))     feats["dR_b1_b2_isBoosted_hbb"]     = FeatComp::delta_r_isBoosted(b_1, b_2, h_bb);
+    if (FeatComp::_feat_check("dR_l1_l2_isBoosted_htt_met")) feats["dR_l1_l2_isBoosted_htt_met"] = FeatComp::delta_r_isBoosted(l_1, l_2, h_tt_met);
+    if (FeatComp::_feat_check("dR_l1_l2_isBoosted_sv"))      feats["dR_l1_l2_isBoosted_sv"]      = svfit_conv ? FeatComp::delta_r_isBoosted(l_1, l_2, svfit) :-1;
     if (FeatComp::_feat_check("min_dR_vbfj_l")) 
     {
       float min_dR_vbfj_l = FeatComp::delta_r(vbf_1, l_1); 
@@ -237,7 +237,7 @@ inline float FeatComp::delta_eta(const LorentzVector& v_0, const LorentzVector& 
 
 inline float FeatComp::delta_r(const LorentzVector& v_0, const LorentzVector& v_1) {return ROOT::Math::VectorUtil::DeltaR(v_0, v_1);}
 
-inline float  FeatComp::delta_r_boosted(const LorentzVector& v_0, const LorentzVector& v_1, const LorentzVector& ref){
+inline float  FeatComp::delta_r_isBoosted(const LorentzVector& v_0, const LorentzVector& v_1, const LorentzVector& ref){
     /* Modified from https://github.com/hh-italian-group/AnalysisTools/blob/1be0da0748d69827ed7ebda6d9b8198b87f170fd/Core/include/AnalysisMath.h */
     using namespace ROOT::Math::VectorUtil;
     return DeltaR(boost(v_0, ref.BoostToCM()), boost(v_1, ref.BoostToCM()));
